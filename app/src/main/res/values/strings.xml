@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Wastic</string>
+    <string name="wastic">Wastic</string>
+    <string name="todo">TODO</string>
+    <string name="zaloguj_sie">Zaloguj się</string>
+    <string name="skanuj_produkt">Skanuj Produkt</string>
 </resources>
