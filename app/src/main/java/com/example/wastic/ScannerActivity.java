@@ -32,14 +32,13 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RelativeLayout view = new RelativeLayout(this);
+        RelativeLayout view= new RelativeLayout(this);
         //lContainerLayout.setLayoutParams(new RelativeLayout.LayoutParams( LayoutParams.FILL_PARENT , LayoutParams.FILL_PARENT ));
         ScannerView = new ZXingScannerView(this);
         album = (ImageView) findViewById(R.id.imageAlbum);
         view.addView(ScannerView);
-        //view.addView(album);
+       // view.addView(album);
         setContentView(view);
-        //ScannerView.addView(album);
     }
 
 

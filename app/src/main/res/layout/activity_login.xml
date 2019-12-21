@@ -65,6 +65,7 @@
         tools:layout_marginBottom="100dp" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/buttonRegister"
         android:layout_width="288dp"
         android:layout_height="47dp"
         android:layout_above="@+id/textViewRegister"
@@ -97,4 +98,16 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_below="@+id/editTextPassword"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="232dp"
+        android:textColor="#88880000"
+        />
 </RelativeLayout>
