@@ -81,11 +81,12 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="292dp"
         android:background="#10000000"
+        android:textColor="#000"
         android:drawableLeft="@drawable/ic_action_search"
         android:ems="10"
         android:hint="Wyszukaj"
         android:inputType="textPersonName"
-        android:textColor="#000" />
+   />
 
     <TextView
         android:id="@+id/textViewCode"

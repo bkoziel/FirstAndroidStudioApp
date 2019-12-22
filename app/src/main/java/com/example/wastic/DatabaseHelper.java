@@ -21,6 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + database_users + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, LOGIN TEXT, PASSWORD TEXT, EMAIL TEXT, PERMISSION INTEGER )");
+        //db.execSQL("DROP TABLE IF EXISTS " + database_products);
         db.execSQL("create table " + database_products + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, BARCODE TEXT,RATE REAL, TYPE TEXT, PHOTOURL TEXT)");
        // db.execSQL("create table " + database_users + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, LOGIN TEXT, PASSWORD TEXT, EMAIL TEXT, PERMISSION INTEGER )");
     }
@@ -66,13 +67,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 boolean productExists(String code){
         SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteCursor cursor = (SQLiteCursor) db.rawQuery("SELECT * FROM " + database_products + " WHERE BARCODE = " + code,null);
-        if(cursor.getCount() == 0) {
-            return false;
-        }else{
+        SQLiteCursor cursor = (SQLiteCursor) db.rawQuery("SELECT * FROM " + database_products + " WHERE BARCODE = '" + code +"'",null);
+        if(cursor.getCount() > 0) {
             return true;
+        }else{
+            return false;
         }
     }
+String getProductName(String code){
+    SQLiteDatabase db = this.getWritableDatabase();
+    SQLiteCursor cursor = (SQLiteCursor) db.rawQuery("SELECT NAME FROM " + database_products + " WHERE BARCODE = '" + code +"'",null);
+        return "pppp";
+}
 
 
     public SQLiteCursor readDataProduct(){

@@ -53,5 +53,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="245dp"
-        android:text="Dodaj Produkt" />
+        android:background="@color/colorPrimary"
+        android:drawableLeft="@drawable/ic_action_plus"
+        android:text="Dodaj Produkt"
+        android:textColor="#fff"
+        tools:visibility="invisible" />
 </RelativeLayout>
