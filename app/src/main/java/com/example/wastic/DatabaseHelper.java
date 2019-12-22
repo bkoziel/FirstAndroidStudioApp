@@ -25,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + database_products + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, BARCODE TEXT,RATE REAL, TYPE TEXT, PHOTOURL TEXT)");
        // db.execSQL("create table " + database_users + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, LOGIN TEXT, PASSWORD TEXT, EMAIL TEXT, PERMISSION INTEGER )");
     }
-
+////COMMENT
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + database_users);
