@@ -46,24 +46,24 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
     public void handleResult(Result result) {
         MainActivity.resultTextView.setText(result.getText());
    //     MainActivity.resultTextView2.setText("Kod Produktu:");
-        try {
-            String productId = result.getText().toString();
-            Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<EncodeHintType, ErrorCorrectionLevel>();
-            hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-            Writer codeWriter;
-            codeWriter = new EAN13Writer();
-            BitMatrix byteMatrix = codeWriter.encode(productId, BarcodeFormat.EAN_13,400, 200, hintMap);
-            int width = byteMatrix.getWidth();
-            int height = byteMatrix.getHeight();
-            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
-                    bitmap.setPixel(i, j, byteMatrix.get(i, j) ? Color.BLACK : Color.WHITE);
-                }
-            }
+        //try {
+            //String productId = result.getText().toString();
+            //Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<EncodeHintType, ErrorCorrectionLevel>();
+            //hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+            //Writer codeWriter;
+            //codeWriter = new EAN13Writer();
+            //BitMatrix byteMatrix = codeWriter.encode(productId, BarcodeFormat.EAN_13,400, 200, hintMap);
+            //int width = byteMatrix.getWidth();
+            //int height = byteMatrix.getHeight();
+            //Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            //for (int i = 0; i < width; i++) {
+            //    for (int j = 0; j < height; j++) {
+            //        bitmap.setPixel(i, j, byteMatrix.get(i, j) ? Color.BLACK : Color.WHITE);
+            //    }
+            //}
             //imageView.setImageBitmap(bitmap);
-        } catch (Exception e) {
-        }
+        //} catch (Exception e) {
+        //}
 
         onBackPressed();}
 

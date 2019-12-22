@@ -37,15 +37,17 @@ public class MainActivity extends AppCompatActivity {
     BarcodeDetector detector;
     public static TextView resultTextView;
     ////////////
-
+        DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db = new DatabaseHelper(this);
+
 
         scannerButton = (Button) findViewById(R.id.buttonScanner);
         loginButton = (Button) findViewById(R.id.buttonLogin);
-        registerButton = (Button) findViewById(R.id.buttonRegister);
+        registerButton = (Button) findViewById(R.id.buttonLogin);
         resultTextView =(TextView)findViewById(R.id.textViewResult);
 
 

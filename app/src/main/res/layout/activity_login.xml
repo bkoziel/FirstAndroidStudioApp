@@ -10,22 +10,48 @@
     <EditText
         android:id="@+id/editTextLogin"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/editTextEmail"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="88dp"
-        android:layout_marginTop="275dp"
+        android:layout_marginTop="20dp"
         android:background="#10000000"
         android:drawableLeft="@drawable/ic_action_user"
         android:ems="10"
         android:fontFamily="sans-serif"
         android:hint="Nazwa użytkownika"
         android:inputType="textPersonName"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="187dp" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="34dp"
+        android:background="#10000000"
+        android:drawableLeft="@drawable/ic_action_mail"
+        android:ems="10"
+        android:fontFamily="sans-serif"
+        android:hint="Adres e-mail"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textSize="20dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="187dp"
+        />
 
     <ImageView
         android:id="@+id/imageView"
@@ -39,7 +65,7 @@
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/editTextLogin"
         android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true"
@@ -51,6 +77,8 @@
         android:fontFamily="sans-serif"
         android:hint="Hasło"
         android:inputType="textPassword"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:textSize="20dp" />
 
     <TextView
@@ -62,10 +90,10 @@
         android:layout_marginTop="10dp"
         android:text="Zarejestruj się"
         android:textColor="#ff000000"
-        tools:layout_marginBottom="100dp" />
+        tools:layout_marginBottom="120dp" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/buttonRegister"
+        android:id="@+id/buttonLogin"
         android:layout_width="288dp"
         android:layout_height="47dp"
         android:layout_above="@+id/textViewRegister"
@@ -87,7 +115,7 @@
             android:layout_height="40dp">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/labelButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -98,6 +126,9 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
+
+
+
 
     <TextView
         android:id="@+id/textInfo"

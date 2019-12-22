@@ -43,10 +43,10 @@
         android:layout_below="@+id/textView2"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="83dp"
         android:layout_marginEnd="100dp"
         android:background="@color/colorPrimary"
-        android:text="Sprawdź Produkt"
+        android:text="Zeskanuj Produkt"
         android:textColor="#fff" />
 
     <Button
@@ -57,27 +57,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="109dp"
         android:layout_marginEnd="100dp"
         android:background="@color/colorPrimary"
-        android:textColor="#fff"
         android:text="Zaloguj się"
-        />
-
-    <Button
-        android:id="@+id/buttonRegister"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/buttonLogin"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="false"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="100dp"
-        android:background="@color/colorPrimary"
-        android:text="Zarejestruj się"
-        android:textColor="#fff"
-        android:visibility="invisible" />
+        android:textColor="#fff" />
 
     <TextView
         android:id="@+id/textViewResult"
@@ -86,5 +70,35 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="111dp" />
+
+    <EditText
+        android:id="@+id/editTextSearch"
+        android:layout_width="352dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="292dp"
+        android:background="#10000000"
+        android:drawableLeft="@drawable/ic_action_search"
+        android:ems="10"
+        android:hint="Wyszukaj"
+        android:inputType="textPersonName"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonLogin"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="134dp"
+        android:layout_marginBottom="68dp"
+        android:text="Po więcej możliwości"
+        android:textColor="#000" />
 
 </RelativeLayout>
