@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + database_users + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, LOGIN TEXT, PASSWORD TEXT, EMAIL TEXT, PERMISSION INTEGER )");
-        db.execSQL("create table " + database_products + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT,  RATE FLOAT, TYPE TEXT, PHOTOURL TEXT)");
+        db.execSQL("create table " + database_products + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, BARCODE TEXT,RATE REAL, TYPE TEXT, PHOTOURL TEXT)");
        // db.execSQL("create table " + database_users + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, LOGIN TEXT, PASSWORD TEXT, EMAIL TEXT, PERMISSION INTEGER )");
     }
 
@@ -44,10 +44,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean writeDataProduct(String name, String type){
+    public boolean writeDataProduct(String name, String barcode, String type){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("Name", name);
+        cv.put("Barcode" , barcode);
         cv.put("Rate", 0.0);
         cv.put("Type" , type );
         cv.put("PhotoURL","");
@@ -63,10 +64,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+boolean productExists(String code){
+        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteCursor cursor = (SQLiteCursor) db.rawQuery("SELECT * FROM " + database_products + " WHERE BARCODE = " + code,null);
+        if(cursor.getCount() == 0) {
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 
     public SQLiteCursor readDataProduct(){
         SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteCursor cursor = (SQLiteCursor) db.rawQuery("SELECT * FROM " + database_users,null);
+        SQLiteCursor cursor = (SQLiteCursor) db.rawQuery("SELECT * FROM " + database_products,null);
         return cursor;
     }
 

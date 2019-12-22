@@ -27,11 +27,13 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class ScannerActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
+    DatabaseHelper db;
     ZXingScannerView ScannerView;
     ImageView album;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db = new DatabaseHelper(this);
         RelativeLayout view= new RelativeLayout(this);
         //lContainerLayout.setLayoutParams(new RelativeLayout.LayoutParams( LayoutParams.FILL_PARENT , LayoutParams.FILL_PARENT ));
         ScannerView = new ZXingScannerView(this);
@@ -44,7 +46,9 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
     @Override
     public void handleResult(Result result) {
-        MainActivity.resultTextView.setText(result.getText());
+                Intent i = new Intent(this, ProductActivity.class);
+                i.putExtra("code", result.getText().toString());
+                startActivity(i);
    //     MainActivity.resultTextView2.setText("Kod Produktu:");
         //try {
             //String productId = result.getText().toString();
