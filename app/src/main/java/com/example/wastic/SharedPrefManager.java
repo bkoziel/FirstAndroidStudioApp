@@ -9,6 +9,9 @@ public class SharedPrefManager {
 
     private static final String SHARED_PREF_NAME = "simplifiedcodingsharedpref";
     private static final String KEY_USERNAME = "keyusername";
+    private static final String KEY_PRODUCTNAME = "keyproductname";
+    private static final String KEY_BARCODE = "keybarcode";
+    private static final String KEY_PHOTOURL = "keyphotourl";
     private static final String KEY_EMAIL = "keyemail";
     private static final String KEY_GENDER = "keygender";
     private static final String KEY_ID = "keyid";
@@ -53,6 +56,15 @@ public class SharedPrefManager {
                 sharedPreferences.getString(KEY_USERNAME, null),
                 sharedPreferences.getString(KEY_EMAIL, null),
                 sharedPreferences.getString(KEY_GENDER, null)
+        );
+    }
+    public User getProduct() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return new User(
+                sharedPreferences.getInt(KEY_ID, -1),
+                sharedPreferences.getString(KEY_PRODUCTNAME, null),
+                sharedPreferences.getString(KEY_BARCODE, null),
+                sharedPreferences.getString(KEY_PHOTOURL, null)
         );
     }
 

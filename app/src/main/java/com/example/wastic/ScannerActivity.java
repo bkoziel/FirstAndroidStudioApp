@@ -9,8 +9,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -24,6 +28,10 @@ import com.google.zxing.oned.EAN13Writer;
 import com.google.zxing.oned.EAN8Writer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.Hashtable;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -34,35 +42,30 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
     ZXingScannerView ScannerView;
     ImageView album;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ScannerView = new ZXingScannerView(this);
         album = (ImageView) findViewById(R.id.imageAlbum);
-<<<<<<< HEAD
-        view.addView(ScannerView);
+
+
         // view.addView(album);
 
-
-        setContentView(view);
-
-
-
-
-
-
-=======
         setContentView(ScannerView);
->>>>>>> 41b693e568f07b3078e9eac99da87ca0ae08ef25
+
     }
 
 
     @Override
     public void handleResult(Result result) {
-        Intent i = new Intent(getApplicationContext() , ProductActivity.class);
-        i.putExtra("code",result.getText());
-        startActivity(i);
+      // Intent i = new Intent(getApplicationContext() , ProductActivity.class);
+        Intent x = new Intent(getApplicationContext() , AddProductActivity.class);
+        //i.putExtra("code",result.getText());
+        x.putExtra("code",result.getText());
+
+        startActivity(x);
         onBackPressed();
     }
 
@@ -78,5 +81,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
         ScannerView.setResultHandler(this);
         ScannerView.startCamera();
     }
+
+
 
 }
