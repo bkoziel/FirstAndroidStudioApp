@@ -37,12 +37,11 @@ public class MainActivity extends AppCompatActivity {
     BarcodeDetector detector;
     public static TextView resultTextView;
     ////////////
-        DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        db = new DatabaseHelper(this);
+
 
 
         scannerButton = (Button) findViewById(R.id.buttonScanner);
@@ -66,12 +65,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-            }
-        });
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
