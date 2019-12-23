@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:hint="Username"
+            android:hint="Nazwa użytkownika"
             android:inputType="text"
             android:drawableLeft="@drawable/ic_action_user"
             />
@@ -45,7 +45,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
-            android:hint="Password"
+            android:hint="Hasło"
             android:inputType="textPassword"
             android:drawableLeft="@drawable/ic_action_password"
             />
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Male"
+                android:text="Mężczyzna"
                 android:textColor="#000"/>
 
 
@@ -71,7 +71,7 @@
                 android:id="@+id/radioButtonFemale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Female"
+                android:text="Kobieta"
                 android:textColor="#000
 "/>
 
@@ -84,7 +84,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimary"
-            android:text="Register"
+            android:text="Zarejestruj"
             android:textColor="#fff" />
 
         <TextView
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:text="Already Registered?\nLogin Here"
+            android:text="Zarejestrowany już?\nZaloguj się tutaj"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
 

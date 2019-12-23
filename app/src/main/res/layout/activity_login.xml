@@ -81,16 +81,19 @@
         android:paddingRight="5dp"
         android:textSize="20dp" />
 
-    <TextView
+    <Button
         android:id="@+id/textViewRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="Zarejestruj się"
-        android:textColor="#ff000000"
+        android:text="Rejestracja"
+        android:background="@color/colorPrimary"
+        android:textColor="#fff"
+        android:textSize="15dp"
         tools:layout_marginBottom="120dp" />
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/buttonLogin"
