@@ -32,42 +32,20 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RelativeLayout view= new RelativeLayout(this);
-        //lContainerLayout.setLayoutParams(new RelativeLayout.LayoutParams( LayoutParams.FILL_PARENT , LayoutParams.FILL_PARENT ));
+
         ScannerView = new ZXingScannerView(this);
         album = (ImageView) findViewById(R.id.imageAlbum);
-        view.addView(ScannerView);
-       // view.addView(album);
-        setContentView(view);
+        setContentView(ScannerView);
     }
 
 
     @Override
     public void handleResult(Result result) {
         Intent i = new Intent(getApplicationContext() , ProductActivity.class);
-        i.putExtra(result.getText(),"code");
+        i.putExtra("code",result.getText());
         startActivity(i);
-        //     MainActivity.resultTextView2.setText("Kod Produktu:");
-        //try {
-            //String productId = result.getText().toString();
-            //Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<EncodeHintType, ErrorCorrectionLevel>();
-            //hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-            //Writer codeWriter;
-            //codeWriter = new EAN13Writer();
-            //BitMatrix byteMatrix = codeWriter.encode(productId, BarcodeFormat.EAN_13,400, 200, hintMap);
-            //int width = byteMatrix.getWidth();
-            //int height = byteMatrix.getHeight();
-            //Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            //for (int i = 0; i < width; i++) {
-            //    for (int j = 0; j < height; j++) {
-            //        bitmap.setPixel(i, j, byteMatrix.get(i, j) ? Color.BLACK : Color.WHITE);
-            //    }
-            //}
-            //imageView.setImageBitmap(bitmap);
-        //} catch (Exception e) {
-        //}
-
-        onBackPressed();}
+        onBackPressed();
+    }
 
     @Override
     protected void onPause() {
