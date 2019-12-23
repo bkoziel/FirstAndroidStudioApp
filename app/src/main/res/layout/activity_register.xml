@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".RegisterActivity"
+    android:background="@drawable/background">
 
 
 
@@ -23,7 +24,9 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:hint="Username"
-            android:inputType="text" />
+            android:inputType="text"
+            android:drawableLeft="@drawable/ic_action_user"
+            />
 
         <EditText
             android:id="@+id/editTextEmail"
@@ -32,7 +35,8 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:drawableLeft="@drawable/ic_action_mail"/>
 
         <EditText
             android:id="@+id/editTextPassword"
@@ -42,7 +46,9 @@
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:drawableLeft="@drawable/ic_action_password"
+            />
 
         <RadioGroup
             android:id="@+id/radioGender"
@@ -57,24 +63,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Male" />
+                android:text="Male"
+                android:textColor="#000"/>
 
 
             <RadioButton
                 android:id="@+id/radioButtonFemale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Female" />
+                android:text="Female"
+                android:textColor="#000
+"/>
 
         </RadioGroup>
 
         <Button
             android:id="@+id/buttonRegister"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_height="42dp"
             android:layout_marginTop="8dp"
-            android:text="Register" />
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimary"
+            android:text="Register"
+            android:textColor="#fff" />
 
         <TextView
             android:id="@+id/textViewLogin"
@@ -84,7 +95,10 @@
             android:layout_marginTop="8dp"
             android:text="Already Registered?\nLogin Here"
             android:textAlignment="center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+
+
+            />
     </LinearLayout>
 
     <ProgressBar
