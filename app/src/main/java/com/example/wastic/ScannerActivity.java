@@ -44,8 +44,10 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
     @Override
     public void handleResult(Result result) {
-        MainActivity.resultTextView.setText(result.getText());
-   //     MainActivity.resultTextView2.setText("Kod Produktu:");
+        Intent i = new Intent(getApplicationContext() , ProductActivity.class);
+        i.putExtra(result.getText(),"code");
+        startActivity(i);
+        //     MainActivity.resultTextView2.setText("Kod Produktu:");
         //try {
             //String productId = result.getText().toString();
             //Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<EncodeHintType, ErrorCorrectionLevel>();

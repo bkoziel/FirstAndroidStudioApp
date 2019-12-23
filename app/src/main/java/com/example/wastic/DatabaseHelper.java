@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String database_name="WasticDB";
     public static final String database_users ="Users";
-    public static final String database_products = "Products";
+    public static final String database_products = "Product";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, database_name, null, 1);
@@ -22,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + database_users + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, LOGIN TEXT, PASSWORD TEXT, EMAIL TEXT, PERMISSION INTEGER )");
         //db.execSQL("DROP TABLE IF EXISTS " + database_products);
-        db.execSQL("create table " + database_products + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, BARCODE TEXT,RATE REAL, TYPE TEXT, PHOTOURL TEXT)");
+        db.execSQL("create table " + database_products + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, BARCODE TEXT, PHOTOURL TEXT)");
        // db.execSQL("create table " + database_users + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, LOGIN TEXT, PASSWORD TEXT, EMAIL TEXT, PERMISSION INTEGER )");
     }
 
@@ -45,13 +45,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean writeDataProduct(String name, String barcode, String type){
+    public boolean writeDataProduct(String name, String barcode){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("Name", name);
         cv.put("Barcode" , barcode);
-        cv.put("Rate", 0.0);
-        cv.put("Type" , type );
         cv.put("PhotoURL","");
         if(db.insert(database_products, null, cv)==-1)
             return false;
@@ -77,7 +75,7 @@ boolean productExists(String code){
 String getProductName(String code){
     SQLiteDatabase db = this.getWritableDatabase();
     SQLiteCursor cursor = (SQLiteCursor) db.rawQuery("SELECT NAME FROM " + database_products + " WHERE BARCODE = '" + code +"'",null);
-        return "pppp";
+        return cursor.getString(1);
 }
 
 

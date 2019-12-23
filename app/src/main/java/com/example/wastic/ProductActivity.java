@@ -45,7 +45,7 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                db.writeDataProduct("Żywiec Zdrój", getIntent().getStringExtra("code"),"Napoje");
+                db.writeDataProduct("Żywiec Zdrój", getIntent().getStringExtra("code"));
             }
         });
     }
