@@ -72,25 +72,25 @@ public class RegisterActivity extends AppCompatActivity {
         //first we will do the validations
 
         if (TextUtils.isEmpty(username)) {
-            editTextUsername.setError("Please enter username");
+            editTextUsername.setError("Wprowadź nazwę użytkownika");
             editTextUsername.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(email)) {
-            editTextEmail.setError("Please enter your email");
+            editTextEmail.setError("Wprowadź email");
             editTextEmail.requestFocus();
             return;
         }
 
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Enter a valid email");
+            editTextEmail.setError("Wprowadź prawidłowy email");
             editTextEmail.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Enter a password");
+            editTextPassword.setError("Wprowadź hasło");
             editTextPassword.requestFocus();
             return;
         }
