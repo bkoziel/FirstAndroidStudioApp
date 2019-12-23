@@ -1,13 +1,18 @@
 package com.example.wastic;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -37,8 +42,16 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
         ScannerView = new ZXingScannerView(this);
         album = (ImageView) findViewById(R.id.imageAlbum);
         view.addView(ScannerView);
-       // view.addView(album);
+        // view.addView(album);
+
+
         setContentView(view);
+
+
+
+
+
+
     }
 
 
@@ -81,4 +94,5 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
         ScannerView.setResultHandler(this);
         ScannerView.startCamera();
     }
+
 }
