@@ -129,7 +129,9 @@ public class AddProductActivity extends AppCompatActivity {
 
                         //starting the profile activity
                         finish();
-                        startActivity(new Intent(getApplicationContext(), ProductActivity.class));
+                        Intent i = new Intent(getApplicationContext() , ProductActivity.class);
+                        i.putExtra("code",code);
+                        startActivity(i);
                     } else {
                         Toast.makeText(getApplicationContext(), "Takie produkt juz istnieje!", Toast.LENGTH_SHORT).show();
                     }

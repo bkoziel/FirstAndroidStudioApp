@@ -60,17 +60,15 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
     @Override
     public void handleResult(Result result) {
-      // Intent i = new Intent(getApplicationContext() , ProductActivity.class);
-        Intent x = new Intent(getApplicationContext() , AddProductActivity.class);
-        //i.putExtra("code",result.getText());
-        x.putExtra("code",result.getText());
-
-        startActivity(x);
+        Intent i = new Intent(getApplicationContext() , ProductActivity.class);
+        i.putExtra("code",result.getText());
+        startActivity(i);
         onBackPressed();
     }
 
     @Override
     protected void onPause() {
+
         super.onPause();
         ScannerView.stopCamera();
     }

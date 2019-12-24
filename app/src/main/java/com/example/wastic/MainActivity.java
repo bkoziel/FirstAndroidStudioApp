@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     BarcodeDetector detector;
     public static TextView resultTextView;
     ////////////
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
