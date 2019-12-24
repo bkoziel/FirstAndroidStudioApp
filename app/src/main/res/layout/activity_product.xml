@@ -48,8 +48,8 @@
 
     <Button
         android:id="@+id/buttonAddProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="236dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="245dp"
@@ -57,5 +57,6 @@
         android:drawableLeft="@drawable/ic_action_plus"
         android:text="Dodaj Produkt"
         android:textColor="#fff"
+        android:visibility="invisible"
         tools:visibility="invisible" />
 </RelativeLayout>

@@ -96,10 +96,12 @@ public class ProductActivity extends AppCompatActivity {
                         SharedPrefManager.getInstance(getApplicationContext()).checkCode(product);
 
                         //starting the profile activity
+
+                        nameTextView.setText("Produkt w bazie");
+                        addProductButton.setVisibility(View.INVISIBLE);
                         finish();
                       //  startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
-                            nameTextView.setText("Produkt w bazie");
-                            addProductButton.setVisibility(View.INVISIBLE);
+
                             //nameTextView.setText(db.getProductName(code));
 
 
