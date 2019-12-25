@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Id"
+                android:text="ID:"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             <TextView
@@ -33,7 +33,8 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="id_number"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                />
 
         </TableRow>
 
@@ -43,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Username"
+                android:text="Login:"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             <TextView
@@ -62,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Email"
+                android:text="Email:"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             <TextView
@@ -81,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Gender"
+                android:text="Płeć:"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             <TextView
@@ -102,7 +103,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-201dp"
-        android:text="Logout" />
+        android:text="Wyloguj"
+        android:background="@color/colorPrimary"
+        android:textColor="#fff"
+        android:layout_margin="10dp"
+        />
 </LinearLayout>
     <!--    <TextView-->
 <!--        android:id="@+id/textView3"-->

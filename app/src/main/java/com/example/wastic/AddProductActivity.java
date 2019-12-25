@@ -125,9 +125,6 @@ public class AddProductActivity extends AppCompatActivity {
                                 userJson.getString("photoURL")
                         );
 
-
-
-                        //starting the profile activity
                         finish();
                         Intent i = new Intent(getApplicationContext() , ProductActivity.class);
                         i.putExtra("code",code);

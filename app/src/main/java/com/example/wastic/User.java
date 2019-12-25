@@ -10,19 +10,15 @@ public class User {
         this.email = email;
         this.gender = gender;
     }
-
     public int getId() {
         return id;
     }
-
     public String getUsername() {
         return username;
     }
-
     public String getEmail() {
         return email;
     }
-
     public String getGender() {
         return gender;
     }

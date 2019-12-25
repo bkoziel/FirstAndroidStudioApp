@@ -65,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         //if everything is fine
-
         class UserLogin extends AsyncTask<Void, Void, String> {
 
             ProgressBar progressBar;

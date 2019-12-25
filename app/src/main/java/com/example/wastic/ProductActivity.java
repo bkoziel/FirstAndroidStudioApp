@@ -26,6 +26,7 @@ public class ProductActivity extends AppCompatActivity {
     ImageView photoImageView;
     Button addProductButton;
     String code;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,83 +38,30 @@ public class ProductActivity extends AppCompatActivity {
         code = getIntent().getStringExtra("code");
         barCodeTextView.setText(code);
 
-
-
-
-
+        checkCode();
+        Product product = SharedPrefManager.getInstance(this).getProduct();
+        nameTextView.setText(product.getName());
 
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 Intent i = new Intent(getApplicationContext() , AddProductActivity.class);
                 i.putExtra("code",code);
                 startActivity(i);
 
             }
         });
+
     }
 
     private void checkCode() {
-        //first getting the values
-        final String username = code;
-        class CheckCode extends AsyncTask<Void, Void, String> {
-
-            ProgressBar progressBar;
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                progressBar = (ProgressBar) findViewById(R.id.progressBar);
-                progressBar.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                progressBar.setVisibility(View.GONE);
+        final String barcode = code;
 
 
-                try {
-                    //converting response to json object
-                    JSONObject obj = new JSONObject(s);
+        class Products extends AsyncTask<Void, Void, String> {
 
-                    //if no error in response
-                    if (!obj.getBoolean("error")) {
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-
-                        //getting the user from the response
-                        JSONObject productJson = obj.getJSONObject("product");
-
-                        //creating a new user object
-                        Product product = new Product(
-                                productJson.getInt("id"),
-                                productJson.getString("name"),
-                                productJson.getString("bar_code"),
-                                productJson.getString("photo")
-                        );
-
-                        //storing the user in shared preferences
-                        SharedPrefManager.getInstance(getApplicationContext()).checkCode(product);
-
-                        //starting the profile activity
-
-                        nameTextView.setText("Produkt w bazie");
-                        addProductButton.setVisibility(View.INVISIBLE);
-                        finish();
-                      //  startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
-
-                            //nameTextView.setText(db.getProductName(code));
-
-
-                    } else {
-                            nameTextView.setText("Brak produktu w bazie");
-                            addProductButton.setVisibility(View.VISIBLE);
-              //          Toast.makeText(getApplicationContext(), "Zła nazwa użytkownika lub hasło", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+            private ProgressBar progressBar;
 
             @Override
             protected String doInBackground(Void... voids) {
@@ -122,13 +70,51 @@ public class ProductActivity extends AppCompatActivity {
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
-                params.put("bar_code",code);
+                params.put("bar_code", barcode);
+
                 //returing the response
                 return requestHandler.sendPostRequest(URLs.URL_PRODUCT, params);
             }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                //displaying the progress bar while user registers on the server
+                progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+                progressBar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                //hiding the progressbar after completion
+                progressBar.setVisibility(View.GONE);
+
+                try {
+                    //converting response to json object
+                    JSONObject obj = new JSONObject(s);
+
+                    //if no error in response
+                    if (!obj.getBoolean("error")) {
+                        nameTextView.setText("Brak produktu w bazie");
+                        addProductButton.setVisibility(View.VISIBLE);
+
+                    } else {
+                        addProductButton.setVisibility(View.INVISIBLE);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-        CheckCode ul = new CheckCode();
-        ul.execute();
+        //executing the async task
+        Products ru = new Products();
+        ru.execute();
     }
+
 }
+
+
+

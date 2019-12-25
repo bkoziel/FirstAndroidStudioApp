@@ -9,9 +9,9 @@ public class SharedPrefManager {
 
     private static final String SHARED_PREF_NAME = "simplifiedcodingsharedpref";
     private static final String KEY_USERNAME = "keyusername";
-    private static final String KEY_PRODUCTNAME = "keyproductname";
+    private static final String KEY_NAME = "keyproductname";
     private static final String KEY_BARCODE = "keybarcode";
-    private static final String KEY_PHOTOURL = "keyphotourl";
+    private static final String KEY_PHOTO = "keyphotourl";
     private static final String KEY_EMAIL = "keyemail";
     private static final String KEY_GENDER = "keygender";
     private static final String KEY_ID = "keyid";
@@ -31,7 +31,6 @@ public class SharedPrefManager {
     }
 
     //method to let the user login
-
     public void userLogin(User user) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -41,19 +40,6 @@ public class SharedPrefManager {
         editor.putString(KEY_GENDER, user.getGender());
         editor.apply();
     }
-
-
-    public void checkCode(Product product) {
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(KEY_ID, product.getId());
-        editor.putString(KEY_PRODUCTNAME, product.getName());
-        editor.putString(KEY_BARCODE, product.getBarcode());
-        editor.putString(KEY_PHOTOURL, product.getPhotoURL());
-        editor.apply();
-    }
-
-
 
     //this method will checker whether user is already logged in or not
     public boolean isLoggedIn() {
@@ -71,13 +57,13 @@ public class SharedPrefManager {
                 sharedPreferences.getString(KEY_GENDER, null)
         );
     }
-    public User getProduct() {
+    public Product getProduct() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return new User(
+        return new Product(
                 sharedPreferences.getInt(KEY_ID, -1),
-                sharedPreferences.getString(KEY_PRODUCTNAME, null),
+                sharedPreferences.getString(KEY_NAME, null),
                 sharedPreferences.getString(KEY_BARCODE, null),
-                sharedPreferences.getString(KEY_PHOTOURL, null)
+                sharedPreferences.getString(KEY_PHOTO, null)
         );
     }
 
