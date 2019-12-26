@@ -39,8 +39,9 @@ public class ProductActivity extends AppCompatActivity {
         barCodeTextView.setText(code);
 
         checkCode();
-        Product product = SharedPrefManager.getInstance(this).getProduct();
-        nameTextView.setText(product.getName());
+       Product product = SharedPrefManager.getInstance(this).getProduct();
+      nameTextView.setText(product.getName());
+
 
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +103,18 @@ public class ProductActivity extends AppCompatActivity {
                     } else {
                         addProductButton.setVisibility(View.INVISIBLE);
 
+
+
+                       // JSONObject userJson = obj.getJSONObject("product");
+
+                        //creating a new user object
+                       // Product product = new Product(
+                                //Json.getInt("id"),
+                                //userJson.getString("name"),
+                               // userJson.getString("barcode"),
+                                //userJson.getString("photoURL")
+                       // );
+                //nameTextView.setText(product.getName());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

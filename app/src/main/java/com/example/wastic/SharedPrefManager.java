@@ -41,6 +41,17 @@ public class SharedPrefManager {
         editor.apply();
     }
 
+    //product
+    public void letProduct(Product product) {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(KEY_ID, product.getId());
+        editor.putString(KEY_NAME, product.getName());
+        editor.putString(KEY_BARCODE, product.getBarcode());
+        editor.putString(KEY_PHOTO, product.getPhotoURL());
+        editor.apply();
+    }
+
     //this method will checker whether user is already logged in or not
     public boolean isLoggedIn() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);

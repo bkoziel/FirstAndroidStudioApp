@@ -24,7 +24,6 @@ public class AddProductActivity extends AppCompatActivity {
     EditText editTextProductName, editTextBarCode, editTextPhotoURL;
     Button buttonAddProduct;
   String code;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addproduct);
@@ -113,7 +112,6 @@ public class AddProductActivity extends AppCompatActivity {
                     //if no error in response
                     if (!obj.getBoolean("error")) {
                         Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-
                         //getting the user from the response
                         JSONObject userJson = obj.getJSONObject("product");
 
@@ -124,17 +122,20 @@ public class AddProductActivity extends AppCompatActivity {
                                 userJson.getString("barcode"),
                                 userJson.getString("photoURL")
                         );
+                        SharedPrefManager.getInstance(getApplicationContext()).letProduct(product);
 
-                        finish();
-                        Intent i = new Intent(getApplicationContext() , ProductActivity.class);
-                        i.putExtra("code",code);
-                        startActivity(i);
                     } else {
-                        Toast.makeText(getApplicationContext(), "Takie produkt juz istnieje!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Taki produkt juz istnieje!", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                finish();
+                Intent x = new Intent(getApplicationContext() , ProductActivity.class);
+                x.putExtra("code",code);
+               // x.putExtra("name",product.getName());
+                startActivity(x);
             }
         }
 

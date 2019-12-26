@@ -16,8 +16,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="15dp"
-        app:srcCompat="@drawable/ic_action_album"
         android:contentDescription="@string/TODO"
-        />
+        android:visibility="invisible"
+        app:srcCompat="@drawable/ic_action_album" />
 
 </RelativeLayout>

@@ -37,9 +37,7 @@ public class MainActivity extends AppCompatActivity {
     Button loginButton;
     Button registerButton;
     ////////////
-    private static final int RESULT_LOAD_IMAGE = 0;
-    BarcodeDetector detector;
-    public static TextView resultTextView;
+
     ////////////
 
     @Override
@@ -54,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         scannerButton = (Button) findViewById(R.id.buttonScanner);
         loginButton = (Button) findViewById(R.id.buttonLogin);
         registerButton = (Button) findViewById(R.id.buttonLogin);
-        resultTextView =(TextView)findViewById(R.id.textViewResult);
+       // resultTextView =(TextView)findViewById(R.id.textViewResult);
 
 
         scannerButton.setOnClickListener(new View.OnClickListener() {
@@ -73,60 +71,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            if (selectedImage != null) {
-                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                if (cursor != null) {
-                    cursor.moveToFirst();
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    String picturePath = cursor.getString(columnIndex);
-                    //imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
-                    try {
-                        processData(BitmapFactory.decodeFile(picturePath));
-                    }catch(Exception e){
-                        //resultTextView.setText("Nie można odczytać kodu");
-                    }
-
-                    cursor.close();
-
-                }
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private void processData(Bitmap myBitmap) throws Exception {
-        Frame frame = new Frame.Builder().setBitmap(myBitmap).build();
-        SparseArray<Barcode> barCodes = detector.detect(frame);
-
-        Barcode thisCode = barCodes.valueAt(0);
-        resultTextView.setText(barCodes.valueAt(0).rawValue);
-        //resultTextView2.setText("Kod Produktu:");
-        try {
-            String productId = resultTextView.getText().toString();
-            Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<EncodeHintType, ErrorCorrectionLevel>();
-            hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-            Writer codeWriter;
-            codeWriter = new EAN13Writer();
-            BitMatrix byteMatrix = codeWriter.encode(productId, BarcodeFormat.EAN_13,400, 200, hintMap);
-            int width = byteMatrix.getWidth();
-            int height = byteMatrix.getHeight();
-            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
-                    bitmap.setPixel(i, j, byteMatrix.get(i, j) ? Color.BLACK : Color.WHITE);
-                }
-            }
-        //    imageView.setImageBitmap(bitmap);
-        } catch (Exception e) {
-        }
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
