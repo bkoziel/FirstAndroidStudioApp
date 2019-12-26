@@ -95,8 +95,6 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
         });
     }
 
-
-
     @Override
     public void handleResult(Result result) {
         Intent i = new Intent(getApplicationContext() , ProductActivity.class);
