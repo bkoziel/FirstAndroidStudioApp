@@ -1,4 +1,4 @@
-package com.example.wastic;
+package com.example.wastic.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -10,6 +10,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.example.wastic.R;
+import com.example.wastic.Requesthandler;
+import com.example.wastic.SharedPrefManager;
+import com.example.wastic.URLs;
+import com.example.wastic.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -14,13 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UserProfileActivity"/>
-        <activity android:name=".AddProductActivity"/>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".ScannerActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".ProductActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activity.UserProfileActivity"/>
+        <activity android:name=".Activity.AddProductActivity"/>
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.ScannerActivity" />
+        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.ProductActivity" />
+        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

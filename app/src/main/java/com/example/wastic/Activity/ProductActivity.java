@@ -1,18 +1,21 @@
-package com.example.wastic;
+package com.example.wastic.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.wastic.Product;
+import com.example.wastic.R;
+import com.example.wastic.Requesthandler;
+import com.example.wastic.SharedPrefManager;
+import com.example.wastic.URLs;
 
 import org.json.JSONException;
 import org.json.JSONObject;

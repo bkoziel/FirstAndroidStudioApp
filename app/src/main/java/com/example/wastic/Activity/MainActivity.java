@@ -1,4 +1,4 @@
-package com.example.wastic;
+package com.example.wastic.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,39 +6,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.vision.Frame;
-import com.google.android.gms.vision.barcode.Barcode;
-import com.google.android.gms.vision.barcode.BarcodeDetector;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.Writer;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.oned.EAN13Writer;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
-import java.util.Hashtable;
+import com.example.wastic.R;
+import com.example.wastic.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity {
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     Button scannerButton;
     Button loginButton;
-    Button registerButton;
+    Button toProfileButton;
+    TextView info;
     ////////////
 
-    ////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +35,23 @@ public class MainActivity extends AppCompatActivity {
 
         scannerButton = (Button) findViewById(R.id.buttonScanner);
         loginButton = (Button) findViewById(R.id.buttonLogin);
-        registerButton = (Button) findViewById(R.id.buttonLogin);
-       // resultTextView =(TextView)findViewById(R.id.textViewResult);
+        toProfileButton = (Button) findViewById(R.id.buttonToProfile);
+        info = (TextView) findViewById(R.id.textViewInfo);
 
+        if (!SharedPrefManager.getInstance(this).isLoggedIn()) {
+            info.setVisibility(View.VISIBLE);
+            loginButton.setVisibility(View.VISIBLE);
+            toProfileButton.setVisibility(View.INVISIBLE);
+        }else{
+            info.setVisibility(View.INVISIBLE);
+            loginButton.setVisibility(View.INVISIBLE);
+            toProfileButton.setVisibility(View.VISIBLE);
+        }
 
         scannerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ScannerActivity.class));
-                //startActivityForResult(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI),RESULT_LOAD_IMAGE);
             }
         });
 
@@ -70,8 +62,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        toProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
+            }
+        });
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!SharedPrefManager.getInstance(this).isLoggedIn()) {
+            info.setVisibility(View.VISIBLE);
+            loginButton.setVisibility(View.VISIBLE);
+            toProfileButton.setVisibility(View.INVISIBLE);
+        }else{
+            info.setVisibility(View.INVISIBLE);
+            loginButton.setVisibility(View.INVISIBLE);
+            toProfileButton.setVisibility(View.VISIBLE);
+        }
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

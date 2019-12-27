@@ -1,4 +1,4 @@
-package com.example.wastic;
+package com.example.wastic.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+
+import com.example.wastic.R;
+import com.example.wastic.Requesthandler;
+import com.example.wastic.SharedPrefManager;
+import com.example.wastic.URLs;
+import com.example.wastic.User;
+
 import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {

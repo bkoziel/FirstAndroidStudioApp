@@ -1,53 +1,29 @@
-package com.example.wastic;
+package com.example.wastic.Activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wastic.R;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
 import com.google.zxing.Result;
-import com.google.zxing.Writer;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.oned.Code128Writer;
-import com.google.zxing.oned.EAN13Writer;
-import com.google.zxing.oned.EAN8Writer;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Hashtable;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-//import static com.example.wastic.MainActivity.imageViewResult;
+//import static com.example.wastic.Activity.MainActivity.imageViewResult;
 
 public class ScannerActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler{
     private static final int MY_CAMERA_REQUEST_CODE = 100;

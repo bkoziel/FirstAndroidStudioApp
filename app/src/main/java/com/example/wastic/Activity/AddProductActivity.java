@@ -1,4 +1,4 @@
-package com.example.wastic;
+package com.example.wastic.Activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.vision.barcode.Barcode;
+import com.example.wastic.Product;
+import com.example.wastic.R;
+import com.example.wastic.Requesthandler;
+import com.example.wastic.SharedPrefManager;
+import com.example.wastic.URLs;
 
 import org.json.JSONException;
 import org.json.JSONObject;
