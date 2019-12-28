@@ -9,11 +9,9 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
-import android.webkit.PermissionRequest;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -57,7 +55,7 @@ final int CODE_GALLERY_REQUEST=999;
     private int PICK_IMAGE_REQUEST = 1;
 private  Bitmap bitmap;
 private     String imageData="";
-    private  Button buttonAddProduct,editPhotoURL;
+    private  Button buttonAddProduct,editPhotoURL,takeFotoButton;
 
     private ImageView imageView;
 
@@ -75,6 +73,16 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
         editTextBarCode = (EditText) findViewById(R.id.editBarCode);
         editPhotoURL = (Button) findViewById(R.id.editPhotoURL);
         imageView = (ImageView)findViewById(R.id.imageViewPhoto);
+        takeFotoButton = (Button) findViewById(R.id.buttonTakeFoto);
+
+        takeFotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showFileChooser();
+
+            }
+        });
+
         editPhotoURL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -240,7 +248,6 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
     }
     private void showFileChooser() {
         ActivityCompat.requestPermissions(AddProductActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},CODE_GALLERY_REQUEST);
-
     }
 
     @Override

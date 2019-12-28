@@ -47,15 +47,42 @@
         android:hint="Kod kreskowy"
 
         />
-        <Button
-            android:id="@+id/editPhotoURL"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif"
-            android:hint="Wybierz zdjęcie"
-            android:drawableLeft="@drawable/ic_action_search" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/editPhotoURL"
+                android:layout_width="188dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:drawableLeft="@drawable/ic_action_search"
+                android:fontFamily="sans-serif"
+                android:hint="Wybierz zdjęcie" />
+
+            <Button
+                android:id="@+id/buttonTakeFoto"
+                android:layout_width="188dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:drawableLeft="@drawable/ic_action_camera"
+                android:fontFamily="sans-serif"
+                android:hint="Wybierz zdjęcie"  />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
 
 
         <Button
@@ -67,6 +94,7 @@
             android:background="@color/colorPrimary"
             android:text="Dodaj Produkt"
             android:textColor="#fff" />
+
     </LinearLayout>
     <ProgressBar
         android:visibility="gone"
