@@ -50,7 +50,7 @@ public class SharedPrefManager {
         editor.putInt(KEY_ID, product.getId());
         editor.putString(KEY_NAME, product.getName());
         editor.putString(KEY_BARCODE, product.getBarcode());
-        editor.putString(KEY_PHOTO, product.getPhotoURL());
+        //editor.putString(KEY_PHOTO, product.getPhotoURL());
         editor.apply();
     }
 
@@ -75,8 +75,8 @@ public class SharedPrefManager {
         return new Product(
                 sharedPreferences.getInt(KEY_ID, -1),
                 sharedPreferences.getString(KEY_NAME, null),
-                sharedPreferences.getString(KEY_BARCODE, null),
-                sharedPreferences.getString(KEY_PHOTO, null)
+                sharedPreferences.getString(KEY_BARCODE, null)
+               // sharedPreferences.getString(KEY_PHOTO, null)
         );
     }
 
