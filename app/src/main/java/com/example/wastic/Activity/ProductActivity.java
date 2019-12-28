@@ -12,6 +12,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.wastic.Product;
 import com.example.wastic.R;
 import com.example.wastic.Requesthandler;
@@ -19,10 +25,12 @@ import com.example.wastic.SharedPrefManager;
 import com.example.wastic.URLs;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class ProductActivity extends AppCompatActivity {
 
@@ -31,7 +39,8 @@ public class ProductActivity extends AppCompatActivity {
     ImageView photoImageView;
     Button addProductButton;
     String code;
-
+    String productName,barcode,photoURL;
+    private RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +50,13 @@ public class ProductActivity extends AppCompatActivity {
         photoImageView = (ImageView) findViewById(R.id.imageViewPhoto);
         addProductButton = (Button) findViewById(R.id.buttonAddProduct);
         code = getIntent().getStringExtra("code");
-        barCodeTextView.setText(code);
+       // barCodeTextView.setText(code);
+        requestQueue = Volley.newRequestQueue(this);
+        //checkCode();
+        jsonParse();
 
-        checkCode();
-       Product product = SharedPrefManager.getInstance(this).getProduct();
 
-      nameTextView.setText(product.getName());
-        Picasso.get().load("https://wasticelo.000webhostapp.com/"+product.getPhotoURL()).into(photoImageView);
+
 
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +70,37 @@ public class ProductActivity extends AppCompatActivity {
         });
 
     }
+    private void jsonParse() {
+        String url = "https://wasticelo.000webhostapp.com/testing.php?bar_code="+code;
+        System.out.println(url);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
 
+                    JSONObject product = response.getJSONObject("data");
+
+
+                        productName = product.getString("name");
+                        barcode = product.getString("bar_code");
+                        photoURL = product.getString("photo");
+                        nameTextView.setText(productName);
+                        barCodeTextView.setText(barcode);
+
+                        Picasso.get().load("https://wasticelo.000webhostapp.com/"+photoURL).into(photoImageView);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(request);
+    }
     private void checkCode() {
         final String barcode = code;
 

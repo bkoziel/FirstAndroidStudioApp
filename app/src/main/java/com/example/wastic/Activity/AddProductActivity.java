@@ -101,7 +101,10 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
                         Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
 
                         Intent x = new Intent(getApplicationContext() , ProductActivity.class);
-                        x.putExtra("code",code);
+                        Bundle extras = new Bundle();
+                        extras.putString("code",code);
+                        extras.putString("pname",code);
+                        x.putExtras(extras);
                         // x.putExtra("name",product.getName());
                         startActivity(x);
                     }

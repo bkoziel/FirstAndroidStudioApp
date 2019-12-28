@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17dp"
-                android:textColor="#000"
+                android:text="Nazwa produktu"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
