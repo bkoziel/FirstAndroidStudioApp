@@ -88,26 +88,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="111dp" />
 
-    <EditText
-        android:id="@+id/editTextSearch"
-        android:layout_width="352dp"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="292dp"
-        android:background="#10000000"
-        android:drawableLeft="@drawable/ic_action_search"
-        android:ems="10"
-        android:hint="Wyszukaj"
-        android:inputType="textPersonName"
-        android:textColor="#000" />
-
     <TextView
         android:id="@+id/textViewInfo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/buttonLogin"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -117,5 +101,62 @@
         android:layout_marginBottom="68dp"
         android:text="Po więcej możliwości"
         android:textColor="#000" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="365dp"
+        android:text="Button" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="290dp"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="#45888686"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editTextSearch"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:background="#45D8D8D8"
+                android:drawableLeft="@drawable/ic_action_search"
+                android:ems="10"
+                android:hint="Wyszukaj"
+                android:inputType="textPersonName"
+                android:textColor="#000" />
+
+            <LinearLayout
+                android:id="@+id/LL"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"></LinearLayout>
+        </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
 </RelativeLayout>
