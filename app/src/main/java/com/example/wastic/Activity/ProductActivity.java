@@ -52,7 +52,7 @@ public class ProductActivity extends AppCompatActivity {
         code = getIntent().getStringExtra("code");
        // barCodeTextView.setText(code);
         requestQueue = Volley.newRequestQueue(this);
-        //checkCode();
+        checkCode();
         jsonParse();
 
 
