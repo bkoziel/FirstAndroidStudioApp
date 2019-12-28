@@ -3,6 +3,7 @@ package com.example.wastic.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.example.wastic.R;
 import com.example.wastic.Requesthandler;
 import com.example.wastic.SharedPrefManager;
 import com.example.wastic.URLs;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,8 +45,9 @@ public class ProductActivity extends AppCompatActivity {
 
         checkCode();
        Product product = SharedPrefManager.getInstance(this).getProduct();
-      nameTextView.setText(product.getName());
 
+      nameTextView.setText(product.getName());
+        Picasso.get().load("https://wasticelo.000webhostapp.com/"+product.getPhotoURL()).into(photoImageView);
 
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override

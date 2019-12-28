@@ -52,6 +52,7 @@ public class AddProductActivity extends AppCompatActivity {
     public static final String UPLOAD_URL = "https://wasticelo.000webhostapp.com/upload.php";
     public static final String UPLOAD_KEY = "image";
     public static final String TAG = "MY MESSAGE";
+    private ProgressDialog loading;
 final int CODE_GALLERY_REQUEST=999;
     private int PICK_IMAGE_REQUEST = 1;
 private  Bitmap bitmap;
@@ -92,7 +93,7 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
                 //here we will register the user to server
                 //uploadImage();
                 productPOST();
-               final ProgressDialog loading = ProgressDialog.show(AddProductActivity.this, "Uploading Image", "Proszę czekać...",true,true);
+              loading = ProgressDialog.show(AddProductActivity.this, "Uploading Image", "Proszę czekać...",true,true);
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, urlUpload, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -213,7 +214,8 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
                         Product product = new Product(
                                 userJson.getInt("id"),
                                 userJson.getString("name"),
-                                userJson.getString("barcode")
+                                userJson.getString("barcode"),
+                                userJson.getString("photoURL")
                                 );
                         SharedPrefManager.getInstance(getApplicationContext()).letProduct(product);
 
@@ -289,6 +291,17 @@ return encodedImage;
 
     }
 
+    private void dismissProgressDialog() {
+        if (loading != null && loading.isShowing()) {
+            loading.dismiss();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        dismissProgressDialog();
+        super.onDestroy();
+    }
 
 }
 
