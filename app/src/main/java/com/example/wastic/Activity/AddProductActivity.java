@@ -91,14 +91,14 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
                 //if user pressed on button register
                 //here we will register the user to server
                 //uploadImage();
-
+                productPOST();
                final ProgressDialog loading = ProgressDialog.show(AddProductActivity.this, "Uploading Image", "Proszę czekać...",true,true);
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, urlUpload, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         loading.dismiss();
                         Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
-                        productPOST();
+
                         Intent x = new Intent(getApplicationContext() , ProductActivity.class);
                         x.putExtra("code",code);
                         // x.putExtra("name",product.getName());
