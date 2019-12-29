@@ -1,9 +1,6 @@
 package com.example.wastic.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -12,25 +9,23 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.wastic.Product;
 import com.example.wastic.R;
 import com.example.wastic.Requesthandler;
-import com.example.wastic.SharedPrefManager;
 import com.example.wastic.URLs;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class ProductActivity extends AppCompatActivity {
 
@@ -50,7 +45,7 @@ public class ProductActivity extends AppCompatActivity {
         photoImageView = (ImageView) findViewById(R.id.imageViewPhoto);
         addProductButton = (Button) findViewById(R.id.buttonAddProduct);
         code = getIntent().getStringExtra("code");
-       // barCodeTextView.setText(code);
+        barCodeTextView.setText(code);
         requestQueue = Volley.newRequestQueue(this);
         checkCode();
         jsonParse();
