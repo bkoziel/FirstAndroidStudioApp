@@ -76,7 +76,7 @@
                 android:layout_marginBottom="8dp"
                 android:drawableLeft="@drawable/ic_action_camera"
                 android:fontFamily="sans-serif"
-                android:hint="Wybierz zdjęcie"  />
+                android:hint="Zrób zdjęcie" />
 
             <Space
                 android:layout_width="wrap_content"

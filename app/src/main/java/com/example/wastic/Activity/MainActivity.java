@@ -3,6 +3,7 @@ package com.example.wastic.Activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -33,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     Button scannerButton;
     Button loginButton;
-    Button toProfileButton,ok;
+    Button toProfileButton;
     TextView info;
     EditText searchEditText;
-LinearLayout LL;
+    LinearLayout LL;
     LinearLayout l;
     Button b;
     ////////////
@@ -57,9 +58,8 @@ String barcode;
         toProfileButton = (Button) findViewById(R.id.buttonToProfile);
         info = (TextView) findViewById(R.id.textViewInfo);
         requestQueue = Volley.newRequestQueue(this);
-        ok = (Button) findViewById(R.id.button);
         LL = (LinearLayout) findViewById(R.id.LL);
-       // l = new LinearLayout(LL.getContext());
+
         if (!SharedPrefManager.getInstance(this).isLoggedIn()) {
             info.setVisibility(View.VISIBLE);
             loginButton.setVisibility(View.VISIBLE);
@@ -91,12 +91,6 @@ String barcode;
             }
         });
 
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                jsonParse();
-            }
-        });
 
         searchEditText.addTextChangedListener(new TextWatcher() {
 
@@ -105,6 +99,7 @@ String barcode;
 
             public void beforeTextChanged(CharSequence s, int start,
                                           int count, int after) {
+                LL.removeAllViews();
             }
 
             public void onTextChanged(CharSequence s, int start,
@@ -120,7 +115,7 @@ String barcode;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
+if(searchEditText.getText().length()!=0){
                 try {
                     JSONArray products = response.getJSONArray("products");
                     //l.removeAllViews() ;
@@ -153,9 +148,11 @@ String barcode;
                         b = new Button(l.getContext());
                         barcode=product.getString("bar_code");
                         b.setText(product.getString("name")+ "\n" + barcode);
+                        b.setBackgroundColor(Color.argb(30,200, 230, 200));
                         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                         b.setLayoutParams(lp);
                         b.setId(i);
+                        b.setElevation(3);
                         final int id=i;
                         s[i] = product.getString("bar_code");
                         /*barcode=product.getString("bar_code");
@@ -193,9 +190,9 @@ String barcode;
                         l.addView(b);
                         LL.addView(l);
 
-                         info.append(product.getString("name"));
-                         info.append(product.getString("bar_code"));
-                         info.append("\n");
+                         //info.append(product.getString("name"));
+                         //info.append(product.getString("bar_code"));
+                        // info.append("\n");
                         //photoURL = product.getString("photo");
                         //nameTextView.setText(productName);
                         //barCodeTextView.setText(barcode);
@@ -203,6 +200,7 @@ String barcode;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }else{ LL.removeAllViews();}
             }
         }, new Response.ErrorListener() {
             @Override
