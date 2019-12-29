@@ -93,6 +93,7 @@
         android:textColor="#000" />
 
     <LinearLayout
+        android:id="@+id/NIE_TYKAC_ZAWARTOSCI"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="290dp"
