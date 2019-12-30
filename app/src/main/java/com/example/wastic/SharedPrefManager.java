@@ -16,6 +16,8 @@ public class SharedPrefManager {
     private static final String KEY_PHOTO = "keyphotourl";
     private static final String KEY_EMAIL = "keyemail";
     private static final String KEY_GENDER = "keygender";
+    private static final String KEY_SINCE = "keysince";
+    private static final String KEY_AVATAR = "keyavatar";
     private static final String KEY_ID = "keyid";
 
     private static SharedPrefManager mInstance;
@@ -40,6 +42,8 @@ public class SharedPrefManager {
         editor.putString(KEY_USERNAME, user.getUsername());
         editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_GENDER, user.getGender());
+        editor.putString(KEY_SINCE, user.getSince());
+        editor.putString(KEY_AVATAR, user.getAvatar());
         editor.apply();
     }
 
@@ -67,7 +71,9 @@ public class SharedPrefManager {
                 sharedPreferences.getInt(KEY_ID, -1),
                 sharedPreferences.getString(KEY_USERNAME, null),
                 sharedPreferences.getString(KEY_EMAIL, null),
-                sharedPreferences.getString(KEY_GENDER, null)
+                sharedPreferences.getString(KEY_GENDER, null),
+                sharedPreferences.getString(KEY_SINCE, null),
+                sharedPreferences.getString(KEY_AVATAR, null)
         );
     }
     public Product getProduct() {

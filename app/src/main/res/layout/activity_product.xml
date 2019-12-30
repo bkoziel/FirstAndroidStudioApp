@@ -73,6 +73,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_weight="1" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -91,12 +96,27 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Kod produktu" />
+            <TextView
+                android:id="@+id/textViewUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="" />
+            <TextView
+                android:id="@+id/textViewUserRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="" />
 
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
+
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"

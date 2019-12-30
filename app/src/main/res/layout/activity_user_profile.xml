@@ -94,7 +94,37 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
         </TableRow>
+            <TableRow>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Data założenia:"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+                <TextView
+                    android:id="@+id/textViewSince"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="YYYY-MM-dd"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+            </TableRow>
+            <TableRow>
+
+                <ImageView
+                    android:id="@+id/imageViewAvatar"
+                    android:layout_width="148dp"
+                    android:layout_height="143dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginBottom="8dp"
+
+                    />
+            </TableRow>
 
     </TableLayout>
 

@@ -3,12 +3,14 @@ package com.example.wastic.Activity;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
@@ -16,6 +18,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +38,7 @@ import com.example.wastic.R;
 import com.example.wastic.Requesthandler;
 import com.example.wastic.SharedPrefManager;
 import com.example.wastic.URLs;
+import com.example.wastic.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +46,8 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,14 +58,20 @@ public class AddProductActivity extends AppCompatActivity {
     public static final String UPLOAD_KEY = "image";
     public static final String TAG = "MY MESSAGE";
     private ProgressDialog loading;
+    private RatingBar ratingBar;
+    private float ratedValue;
+    private TextView  rateCount;
 final int CODE_GALLERY_REQUEST=999;
     private int PICK_IMAGE_REQUEST = 1;
+    private int REQUEST_IMAGE_CAPTURE = 1;
 private  Bitmap bitmap;
 private     String imageData="";
-    private  Button buttonAddProduct,editPhotoURL,takeFotoButton;
-
+    private  Button buttonAddProduct,editPhotoURL,takePhotoButton;
+   private User user = SharedPrefManager.getInstance(this).getUser();
     private ImageView imageView;
-
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
+    private String date;
 
 private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
 
@@ -73,13 +86,13 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
         editTextBarCode = (EditText) findViewById(R.id.editBarCode);
         editPhotoURL = (Button) findViewById(R.id.editPhotoURL);
         imageView = (ImageView)findViewById(R.id.imageViewPhoto);
-        takeFotoButton = (Button) findViewById(R.id.buttonTakeFoto);
+        takePhotoButton = (Button) findViewById(R.id.buttonTakeFoto);
 
-        takeFotoButton.setOnClickListener(new View.OnClickListener() {
+        takePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showFileChooser();
 
+            showCamera();
             }
         });
 
@@ -91,7 +104,17 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
             }
         });
 
+        ratingBar=(RatingBar) findViewById(R.id.RatingBars);
+        rateCount = (TextView) findViewById(R.id.textViewRating);
 
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                ratedValue = ratingBar.getRating();
+                rateCount.setText("Twoja ocena: " + ratedValue + "/5");
+            }
+        });
     editTextBarCode.setText(code);
         buttonAddProduct.setOnClickListener(new View.OnClickListener() {
 
@@ -128,9 +151,14 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
+
+                     String userID= Integer.toString(user.getId());
+                     String rating= Float.toString(ratedValue);
                       imageData = imageToString(bitmap);
 
                         params.put("imagee", imageData);
+                        params.put("user_id",userID);
+                        params.put("ratingValue",rating);
 
 
                         return params;
@@ -185,12 +213,19 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
             protected String doInBackground(Void... voids) {
                 //creating request handler object
                 Requesthandler requestHandler = new Requesthandler();
+                calendar = Calendar.getInstance();
 
+                dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                date = dateFormat.format(calendar.getTime());
+                String userid=Integer.toString(user.getId());
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
                 params.put("name", name);
                 params.put("bar_code", barcode);
                 params.put("photo", "photo.jpg");
+                params.put("user_id",userid);
+                params.put("added_date",date);
+
 
 
                 //returing the response
@@ -248,7 +283,15 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
     }
     private void showFileChooser() {
         ActivityCompat.requestPermissions(AddProductActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},CODE_GALLERY_REQUEST);
+
     }
+    private void showCamera() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -268,7 +311,6 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -284,6 +326,13 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK ) {
+
+                Bundle extras = data.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                imageView.setImageBitmap(imageBitmap);
+
+
         }
     }
 

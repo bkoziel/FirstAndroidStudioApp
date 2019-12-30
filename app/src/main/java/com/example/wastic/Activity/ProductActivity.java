@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.wastic.R;
 import com.example.wastic.Requesthandler;
+import com.example.wastic.SharedPrefManager;
 import com.example.wastic.URLs;
 import com.squareup.picasso.Picasso;
 
@@ -29,12 +31,15 @@ import java.util.HashMap;
 
 public class ProductActivity extends AppCompatActivity {
 
-    TextView barCodeTextView;
-    TextView nameTextView;
-    ImageView photoImageView;
-    Button addProductButton;
+    private RatingBar ratingBar;
+   private TextView barCodeTextView, rateCount;
+    private TextView nameTextView,userTextView,userRating;
+   private ImageView photoImageView;
+    private Button addProductButton;
+    private float ratedValue;
     String code;
-    String productName,barcode,photoURL;
+    String productName,barcode,photoURL,addedByUser,ratingValue;
+
     private RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +49,17 @@ public class ProductActivity extends AppCompatActivity {
         nameTextView = (TextView) findViewById(R.id.textViewName);
         photoImageView = (ImageView) findViewById(R.id.imageViewPhoto);
         addProductButton = (Button) findViewById(R.id.buttonAddProduct);
+        userTextView=(TextView) findViewById(R.id.textViewUser);
+        userRating=(TextView) findViewById(R.id.textViewUserRate);
+
+
+
+
         code = getIntent().getStringExtra("code");
         barCodeTextView.setText(code);
         requestQueue = Volley.newRequestQueue(this);
         checkCode();
         jsonParse();
-
-
-
-
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,9 +86,12 @@ public class ProductActivity extends AppCompatActivity {
                         productName = product.getString("name");
                         barcode = product.getString("bar_code");
                         photoURL = product.getString("photo");
+                        addedByUser=product.getString("username");
+                        ratingValue=product.getString("RatingValue");
                         nameTextView.setText(productName);
                         barCodeTextView.setText(barcode);
-
+                        userTextView.setText("Dodane przez: " +addedByUser);
+                        userRating.setText("Ocena: "+ratingValue);
                         Picasso.get().load("https://wasticelo.000webhostapp.com/"+photoURL).into(photoImageView);
 
                 } catch (JSONException e) {
@@ -96,6 +106,8 @@ public class ProductActivity extends AppCompatActivity {
         });
         requestQueue.add(request);
     }
+
+
     private void checkCode() {
         final String barcode = code;
 
@@ -138,10 +150,19 @@ public class ProductActivity extends AppCompatActivity {
                     //if no error in response
                     if (!obj.getBoolean("error")) {
                         nameTextView.setText("Brak produktu w bazie");
-                        addProductButton.setVisibility(View.VISIBLE);
+                        if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
+
+
+                            addProductButton.setVisibility(View.INVISIBLE);
+                        }else{
+                            addProductButton.setVisibility(View.VISIBLE);
+                        }
+
+
 
                     } else {
                         addProductButton.setVisibility(View.INVISIBLE);
+
 
 
 

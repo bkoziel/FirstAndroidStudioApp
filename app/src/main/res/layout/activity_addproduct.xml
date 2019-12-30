@@ -84,6 +84,24 @@
                 android:layout_weight="1" />
         </LinearLayout>
 
+        <RatingBar
+            android:id="@+id/RatingBars"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+
+            />
+
+        <TextView
+            android:id="@+id/textViewRating"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+
+            />
 
         <Button
             android:id="@+id/buttonAddProduct"

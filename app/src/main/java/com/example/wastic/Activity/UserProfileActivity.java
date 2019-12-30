@@ -3,17 +3,21 @@ package com.example.wastic.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wastic.Activity.LoginActivity;
 import com.example.wastic.R;
 import com.example.wastic.SharedPrefManager;
 import com.example.wastic.User;
+import com.squareup.picasso.Picasso;
 
 public class UserProfileActivity extends AppCompatActivity {
-    TextView textViewId, textViewUsername, textViewEmail, textViewGender;
+    TextView textViewId, textViewUsername, textViewEmail, textViewGender, textViewSince;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +35,8 @@ public class UserProfileActivity extends AppCompatActivity {
         textViewUsername = (TextView) findViewById(R.id.textViewUsername);
         textViewEmail = (TextView) findViewById(R.id.textViewEmail);
         textViewGender = (TextView) findViewById(R.id.textViewGender);
-
-
+        textViewSince =(TextView) findViewById(R.id.textViewSince);
+        imageView=(ImageView) findViewById(R.id.imageViewAvatar);
         //getting the current user
         User user = SharedPrefManager.getInstance(this).getUser();
 
@@ -41,6 +45,8 @@ public class UserProfileActivity extends AppCompatActivity {
         textViewUsername.setText(user.getUsername());
         textViewEmail.setText(user.getEmail());
         textViewGender.setText(user.getGender());
+        textViewSince.setText(user.getSince());
+        Picasso.get().load("https://wasticelo.000webhostapp.com/"+user.getAvatar()).into(imageView);
 
         //when the user presses logout button
         //calling the logout method
