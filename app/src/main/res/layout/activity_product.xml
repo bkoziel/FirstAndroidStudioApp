@@ -128,15 +128,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <Button
-                android:id="@+id/buttonAddProduct"
-                android:layout_width="383dp"
-                android:layout_height="98dp"
+            <TextView
+                android:id="@+id/textViewPleaseLogIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@color/colorPrimary"
-                android:drawableLeft="@drawable/ic_action_plus"
-                android:text="Dodaj Produkt"
+                android:clickable="true"
+                android:ellipsize="none"
+                android:text="Zaloguj się po więcej"
+
+                android:textAlignment="center"
                 android:textColor="#fff"
+                android:textSize="18sp"
                 android:visibility="invisible" />
 
             <Space
@@ -144,6 +148,17 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonAddProduct"
+            android:layout_width="383dp"
+            android:layout_height="98dp"
+            android:layout_margin="10dp"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/ic_action_plus"
+            android:text="Dodaj Produkt"
+            android:textColor="#fff"
+            android:visibility="invisible" />
 
     </LinearLayout>
 

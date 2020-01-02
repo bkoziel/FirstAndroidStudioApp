@@ -3,6 +3,7 @@ package com.example.wastic.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,7 +34,7 @@ public class ProductActivity extends AppCompatActivity {
 
     private RatingBar ratingBar;
    private TextView barCodeTextView, rateCount;
-    private TextView nameTextView,userTextView,userRating;
+    private TextView nameTextView,userTextView,userRating,loginForMore;
    private ImageView photoImageView;
     private Button addProductButton;
     private float ratedValue;
@@ -51,6 +52,7 @@ public class ProductActivity extends AppCompatActivity {
         addProductButton = (Button) findViewById(R.id.buttonAddProduct);
         userTextView=(TextView) findViewById(R.id.textViewUser);
         userRating=(TextView) findViewById(R.id.textViewUserRate);
+        loginForMore = (TextView) findViewById(R.id.textViewPleaseLogIn);
 
 
 
@@ -152,7 +154,16 @@ public class ProductActivity extends AppCompatActivity {
                         nameTextView.setText("Brak produktu w bazie");
                         if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
 
+                            loginForMore.setVisibility(View.VISIBLE);
+                                loginForMore.setOnTouchListener(new View.OnTouchListener() {
+                                    @Override
+                                    public boolean onTouch(View v, MotionEvent event) {
 
+                                        Intent x = new Intent(getApplicationContext() , LoginActivity.class);
+                                        startActivity(x);
+                                        return false;
+                                    }
+                                });
                             addProductButton.setVisibility(View.INVISIBLE);
                         }else{
                             addProductButton.setVisibility(View.VISIBLE);
