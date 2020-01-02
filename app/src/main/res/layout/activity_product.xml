@@ -34,8 +34,8 @@
 
             <ImageView
                 android:id="@+id/imageViewPhoto"
-                android:layout_width="200dp"
-                android:layout_height="100dp"
+                android:layout_width="211dp"
+                android:layout_height="162dp"
                 android:layout_margin="10dp"
                 android:layout_marginEnd="118dp"
                 app:srcCompat="@drawable/ic_action_album"
