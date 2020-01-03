@@ -13,11 +13,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.wastic.R;
 import com.example.wastic.Requesthandler;
@@ -29,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class ProductActivity extends AppCompatActivity {
 
@@ -40,6 +43,8 @@ public class ProductActivity extends AppCompatActivity {
     private float ratedValue;
     String code;
     String productName,barcode,photoURL,addedByUser,ratingValue;
+    int productID;
+    String addOpinionURL = "https://wasticelo.000webhostapp.com/addOpinion.php";
 
     private RequestQueue requestQueue;
     @Override
@@ -73,6 +78,37 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
+        addCommentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+StringRequest request = new StringRequest(Request.Method.POST, addOpinionURL, new Response.Listener<String>() {
+    @Override
+    public void onResponse(String response) {
+
+    }
+}, new Response.ErrorListener() {
+    @Override
+    public void onErrorResponse(VolleyError error) {
+
+    }
+}){
+
+    @Override
+    protected Map<String, String> getParams() throws AuthFailureError {
+        Map<String, String> params = new HashMap<>();
+
+        params.put("description",commentTextView.getText().toString());
+        params.put("product_id",Integer.toString(productID));
+        params.put("user_id", Integer.toString(SharedPrefManager.getInstance(ProductActivity.this).currentUser()));
+
+
+        return params;
+    }
+};
+requestQueue.add(request);
+            }
+        });
+
     }
     private void jsonParse() {
         String url = "https://wasticelo.000webhostapp.com/testing.php?bar_code="+code;
@@ -84,7 +120,7 @@ public class ProductActivity extends AppCompatActivity {
 
                     JSONObject product = response.getJSONObject("data");
 
-
+                        productID = product.getInt("id");
                         productName = product.getString("name");
                         barcode = product.getString("bar_code");
                         photoURL = product.getString("photo");
@@ -145,8 +181,6 @@ public class ProductActivity extends AppCompatActivity {
                 try {
                     JSONObject obj = new JSONObject(s);
 
-
-
                     if (!obj.getBoolean("error")) {
                         nameTextView.setText("Brak produktu w bazie");
                         addCommentButton.setVisibility(View.INVISIBLE);
@@ -166,7 +200,6 @@ public class ProductActivity extends AppCompatActivity {
                             addProductButton.setVisibility(View.INVISIBLE);
                         } else {
                             addProductButton.setVisibility(View.VISIBLE);
-
                         }
                     }
                 } catch (JSONException e) {
@@ -193,7 +226,6 @@ public class ProductActivity extends AppCompatActivity {
                             ratingBar.setVisibility(View.VISIBLE);
                             addCommentButton.setVisibility(View.VISIBLE);
                         }
-
                 }
             }
         }

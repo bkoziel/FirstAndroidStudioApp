@@ -110,7 +110,7 @@ String barcode;
 
     }
     private void jsonParse() {
-        String url = "https://wasticelo.000webhostapp.com/Search.php?name="+searchEditText.getText().toString();
+        String url = "https://wasticelo.000webhostapp.com/Search.php?name="+searchEditText.getText().toString() ;
         //System.out.println(url);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override

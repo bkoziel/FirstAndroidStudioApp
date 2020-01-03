@@ -144,9 +144,9 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
                     public void onErrorResponse(VolleyError error) {
                         loading.dismiss();
                         Toast.makeText(getApplicationContext(),"error "+error.toString(),Toast.LENGTH_LONG).show();
-
                     }
-                }) {
+                })
+                {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
