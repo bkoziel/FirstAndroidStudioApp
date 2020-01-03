@@ -34,7 +34,7 @@ public class ProductActivity extends AppCompatActivity {
 
     private RatingBar ratingBar;
    private TextView barCodeTextView, rateCount;
-    private TextView nameTextView,userTextView,userRating,loginForMore;
+    private TextView nameTextView,userTextView,userRating,loginForMore,commentTextView,addCommentButton;
    private ImageView photoImageView;
     private Button addProductButton;
     private float ratedValue;
@@ -46,16 +46,16 @@ public class ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
-        barCodeTextView = (TextView) findViewById(R.id.textViewCode);
-        nameTextView = (TextView) findViewById(R.id.textViewName);
-        photoImageView = (ImageView) findViewById(R.id.imageViewPhoto);
-        addProductButton = (Button) findViewById(R.id.buttonAddProduct);
-        userTextView=(TextView) findViewById(R.id.textViewUser);
-        userRating=(TextView) findViewById(R.id.textViewUserRate);
-        loginForMore = (TextView) findViewById(R.id.textViewPleaseLogIn);
-
-
-
+        barCodeTextView = findViewById(R.id.textViewCode);
+        nameTextView = findViewById(R.id.textViewName);
+        photoImageView = findViewById(R.id.imageViewPhoto);
+        addProductButton = findViewById(R.id.buttonAddProduct);
+        userTextView= findViewById(R.id.textViewUser);
+        userRating= findViewById(R.id.textViewUserRate);
+        loginForMore = findViewById(R.id.textViewPleaseLogIn);
+        commentTextView = findViewById(R.id.editTextComment);
+        addCommentButton = findViewById(R.id.buttonAddComment);
+        ratingBar = findViewById(R.id.ratingBars);
 
         code = getIntent().getStringExtra("code");
         barCodeTextView.setText(code);
@@ -88,13 +88,13 @@ public class ProductActivity extends AppCompatActivity {
                         productName = product.getString("name");
                         barcode = product.getString("bar_code");
                         photoURL = product.getString("photo");
-                        addedByUser=product.getString("username");
-                        ratingValue=product.getString("RatingValue");
+                        addedByUser = product.getString("username");
+                        ratingValue = product.getString("RatingValue");
                         nameTextView.setText(productName);
                         barCodeTextView.setText(barcode);
-                        userTextView.setText("Dodane przez: " +addedByUser);
-                        userRating.setText("Ocena: "+ratingValue);
-                        Picasso.get().load("https://wasticelo.000webhostapp.com/"+photoURL).into(photoImageView);
+                        userTextView.setText("Dodane przez: " + addedByUser);
+                        userRating.setText("Ocena: "+ ratingValue);
+                        Picasso.get().load("https://wasticelo.000webhostapp.com/"+ photoURL).into(photoImageView);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -120,21 +120,18 @@ public class ProductActivity extends AppCompatActivity {
 
             @Override
             protected String doInBackground(Void... voids) {
-                //creating request handler object
                 Requesthandler requestHandler = new Requesthandler();
 
-                //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
                 params.put("bar_code", barcode);
 
-                //returing the response
                 return requestHandler.sendPostRequest(URLs.URL_PRODUCT, params);
             }
 
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                //displaying the progress bar while user registers on the server
+
                 progressBar = (ProgressBar) findViewById(R.id.progressBar2);
                 progressBar.setVisibility(View.VISIBLE);
             }
@@ -142,59 +139,64 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                //hiding the progressbar after completion
+
                 progressBar.setVisibility(View.GONE);
 
                 try {
-                    //converting response to json object
                     JSONObject obj = new JSONObject(s);
 
-                    //if no error in response
+
+
                     if (!obj.getBoolean("error")) {
                         nameTextView.setText("Brak produktu w bazie");
+                        addCommentButton.setVisibility(View.INVISIBLE);
+                        ratingBar.setVisibility(View.INVISIBLE);
+                        commentTextView.setVisibility(View.INVISIBLE);
                         if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
-
                             loginForMore.setVisibility(View.VISIBLE);
-                                loginForMore.setOnTouchListener(new View.OnTouchListener() {
-                                    @Override
-                                    public boolean onTouch(View v, MotionEvent event) {
+                            loginForMore.setOnTouchListener(new View.OnTouchListener() {
+                                @Override
+                                public boolean onTouch(View v, MotionEvent event) {
 
-                                        Intent x = new Intent(getApplicationContext() , LoginActivity.class);
-                                        startActivity(x);
-                                        return false;
-                                    }
-                                });
+                                    Intent x = new Intent(getApplicationContext(), LoginActivity.class);
+                                    startActivity(x);
+                                    return false;
+                                }
+                            });
                             addProductButton.setVisibility(View.INVISIBLE);
-                        }else{
+                        } else {
                             addProductButton.setVisibility(View.VISIBLE);
+
                         }
-
-
-
-                    } else {
-                        addProductButton.setVisibility(View.INVISIBLE);
-
-
-
-
-                       // JSONObject userJson = obj.getJSONObject("product");
-
-                        //creating a new user object
-                       // Product product = new Product(
-                                //Json.getInt("id"),
-                                //userJson.getString("name"),
-                               // userJson.getString("barcode"),
-                                //userJson.getString("photoURL")
-                       // );
-                //nameTextView.setText(product.getName());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                        addProductButton.setVisibility(View.INVISIBLE);
+
+                        if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
+
+                            addCommentButton.setVisibility(View.INVISIBLE);
+                            ratingBar.setVisibility(View.INVISIBLE);
+                            commentTextView.setVisibility(View.INVISIBLE);
+                            loginForMore.setVisibility(View.VISIBLE);
+                            loginForMore.setOnTouchListener(new View.OnTouchListener() {
+                                @Override
+                                public boolean onTouch(View v, MotionEvent event) {
+
+                                    Intent x = new Intent(getApplicationContext() , LoginActivity.class);
+                                    startActivity(x);
+                                    return false;
+                                }
+                            });
+                        }else{
+                            commentTextView.setVisibility(View.VISIBLE);
+                            ratingBar.setVisibility(View.VISIBLE);
+                            addCommentButton.setVisibility(View.VISIBLE);
+                        }
+
                 }
             }
         }
-
-        //executing the async task
         Products ru = new Products();
         ru.execute();
     }

@@ -3,7 +3,6 @@ package com.example.wastic.Activity;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -104,7 +103,7 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
             }
         });
 
-        ratingBar=(RatingBar) findViewById(R.id.RatingBars);
+        ratingBar= (RatingBar) findViewById(R.id.RatingBars);
         rateCount = (TextView) findViewById(R.id.textViewRating);
 
 
@@ -157,7 +156,7 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
                       imageData = imageToString(bitmap);
 
                         params.put("imagee", imageData);
-                        params.put("user_id",userID);
+                        params.put("user_id", userID);
                         params.put("ratingValue",rating);
 
 
@@ -172,10 +171,6 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
         });
 
     }
-
-
-
-
 
 
 
