@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,12 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">>
-        <activity android:name=".UserProfileActivity"></activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".ScannerActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity">
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activity.UserProfileActivity" />
+        <activity android:name=".Activity.AddProductActivity" />
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.ScannerActivity" />
+        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.ProductActivity" />
+        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

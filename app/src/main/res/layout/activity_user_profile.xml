@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserProfileActivity"
+    tools:context=".Activity.UserProfileActivity"
     android:background="@drawable/background"
     >
     <LinearLayout
@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Id"
+                android:text="ID:"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             <TextView
@@ -33,7 +33,8 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="id_number"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                />
 
         </TableRow>
 
@@ -43,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Username"
+                android:text="Login:"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             <TextView
@@ -62,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Email"
+                android:text="Email:"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             <TextView
@@ -81,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Gender"
+                android:text="Płeć:"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             <TextView
@@ -93,7 +94,37 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
         </TableRow>
+            <TableRow>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Data założenia:"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+                <TextView
+                    android:id="@+id/textViewSince"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="YYYY-MM-dd"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+            </TableRow>
+            <TableRow>
+
+                <ImageView
+                    android:id="@+id/imageViewAvatar"
+                    android:layout_width="148dp"
+                    android:layout_height="143dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginBottom="8dp"
+
+                    />
+            </TableRow>
 
     </TableLayout>
 
@@ -102,7 +133,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-201dp"
-        android:text="Logout" />
+        android:text="Wyloguj"
+        android:background="@color/colorPrimary"
+        android:textColor="#fff"
+        android:layout_margin="10dp"
+        />
 </LinearLayout>
     <!--    <TextView-->
 <!--        android:id="@+id/textView3"-->

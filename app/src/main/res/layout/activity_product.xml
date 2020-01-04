@@ -4,58 +4,186 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductActivity"
     android:background="@drawable/background"
-    >
+    tools:context=".Activity.ProductActivity">
 
-    <ImageView
-        android:id="@+id/imageViewPhoto"
-        android:layout_width="167dp"
-        android:layout_height="105dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp"
-        android:layout_marginEnd="118dp"
-        app:srcCompat="@drawable/ic_action_album"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="35dp" />
-
-    <TextView
-        android:id="@+id/textViewName"
+    <ProgressBar
+        android:id="@+id/progressBar2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageViewPhoto"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="110dp"
-        android:text="Nazwa Produktu"
-        android:textSize="25dp"
-        android:textColor="#000"
-        android:textStyle="bold" />
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/textViewCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewName"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="161dp"
-        android:text="Kod produktu" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_alignParentBottom="false"
+        android:baselineAligned="false"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/buttonAddProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="245dp"
-        android:background="@color/colorPrimary"
-        android:drawableLeft="@drawable/ic_action_plus"
-        android:text="Dodaj Produkt"
-        android:textColor="#fff"
-        tools:visibility="invisible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/imageViewPhoto"
+                android:layout_width="211dp"
+                android:layout_height="162dp"
+                android:layout_margin="10dp"
+                android:layout_marginEnd="118dp"
+                app:srcCompat="@drawable/ic_action_album"
+                tools:layout_editor_absoluteX="127dp"
+                tools:layout_editor_absoluteY="35dp" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:text="Nazwa produktu"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textViewPleaseLogIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/colorPrimary"
+                android:clickable="true"
+                android:ellipsize="none"
+                android:text="Zaloguj się po więcej"
+
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:visibility="invisible" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textViewCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Kod produktu" />
+
+            <TextView
+                android:id="@+id/textViewUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+            <TextView
+                android:id="@+id/textViewUserRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/buttonAddProduct"
+            android:layout_width="383dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/ic_action_plus"
+            android:text="Dodaj Produkt"
+            android:textColor="#fff"
+            android:visibility="invisible" />
+
+        <RatingBar
+            android:id="@+id/ratingBars"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginBottom="8dp"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/editTextComment"
+            android:layout_width="match_parent"
+            android:layout_height="107dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/buttonAddComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/ic_action_comment"
+            android:text="Oceń"
+            android:textColor="#fff"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
 </RelativeLayout>

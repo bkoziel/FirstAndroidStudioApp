@@ -1,4 +1,4 @@
-package com.example.wastic;
+package com.example.wastic.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -10,6 +10,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.example.wastic.R;
+import com.example.wastic.Requesthandler;
+import com.example.wastic.SharedPrefManager;
+import com.example.wastic.URLs;
+import com.example.wastic.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,19 +59,18 @@ public class LoginActivity extends AppCompatActivity {
 
         //validating inputs
         if (TextUtils.isEmpty(username)) {
-            editTextUsername.setError("Please enter your username");
+            editTextUsername.setError("Wprowadź nazwę użytkownika");
             editTextUsername.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Please enter your password");
+            editTextPassword.setError("Wprowadź hasło");
             editTextPassword.requestFocus();
             return;
         }
 
         //if everything is fine
-
         class UserLogin extends AsyncTask<Void, Void, String> {
 
             ProgressBar progressBar;
@@ -99,7 +104,9 @@ public class LoginActivity extends AppCompatActivity {
                                 userJson.getInt("id"),
                                 userJson.getString("username"),
                                 userJson.getString("email"),
-                                userJson.getString("gender")
+                                userJson.getString("gender"),
+                                userJson.getString("since"),
+                                userJson.getString("avatar")
                         );
 
                         //storing the user in shared preferences
@@ -109,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                         startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
                     } else {
-                        Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Zła nazwa użytkownika lub hasło", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

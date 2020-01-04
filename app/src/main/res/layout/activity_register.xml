@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity"
+    tools:context=".Activity.RegisterActivity"
     android:background="@drawable/background">
 
 
@@ -16,6 +17,15 @@
         android:orientation="vertical"
         android:padding="10dp">
 
+        <ImageView
+            android:id="@+id/imageAvatar"
+            android:layout_width="140dp"
+            android:layout_height="132dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+
+            android:visibility="visible"
+            app:srcCompat="@android:drawable/sym_def_app_icon" />
 
         <EditText
             android:id="@+id/editTextUsername"
@@ -23,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:hint="Username"
+            android:hint="Nazwa użytkownika"
             android:inputType="text"
             android:drawableLeft="@drawable/ic_action_user"
             />
@@ -45,7 +55,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
-            android:hint="Password"
+            android:hint="Hasło"
             android:inputType="textPassword"
             android:drawableLeft="@drawable/ic_action_password"
             />
@@ -63,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Male"
+                android:text="Mężczyzna"
                 android:textColor="#000"/>
 
 
@@ -71,12 +81,19 @@
                 android:id="@+id/radioButtonFemale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Female"
+                android:text="Kobieta"
                 android:textColor="#000
 "/>
 
         </RadioGroup>
-
+        <Button
+            android:id="@+id/buttonAvatarPicker"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Wybierz Avatar"
+            />
         <Button
             android:id="@+id/buttonRegister"
             android:layout_width="match_parent"
@@ -84,7 +101,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimary"
-            android:text="Register"
+            android:text="Zarejestruj"
             android:textColor="#fff" />
 
         <TextView
@@ -93,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:text="Already Registered?\nLogin Here"
+            android:text="Zarejestrowany już?\nZaloguj się tutaj"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
 

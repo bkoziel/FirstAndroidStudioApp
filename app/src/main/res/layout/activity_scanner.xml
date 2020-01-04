@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScannerActivity"
+    tools:context=".Activity.ScannerActivity"
     android:background="@drawable/background"
     >
 
@@ -16,8 +16,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="15dp"
-        app:srcCompat="@drawable/ic_action_album"
         android:contentDescription="@string/TODO"
-        />
+        android:visibility="invisible"
+        app:srcCompat="@drawable/ic_action_album" />
 
 </RelativeLayout>
