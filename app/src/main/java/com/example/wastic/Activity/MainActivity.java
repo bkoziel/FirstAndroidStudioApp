@@ -52,7 +52,7 @@ String barcode;
             onBackPressedCalled = false;
         }else{
         super.onBackPressed();
-    }
+        }
     }
 
     @Override

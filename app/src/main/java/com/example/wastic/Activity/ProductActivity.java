@@ -219,9 +219,11 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                     if (!obj.getBoolean("error")) {
                         
                         nameTextView.setText("Brak produktu w bazie");
-                        addCommentButton.setVisibility(View.INVISIBLE);
-                        ratingBar.setVisibility(View.INVISIBLE);
-                        commentTextView.setVisibility(View.INVISIBLE);
+
+                            addCommentButton.setVisibility(View.INVISIBLE);
+                            ratingBar.setVisibility(View.INVISIBLE);
+                            commentTextView.setVisibility(View.INVISIBLE);
+
                         if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
                             loginForMore.setVisibility(View.VISIBLE);
                             loginForMore.setOnTouchListener(new View.OnTouchListener() {
@@ -258,9 +260,16 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                                 }
                             });
                         }else{
+                            if(commentExist) {
                             commentTextView.setVisibility(View.VISIBLE);
                             ratingBar.setVisibility(View.VISIBLE);
                             addCommentButton.setVisibility(View.VISIBLE);
+                        }else{
+                                addCommentButton.setVisibility(View.INVISIBLE);
+                                ratingBar.setVisibility(View.INVISIBLE);
+                                commentTextView.setVisibility(View.INVISIBLE);
+
+                            }
                         }
                 }
             }
