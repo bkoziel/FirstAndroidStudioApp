@@ -40,14 +40,27 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout LL;
     LinearLayout l;
     Button b;
+    boolean onBackPressedCalled=false;
     ////////////
     private RequestQueue requestQueue;
 String barcode;
  String[]s;
     @Override
+    public void onBackPressed() {
+        if(onBackPressedCalled==true) {
+            LL.removeAllViews();
+            onBackPressedCalled = false;
+        }else{
+        super.onBackPressed();
+    }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
@@ -95,18 +108,25 @@ String barcode;
         searchEditText.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
+            LL.removeAllViews();
             }
+
 
             public void beforeTextChanged(CharSequence s, int start,
                                           int count, int after) {
                 LL.removeAllViews();
+                onBackPressedCalled=false;
             }
 
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
+                onBackPressedCalled=true;
                 jsonParse();
             }
+
+
         });
+
 
     }
     private void jsonParse() {
@@ -148,11 +168,11 @@ if(searchEditText.getText().length()!=0){
                         b = new Button(l.getContext());
                         barcode=product.getString("bar_code");
                         b.setText(product.getString("name")+ "\n" + barcode);
-                        b.setBackgroundColor(Color.argb(30,200, 230, 200));
+                        b.setBackgroundColor(Color.rgb(240,240,240));
                         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                         b.setLayoutParams(lp);
                         b.setId(i);
-                        b.setElevation(3);
+                       // b.setElevation(3);
                         final int id=i;
                         s[i] = product.getString("bar_code");
                         /*barcode=product.getString("bar_code");

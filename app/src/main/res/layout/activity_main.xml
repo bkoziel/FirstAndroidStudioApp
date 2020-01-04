@@ -45,6 +45,7 @@
         android:layout_marginTop="83dp"
         android:layout_marginEnd="100dp"
         android:background="@color/colorPrimary"
+        android:elevation="0dp"
         android:text="Zeskanuj Produkt"
         android:textColor="#fff" />
 
@@ -97,6 +98,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="290dp"
+
+        android:elevation="10dp"
+        android:layoutDirection="rtl"
         android:orientation="horizontal">
 
         <Space
@@ -107,27 +111,29 @@
         <LinearLayout
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:background="#45888686"
-            android:orientation="vertical">
+            android:background="#D8D8D8"
+            android:orientation="vertical"
+            >
 
             <EditText
                 android:id="@+id/editTextSearch"
                 android:layout_width="350dp"
                 android:layout_height="40dp"
-                android:background="#45D8D8D8"
+                android:background="#DFDFDF"
                 android:drawableLeft="@drawable/ic_action_search"
                 android:ems="10"
                 android:hint="Wyszukaj"
                 android:inputType="textPersonName"
+                android:padding="5dp"
                 android:textColor="#000" />
 
             <LinearLayout
                 android:id="@+id/LL"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:baselineAlignedChildIndex="1"
                 android:elevation="5dp"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"
+                android:padding="5dp"></LinearLayout>
 
         </LinearLayout>
 
