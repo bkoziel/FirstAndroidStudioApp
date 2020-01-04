@@ -42,7 +42,7 @@ public class ProductActivity extends AppCompatActivity {
    private ImageView photoImageView;
     private Button addProductButton;
     private float ratedValue;
-    private Boolean commentExist;
+    private boolean commentExist;
     String code;
     String productName,barcode,photoURL,addedByUser,ratingValue;
     int productID;
@@ -155,7 +155,6 @@ requestQueue.add(request);
 
 String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id="+user_id+"&product_id="+prod_id;
 
-        System.out.println(url);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -163,8 +162,8 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
 
                     JSONObject comment = response.getJSONObject("data");
 
-                  Boolean exist=comment.getBoolean("exist");
-                    commentExist=exist;
+                    commentExist=comment.getBoolean("exist");
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
