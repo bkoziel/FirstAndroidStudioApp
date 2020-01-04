@@ -79,6 +79,14 @@ public class ProductActivity extends AppCompatActivity {
                 i.putExtra("code",code);
                 startActivity(i);
 
+                ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                        if(rating<1.0f)
+                            ratingBar.setRating(1.0f);
+                    }
+                });
+
             }
         });
 
