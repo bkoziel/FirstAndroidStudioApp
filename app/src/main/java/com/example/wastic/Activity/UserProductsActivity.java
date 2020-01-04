@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Space;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,6 +57,8 @@ public class UserProductsActivity extends AppCompatActivity {
                             TextView tv = new TextView(l.getContext());
                             tv.setGravity(View.TEXT_ALIGNMENT_CENTER);
                             tv.setTextSize(20);
+                            Space space= new Space(l.getContext());
+
                             Button b = new Button(l.getContext());
                             //b.setGravity(View.FOCUS_RIGHT);
                             tv.setText(product.getString("name"));
@@ -63,10 +66,14 @@ public class UserProductsActivity extends AppCompatActivity {
                      //       b.setText(product.getString("name")+ "\n" + barcode);
                             b.setBackgroundColor(Color.rgb(0,85,77));
                             b.setTextColor(Color.rgb(255,255,255));
-                            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(800, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                             lp.setMargins(10,10,10,10);
+                            //lp.setMarginEnd(10);
+                            lp2.setMargins(10,10,10,10);
                             tv.setLayoutParams(lp);
-                            b.setLayoutParams(lp);
+                            b.setLayoutParams(lp2);
+                            //space.setLayoutParams(lp2);
                             b.setId(i);
                             final int id=i;
                             s[i] = product.getString("bar_code");
@@ -82,6 +89,7 @@ public class UserProductsActivity extends AppCompatActivity {
 
                             });
                             l.addView(tv);
+                            l.addView(space);
                            l.addView(b);
                            LL.addView(l);
 
