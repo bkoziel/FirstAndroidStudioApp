@@ -104,6 +104,7 @@ StringRequest request = new StringRequest(Request.Method.POST, addOpinionURL, ne
         params.put("description",commentTextView.getText().toString());
         params.put("product_id",Integer.toString(productID));
         params.put("user_id", Integer.toString(SharedPrefManager.getInstance(ProductActivity.this).currentUser()));
+        params.put("ratingValue",String.valueOf(ratingBar.getRating()));
 
 
         return params;
@@ -113,6 +114,33 @@ requestQueue.add(request);
             }
         });
 
+    }
+    private void getRating() {
+        String prod_id=Integer.toString(productID);
+        String url = "https://wasticelo.000webhostapp.com/averageRating.php?product_id="+prod_id;
+        System.out.println(url);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+
+                    JSONObject product = response.getJSONObject("data");
+
+                    ratingValue = product.getString("ratingValue");
+                    userRating.setText("Ocena: "+ ratingValue);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(request);
     }
     private void jsonParse() {
         String url = "https://wasticelo.000webhostapp.com/testing.php?bar_code="+code;
@@ -129,11 +157,11 @@ requestQueue.add(request);
                         barcode = product.getString("bar_code");
                         photoURL = product.getString("photo");
                         addedByUser = product.getString("username");
-                        ratingValue = product.getString("RatingValue");
+                         getRating();
                         nameTextView.setText(productName);
                         barCodeTextView.setText(barcode);
                         userTextView.setText("Dodane przez: " + addedByUser);
-                       userRating.setText("Ocena: "+ ratingValue);
+
                         Picasso.get().load("https://wasticelo.000webhostapp.com/"+ photoURL).into(photoImageView);
 
                 } catch (JSONException e) {
@@ -259,7 +287,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                                 }
                             });
                         }else{
-                            if(commentExist) {
+                            if(commentExist==false) {
                             commentTextView.setVisibility(View.VISIBLE);
                             ratingBar.setVisibility(View.VISIBLE);
                             addCommentButton.setVisibility(View.VISIBLE);
