@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -41,10 +42,11 @@ public class ProductActivity extends AppCompatActivity {
    private ImageView photoImageView;
     private Button addProductButton;
     private float ratedValue;
+    private Boolean commentExist;
     String code;
     String productName,barcode,photoURL,addedByUser,ratingValue;
     int productID;
-    String addOpinionURL = "https://wasticelo.000webhostapp.com/addOpinion.php";
+   private String addOpinionURL = "https://wasticelo.000webhostapp.com/addOpinion.php";
 
     private RequestQueue requestQueue;
     @Override
@@ -65,7 +67,9 @@ public class ProductActivity extends AppCompatActivity {
         code = getIntent().getStringExtra("code");
         barCodeTextView.setText(code);
         requestQueue = Volley.newRequestQueue(this);
+        checkIfExsistComment();
         checkCode();
+
         jsonParse();
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,12 +88,12 @@ public class ProductActivity extends AppCompatActivity {
 StringRequest request = new StringRequest(Request.Method.POST, addOpinionURL, new Response.Listener<String>() {
     @Override
     public void onResponse(String response) {
-
+        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
     }
 }, new Response.ErrorListener() {
     @Override
     public void onErrorResponse(VolleyError error) {
-
+        Toast.makeText(getApplicationContext(),"error"+error.toString(),Toast.LENGTH_LONG).show();
     }
 }){
 
@@ -129,7 +133,7 @@ requestQueue.add(request);
                         nameTextView.setText(productName);
                         barCodeTextView.setText(barcode);
                         userTextView.setText("Dodane przez: " + addedByUser);
-                        userRating.setText("Ocena: "+ ratingValue);
+                       userRating.setText("Ocena: "+ ratingValue);
                         Picasso.get().load("https://wasticelo.000webhostapp.com/"+ photoURL).into(photoImageView);
 
                 } catch (JSONException e) {
@@ -145,6 +149,37 @@ requestQueue.add(request);
         requestQueue.add(request);
     }
 
+    private void checkIfExsistComment() {
+       String prod_id=Integer.toString(productID);
+       String user_id=Integer.toString(SharedPrefManager.getInstance(ProductActivity.this).currentUser());
+
+String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id="+user_id+"&product_id="+prod_id;
+
+        System.out.println(url);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+
+                    JSONObject comment = response.getJSONObject("data");
+
+                  Boolean exist=comment.getBoolean("exist");
+                    commentExist=exist;
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        requestQueue.add(request);
+
+    }
 
     private void checkCode() {
         final String barcode = code;
@@ -182,6 +217,7 @@ requestQueue.add(request);
                     JSONObject obj = new JSONObject(s);
 
                     if (!obj.getBoolean("error")) {
+                        
                         nameTextView.setText("Brak produktu w bazie");
                         addCommentButton.setVisibility(View.INVISIBLE);
                         ratingBar.setVisibility(View.INVISIBLE);
