@@ -17,11 +17,25 @@
             android:layout_height="wrap_content">
 
 
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TableRow android:layout_height="329dp">
+                <ImageView
+                    android:id="@+id/imageViewAvatar"
+                    android:layout_width="148dp"
+                    android:layout_height="143dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="32dp"
+
+                    android:layout_marginBottom="8dp" />
+            </TableRow>
+
+            <TableRow android:layout_height="329dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="ID:"
@@ -29,19 +43,18 @@
 
             <TextView
                 android:id="@+id/textViewId"
-                android:layout_width="wrap_content"
+                android:layout_width="195dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="id_number"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="Login:"
@@ -60,7 +73,7 @@
         <TableRow>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="Email:"
@@ -79,7 +92,7 @@
         <TableRow>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="Płeć:"
@@ -97,7 +110,7 @@
             <TableRow>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:text="Data założenia:"
@@ -112,33 +125,29 @@
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             </TableRow>
-            <TableRow>
 
-                <ImageView
-                    android:id="@+id/imageViewAvatar"
-                    android:layout_width="148dp"
-                    android:layout_height="143dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="32dp"
-                    android:layout_marginBottom="8dp"
+        </TableLayout>
 
-                    />
-            </TableRow>
+        <Button
+            android:id="@+id/buttonAddedProducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-    </TableLayout>
+            android:layout_margin="10dp"
+            android:background="@color/colorPrimary"
+            android:text="Dodane produkty"
+            android:textColor="#fff" />
 
-    <Button
-        android:id="@+id/buttonLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-201dp"
-        android:text="Wyloguj"
-        android:background="@color/colorPrimary"
-        android:textColor="#fff"
-        android:layout_margin="10dp"
-        />
-</LinearLayout>
+        <Button
+            android:id="@+id/buttonLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginTop="-201dp"
+            android:background="@color/colorPrimary"
+            android:text="Wyloguj"
+            android:textColor="#fff" />
+    </LinearLayout>
     <!--    <TextView-->
 <!--        android:id="@+id/textView3"-->
 <!--        android:layout_width="wrap_content"-->
