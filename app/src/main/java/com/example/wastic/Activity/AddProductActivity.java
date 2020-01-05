@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -192,11 +194,11 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
             editTextBarCode.requestFocus();
             return;
         }
-//        if (TextUtils.isEmpty(photourl)) {
-//            editPhotoURL.setError("Wprowadź zdjęcie produktu");
-//            editPhotoURL.requestFocus();
-//            return;
-//        }
+        if(!hasImage(imageView)){
+            Toast.makeText(getApplicationContext(),"Wybierz lub zrób zdjęcie", Toast.LENGTH_SHORT).show();
+            imageView.requestFocus();
+            return;
+        }
 
         //if it passes all the validations
 
@@ -331,7 +333,16 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
         }
     }
 
-//
+    private boolean hasImage(@NonNull ImageView view) {
+        Drawable drawable = view.getDrawable();
+        boolean hasImage = (drawable != null);
+
+        if (hasImage && (drawable instanceof BitmapDrawable)) {
+            hasImage = ((BitmapDrawable)drawable).getBitmap() != null;
+        }
+
+        return hasImage;
+    }
 
     private String imageToString(Bitmap bitmap){
 
