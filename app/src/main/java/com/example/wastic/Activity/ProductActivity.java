@@ -107,7 +107,11 @@ StringRequest request = new StringRequest(Request.Method.POST, addOpinionURL, ne
     @Override
     public void onResponse(String response) {
         Toast.makeText(getApplicationContext(),"Oceniono Produkt",Toast.LENGTH_LONG).show();
-        onRestart();
+       finish();
+            Intent x = new Intent(getApplicationContext() , ProductActivity.class);
+            x.putExtra("code",code);
+            startActivity(x);
+
     }
 }, new Response.ErrorListener() {
     @Override
@@ -340,6 +344,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                             addCommentButton.setVisibility(View.INVISIBLE);
                             ratingBar.setVisibility(View.INVISIBLE);
                             commentTextView.setVisibility(View.INVISIBLE);
+                            rateCount.setVisibility(View.INVISIBLE);
 
                         if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
                             nameTextView.setText("Brak produktu w bazie");
@@ -363,6 +368,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                         addProductButton.setVisibility(View.INVISIBLE);
 
                         if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
+                            rateCount.setVisibility(View.INVISIBLE);
 
                             addCommentButton.setVisibility(View.INVISIBLE);
                             ratingBar.setVisibility(View.INVISIBLE);
@@ -383,10 +389,14 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                             commentTextView.setVisibility(View.VISIBLE);
                             ratingBar.setVisibility(View.VISIBLE);
                             addCommentButton.setVisibility(View.VISIBLE);
+                                rateCount.setVisibility(View.VISIBLE);
+
                         }else {
                                 addCommentButton.setVisibility(View.INVISIBLE);
                                 ratingBar.setVisibility(View.INVISIBLE);
                                 commentTextView.setVisibility(View.INVISIBLE);
+                                rateCount.setVisibility(View.INVISIBLE);
+
                             }
                         }
                 }
