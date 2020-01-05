@@ -63,7 +63,7 @@ public class AddProductActivity extends AppCompatActivity {
     private float ratedValue;
     private TextView  rateCount;
 final int CODE_GALLERY_REQUEST=999;
-    private int PICK_IMAGE_REQUEST = 1;
+    private int PICK_IMAGE_REQUEST = 8;
     private int REQUEST_IMAGE_CAPTURE = 1;
 private  Bitmap bitmap;
 private     String imageData="";
@@ -157,7 +157,7 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
                      String rating= Float.toString(ratedValue);
                       imageData = imageToString(bitmap);
 
-                        params.put("imagee", imageData);
+                        params.put("imagee", imageToString(bitmap));
                         params.put("user_id", userID);
                         params.put("ratingValue",rating);
 
@@ -323,10 +323,11 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK ) {
+        }if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null ) {
 
                 Bundle extras = data.getExtras();
                 Bitmap imageBitmap = (Bitmap) extras.get("data");
+                bitmap=imageBitmap;
                 imageView.setImageBitmap(imageBitmap);
 
 
