@@ -105,17 +105,9 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
             }
         });
 
-        ratingBar= (RatingBar) findViewById(R.id.RatingBars);
-        rateCount = (TextView) findViewById(R.id.textViewRating);
 
 
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                ratedValue = ratingBar.getRating();
-                rateCount.setText("Twoja ocena: " + ratedValue + "/5");
-            }
-        });
+
     editTextBarCode.setText(code);
         buttonAddProduct.setOnClickListener(new View.OnClickListener() {
 
@@ -155,11 +147,11 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
 
                      String userID= Integer.toString(user.getId());
                      String rating= Float.toString(ratedValue);
-                      imageData = imageToString(bitmap);
 
-                        params.put("imagee", imageToString(bitmap));
+
+                        params.put("imagee", imageData);
                         params.put("user_id", userID);
-                        params.put("ratingValue",rating);
+                        params.put("ratingValue","5");
 
 
                         return params;
@@ -320,6 +312,7 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
 
                 bitmap = BitmapFactory.decodeStream(inputStream);
                 imageView.setImageBitmap(bitmap);
+                imageData = imageToString(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -328,6 +321,7 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
                 Bundle extras = data.getExtras();
                 Bitmap imageBitmap = (Bitmap) extras.get("data");
                 bitmap=imageBitmap;
+                imageData = imageToString2(bitmap);
                 imageView.setImageBitmap(imageBitmap);
 
 
@@ -353,6 +347,17 @@ bitmap.compress(Bitmap.CompressFormat.JPEG,40,outputStream);
 byte[] imageBytes=outputStream.toByteArray();
 String encodedImage=Base64.encodeToString(imageBytes,Base64.DEFAULT);
 return encodedImage;
+
+
+    }
+    private String imageToString2(Bitmap bitmap){
+
+        ByteArrayOutputStream outputStream=new ByteArrayOutputStream();
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+        byte[] imageBytes=outputStream.toByteArray();
+        String encodedImage=Base64.encodeToString(imageBytes,Base64.DEFAULT);
+        return encodedImage;
 
 
     }
