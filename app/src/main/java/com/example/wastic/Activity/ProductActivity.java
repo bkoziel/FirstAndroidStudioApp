@@ -42,10 +42,10 @@ public class ProductActivity extends AppCompatActivity {
    private ImageView photoImageView;
     private Button addProductButton;
     private float ratedValue;
-    private boolean commentExist;
+    private String commentExist;
     String code;
     String productName,barcode,photoURL,addedByUser,ratingValue;
-    int productID;
+    static int productID;
    private String addOpinionURL = "https://wasticelo.000webhostapp.com/addOpinion.php";
 
     private RequestQueue requestQueue;
@@ -67,10 +67,10 @@ public class ProductActivity extends AppCompatActivity {
         code = getIntent().getStringExtra("code");
         barCodeTextView.setText(code);
         requestQueue = Volley.newRequestQueue(this);
-        checkIfExsistComment();
+        jsonParse();
         checkCode();
 
-        jsonParse();
+
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +126,7 @@ requestQueue.add(request);
     private void getRating() {
         String prod_id=Integer.toString(productID);
         String url = "https://wasticelo.000webhostapp.com/averageRating.php?product_id="+prod_id;
-        System.out.println(url);
+
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -183,12 +183,13 @@ requestQueue.add(request);
             }
         });
         requestQueue.add(request);
+        checkIfExsistComment();
     }
 
     private void checkIfExsistComment() {
        String prod_id=Integer.toString(productID);
        String user_id=Integer.toString(SharedPrefManager.getInstance(ProductActivity.this).currentUser());
-
+        System.out.println("user: "+user_id + " product: "+prod_id);
 String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id="+user_id+"&product_id="+prod_id;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -198,7 +199,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
 
                     JSONObject comment = response.getJSONObject("data");
 
-                    commentExist=comment.getBoolean("exist");
+                    commentExist=comment.getString("exist");
 
 
                 } catch (JSONException e) {
@@ -295,7 +296,8 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                                 }
                             });
                         }else{
-                            if(commentExist==false) {
+                            System.out.println("co siedzi w commentExist= "+commentExist);
+                            if(commentExist=="false") {
                             commentTextView.setVisibility(View.VISIBLE);
                             ratingBar.setVisibility(View.VISIBLE);
                             addCommentButton.setVisibility(View.VISIBLE);
