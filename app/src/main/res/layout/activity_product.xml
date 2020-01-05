@@ -111,34 +111,29 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
             <TextView
                 android:id="@+id/textViewCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:gravity="center"
                 android:text="Kod produktu" />
 
             <TextView
                 android:id="@+id/textViewUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
                 android:text="" />
+
             <TextView
                 android:id="@+id/textViewUserRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:gravity="center"
                 android:text="" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -157,7 +152,7 @@
         <RatingBar
             android:id="@+id/ratingBars"
 
-            android:layout_width="wrap_content"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
@@ -170,7 +165,7 @@
         <EditText
             android:id="@+id/editTextComment"
             android:layout_width="match_parent"
-            android:layout_height="107dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine" />
@@ -185,6 +180,12 @@
             android:text="Oceń"
             android:textColor="#fff"
             android:visibility="invisible" />
+
+        <LinearLayout
+            android:id="@+id/commentsLL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
 
     </LinearLayout>
 

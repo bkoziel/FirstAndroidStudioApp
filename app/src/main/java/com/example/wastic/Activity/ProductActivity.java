@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import com.example.wastic.SharedPrefManager;
 import com.example.wastic.URLs;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,6 +45,7 @@ public class ProductActivity extends AppCompatActivity {
     private Button addProductButton;
     private float ratedValue;
     private String commentExist;
+    LinearLayout LL;
     String code;
     String productName,barcode,photoURL,addedByUser,ratingValue;
     static int productID;
@@ -63,12 +66,13 @@ public class ProductActivity extends AppCompatActivity {
         commentTextView = findViewById(R.id.editTextComment);
         addCommentButton = findViewById(R.id.buttonAddComment);
         ratingBar = findViewById(R.id.ratingBars);
-
+        LL = findViewById(R.id.commentsLL);
         code = getIntent().getStringExtra("code");
         barCodeTextView.setText(code);
         requestQueue = Volley.newRequestQueue(this);
         jsonParse();
         checkCode();
+
 
 
         addProductButton.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +113,11 @@ StringRequest request = new StringRequest(Request.Method.POST, addOpinionURL, ne
     protected Map<String, String> getParams() throws AuthFailureError {
         Map<String, String> params = new HashMap<>();
 
-        params.put("description",commentTextView.getText().toString());
+        if(!commentTextView.getText().equals("")) {
+            params.put("description", commentTextView.getText().toString());
+        }else{
+            params.put("description", null);
+        }
         params.put("product_id",Integer.toString(productID));
         params.put("user_id", Integer.toString(SharedPrefManager.getInstance(ProductActivity.this).currentUser()));
         params.put("ratingValue",String.valueOf(ratingBar.getRating()));
@@ -169,7 +177,7 @@ requestQueue.add(request);
                         nameTextView.setText(productName);
                         barCodeTextView.setText(barcode);
                         userTextView.setText("Dodane przez: " + addedByUser);
-
+                        seeComments();
                         Picasso.get().load("https://wasticelo.000webhostapp.com/"+ photoURL).into(photoImageView);
 
                 } catch (JSONException e) {
@@ -217,6 +225,77 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
 
     }
 
+    private void seeComments() {
+        String url = "https://wasticelo.000webhostapp.com/addedComments.php?product_id="+productID;
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray comments = response.getJSONArray("comments");
+
+//                    nameTextView.setText(Integer.toString(productID));
+                    //        LL.removeAllViews();
+                    //final String[] s = new String[((JSONArray) products).length()];
+                    for(int i = 0; i < ((JSONArray) comments).length(); i++) {
+                        final JSONObject comment = comments.getJSONObject(i);
+                        //final String barcode = product.getString("barcode");
+                        //l = new LinearLayout(LL.getContext());
+                        //LinearLayout l = new LinearLayout(LL.getContext());
+                        //l.setOrientation(LinearLayout.HORIZONTAL);
+                        TextView tv = new TextView(LL.getContext());
+                        tv.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                        tv.setTextSize(20);
+                        //Space space= new Space(l.getContext());
+
+                        //Button b = new Button(l.getContext());
+                        //b.setGravity(View.FOCUS_RIGHT);
+                        tv.setText(comment.getString("description") + " Ocena:" + comment.getDouble("ratingValue") + " " + comment.get("comment_date")  );
+                        //b.setText(" Przejdź > ");
+                        //       b.setText(product.getString("name")+ "\n" + barcode);
+                        //b.setBackgroundColor(Color.rgb(0,85,77));
+                        //b.setTextColor(Color.rgb(255,255,255));
+                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        //LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        lp.setMargins(10,10,10,10);
+                        //lp.setMarginEnd(10);
+                        //lp2.setMargins(10,10,10,10);
+                        tv.setLayoutParams(lp);
+                        //b.setLayoutParams(lp2);
+                        //space.setLayoutParams(lp2);
+                        //b.setId(i);
+                        //final int id=i;
+                        //s[i] = product.getString("bar_code");
+
+                        //b.setOnClickListener(new View.OnClickListener() {
+                         //   @Override
+                         //   public void onClick(View v) {
+                         //       Intent x = new Intent(getApplicationContext() , ProductActivity.class);
+                         //       x.putExtra("code",s[id]);
+
+                         //       startActivity(x);
+                          //  }
+
+                        //});
+                        //l.addView(tv);
+                       // l.addView(space);
+                       // l.addView(b);
+                        LL.addView(tv);
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(request);
+    }
+
     private void checkCode() {
         final String barcode = code;
 
@@ -261,6 +340,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                             commentTextView.setVisibility(View.INVISIBLE);
 
                         if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
+                            nameTextView.setText("Brak produktu w bazie");
                             loginForMore.setVisibility(View.VISIBLE);
                             loginForMore.setOnTouchListener(new View.OnTouchListener() {
                                 @Override
@@ -301,11 +381,10 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                             commentTextView.setVisibility(View.VISIBLE);
                             ratingBar.setVisibility(View.VISIBLE);
                             addCommentButton.setVisibility(View.VISIBLE);
-                        }else{
+                        }else {
                                 addCommentButton.setVisibility(View.INVISIBLE);
                                 ratingBar.setVisibility(View.INVISIBLE);
                                 commentTextView.setVisibility(View.INVISIBLE);
-
                             }
                         }
                 }
