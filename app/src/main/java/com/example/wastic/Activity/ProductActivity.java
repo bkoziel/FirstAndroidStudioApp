@@ -43,8 +43,7 @@ public class ProductActivity extends AppCompatActivity {
     private TextView nameTextView,userTextView,userRating,loginForMore,commentTextView,addCommentButton;
    private ImageView photoImageView;
     private Button addProductButton;
-    private float ratedValue;
-    private String commentExist;
+    private String commentExist="false";
     LinearLayout LL;
     String code;
     String productName,barcode,photoURL,addedByUser,ratingValue;
@@ -67,6 +66,7 @@ public class ProductActivity extends AppCompatActivity {
         addCommentButton = findViewById(R.id.buttonAddComment);
         ratingBar = findViewById(R.id.ratingBars);
         LL = findViewById(R.id.commentsLL);
+        rateCount = findViewById(R.id.ratingBarText);
         code = getIntent().getStringExtra("code");
         barCodeTextView.setText(code);
         requestQueue = Volley.newRequestQueue(this);
@@ -79,20 +79,26 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                Intent i = new Intent(getApplicationContext() , AddProductActivity.class);
-                i.putExtra("code",code);
+                Intent i = new Intent(getApplicationContext(), AddProductActivity.class);
+                i.putExtra("code", code);
                 startActivity(i);
-
+            }
+        });
                 ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                     @Override
                     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                        if(rating<1.0f)
-                            ratingBar.setRating(1.0f);
+                        if (rating < 1.0f)
+                        {       ratingBar.setRating(1.0f);
+                                rating = 1.0f;
+                        }
+                        rateCount.setText("Twoja ocena: " + rating + "/5");
                     }
-                });
 
-            }
-        });
+                }
+                );
+
+
+
 
         addCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,12 +106,13 @@ public class ProductActivity extends AppCompatActivity {
 StringRequest request = new StringRequest(Request.Method.POST, addOpinionURL, new Response.Listener<String>() {
     @Override
     public void onResponse(String response) {
-        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Oceniono Produkt",Toast.LENGTH_LONG).show();
+        onRestart();
     }
 }, new Response.ErrorListener() {
     @Override
     public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getApplicationContext(),"error"+error.toString(),Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Wystąpił błąd",Toast.LENGTH_LONG).show();
     }
 }){
 
@@ -113,11 +120,7 @@ StringRequest request = new StringRequest(Request.Method.POST, addOpinionURL, ne
     protected Map<String, String> getParams() throws AuthFailureError {
         Map<String, String> params = new HashMap<>();
 
-        if(!commentTextView.getText().equals("")) {
-            params.put("description", commentTextView.getText().toString());
-        }else{
-            params.put("description", null);
-        }
+        params.put("description", commentTextView.getText().toString());
         params.put("product_id",Integer.toString(productID));
         params.put("user_id", Integer.toString(SharedPrefManager.getInstance(ProductActivity.this).currentUser()));
         params.put("ratingValue",String.valueOf(ratingBar.getRating()));
@@ -131,7 +134,7 @@ requestQueue.add(request);
         });
 
     }
-    private void getRating() {
+    private void getRatings() {
         String prod_id=Integer.toString(productID);
         String url = "https://wasticelo.000webhostapp.com/averageRating.php?product_id="+prod_id;
 
@@ -173,11 +176,12 @@ requestQueue.add(request);
                         barcode = product.getString("bar_code");
                         photoURL = product.getString("photo");
                         addedByUser = product.getString("username");
-                         getRating();
+                         getRatings();
                         nameTextView.setText(productName);
                         barCodeTextView.setText(barcode);
                         userTextView.setText("Dodane przez: " + addedByUser);
                         seeComments();
+                        checkIfExsistComment();
                         Picasso.get().load("https://wasticelo.000webhostapp.com/"+ photoURL).into(photoImageView);
 
                 } catch (JSONException e) {
@@ -191,7 +195,6 @@ requestQueue.add(request);
             }
         });
         requestQueue.add(request);
-        checkIfExsistComment();
     }
 
     private void checkIfExsistComment() {
@@ -206,7 +209,6 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                 try {
 
                     JSONObject comment = response.getJSONObject("data");
-
                     commentExist=comment.getString("exist");
 
 
@@ -377,7 +379,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                             });
                         }else{
                             System.out.println("co siedzi w commentExist= "+commentExist);
-                            if(commentExist=="false") {
+                            if(commentExist.equals("false")) {
                             commentTextView.setVisibility(View.VISIBLE);
                             ratingBar.setVisibility(View.VISIBLE);
                             addCommentButton.setVisibility(View.VISIBLE);
