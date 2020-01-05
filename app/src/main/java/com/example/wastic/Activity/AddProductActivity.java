@@ -105,17 +105,9 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
             }
         });
 
-        ratingBar= (RatingBar) findViewById(R.id.RatingBars);
-        rateCount = (TextView) findViewById(R.id.textViewRating);
 
 
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                ratedValue = ratingBar.getRating();
-                rateCount.setText("Twoja ocena: " + ratedValue + "/5");
-            }
-        });
+
     editTextBarCode.setText(code);
         buttonAddProduct.setOnClickListener(new View.OnClickListener() {
 
@@ -159,7 +151,7 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
 
                         params.put("imagee", imageData);
                         params.put("user_id", userID);
-                        params.put("ratingValue",rating);
+                        params.put("ratingValue","5");
 
 
                         return params;
