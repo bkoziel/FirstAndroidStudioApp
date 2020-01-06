@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -341,14 +342,29 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                         
                         nameTextView.setText("Brak produktu w bazie");
 
-                            addCommentButton.setVisibility(View.INVISIBLE);
-                            ratingBar.setVisibility(View.INVISIBLE);
-                            commentTextView.setVisibility(View.INVISIBLE);
-                            rateCount.setVisibility(View.INVISIBLE);
+
+                        addCommentButton.setVisibility(View.INVISIBLE);
+                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(addCommentButton.getLayoutParams().width, 0);
+                        addCommentButton.setLayoutParams(lp);
+
+                        ratingBar.setVisibility(View.INVISIBLE);
+                        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ratingBar.getLayoutParams().width, 0);
+                        ratingBar.setLayoutParams(lp2);
+
+                        commentTextView.setVisibility(View.INVISIBLE);
+                        LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(commentTextView.getLayoutParams().width, 0);
+                        commentTextView.setLayoutParams(lp3);
+
+                        rateCount.setVisibility(View.INVISIBLE);
+                        LinearLayout.LayoutParams lp4 = new LinearLayout.LayoutParams(rateCount.getLayoutParams().width, 0);
+                        rateCount.setLayoutParams(lp4);
+
 
                         if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
                             nameTextView.setText("Brak produktu w bazie");
                             loginForMore.setVisibility(View.VISIBLE);
+                            LinearLayout.LayoutParams lp5 = new LinearLayout.LayoutParams(loginForMore.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            loginForMore.setLayoutParams(lp5);
                             loginForMore.setOnTouchListener(new View.OnTouchListener() {
                                 @Override
                                 public boolean onTouch(View v, MotionEvent event) {
@@ -359,20 +375,41 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                                 }
                             });
                             addProductButton.setVisibility(View.INVISIBLE);
+                            LinearLayout.LayoutParams lp6 = new LinearLayout.LayoutParams(addProductButton.getLayoutParams().width, 0);
+                            addProductButton.setLayoutParams(lp6);
                         } else {
                             addProductButton.setVisibility(View.VISIBLE);
+                            LinearLayout.LayoutParams lp6 = new LinearLayout.LayoutParams(addProductButton.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            addProductButton.setLayoutParams(lp6);
                         }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                         addProductButton.setVisibility(View.INVISIBLE);
+                    LinearLayout.LayoutParams lp6 = new LinearLayout.LayoutParams(addProductButton.getLayoutParams().width, 0);
+                    addProductButton.setLayoutParams(lp6);
 
-                        if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
-                            rateCount.setVisibility(View.INVISIBLE);
+                    if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
                             addCommentButton.setVisibility(View.INVISIBLE);
+                            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(addCommentButton.getLayoutParams().width, 0);
+                            addCommentButton.setLayoutParams(lp);
+
                             ratingBar.setVisibility(View.INVISIBLE);
+                            LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ratingBar.getLayoutParams().width, 0);
+                            ratingBar.setLayoutParams(lp2);
+
                             commentTextView.setVisibility(View.INVISIBLE);
+                            LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(commentTextView.getLayoutParams().width, 0);
+                            commentTextView.setLayoutParams(lp3);
+
+                            rateCount.setVisibility(View.INVISIBLE);
+                            LinearLayout.LayoutParams lp4 = new LinearLayout.LayoutParams(rateCount.getLayoutParams().width, 0);
+                            rateCount.setLayoutParams(lp4);
+
                             loginForMore.setVisibility(View.VISIBLE);
+                            LinearLayout.LayoutParams lp5 = new LinearLayout.LayoutParams(loginForMore.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            loginForMore.setLayoutParams(lp5);
+
                             loginForMore.setOnTouchListener(new View.OnTouchListener() {
                                 @Override
                                 public boolean onTouch(View v, MotionEvent event) {
@@ -383,19 +420,40 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                                 }
                             });
                         }else{
-                            System.out.println("co siedzi w commentExist= "+commentExist);
+ //                           System.out.println("co siedzi w commentExist= "+commentExist);
                             if(commentExist.equals("false")) {
-                            commentTextView.setVisibility(View.VISIBLE);
-                            ratingBar.setVisibility(View.VISIBLE);
-                            addCommentButton.setVisibility(View.VISIBLE);
+                                addCommentButton.setVisibility(View.VISIBLE);
+                                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(addCommentButton.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                addCommentButton.setLayoutParams(lp);
+
+                                ratingBar.setVisibility(View.VISIBLE);
+                                LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ratingBar.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                ratingBar.setLayoutParams(lp2);
+
+                                commentTextView.setVisibility(View.VISIBLE);
+                                LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(commentTextView.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                commentTextView.setLayoutParams(lp3);
+
                                 rateCount.setVisibility(View.VISIBLE);
+                                LinearLayout.LayoutParams lp4 = new LinearLayout.LayoutParams(rateCount.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                rateCount.setLayoutParams(lp4);
 
                         }else {
                                 addCommentButton.setVisibility(View.INVISIBLE);
-                                ratingBar.setVisibility(View.INVISIBLE);
-                                commentTextView.setVisibility(View.INVISIBLE);
-                                rateCount.setVisibility(View.INVISIBLE);
+                                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(addCommentButton.getLayoutParams().width, 0);
+                                addCommentButton.setLayoutParams(lp);
 
+                                ratingBar.setVisibility(View.INVISIBLE);
+                                LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ratingBar.getLayoutParams().width, 0);
+                                ratingBar.setLayoutParams(lp2);
+
+                                commentTextView.setVisibility(View.INVISIBLE);
+                                LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(commentTextView.getLayoutParams().width, 0);
+                                commentTextView.setLayoutParams(lp3);
+
+                                rateCount.setVisibility(View.INVISIBLE);
+                                LinearLayout.LayoutParams lp4 = new LinearLayout.LayoutParams(rateCount.getLayoutParams().width, 0);
+                                rateCount.setLayoutParams(lp4);
                             }
                         }
                 }
