@@ -16,6 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -25,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.wastic.CommentAdapter;
 import com.example.wastic.R;
 import com.example.wastic.Requesthandler;
 import com.example.wastic.SharedPrefManager;
@@ -35,11 +39,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProductActivity extends AppCompatActivity {
+    private RecyclerView mList;
 
+    private LinearLayoutManager linearLayoutManager;
+    private DividerItemDecoration dividerItemDecoration;
+    private List<Comments> commentsList;
+    private RecyclerView.Adapter adapter;
     private RatingBar ratingBar;
    private TextView barCodeTextView, rateCount;
     private TextView nameTextView,userTextView,userRating,loginForMore,commentTextView,addCommentButton;
@@ -64,14 +75,27 @@ public class ProductActivity extends AppCompatActivity {
         userTextView= findViewById(R.id.textViewUser);
         userRating= findViewById(R.id.textViewUserRate);
         loginForMore = findViewById(R.id.textViewPleaseLogIn);
-        commentTextView = findViewById(R.id.editTextComment);
-        addCommentButton = findViewById(R.id.buttonAddComment);
-        ratingBar = findViewById(R.id.ratingBars);
-        LL = findViewById(R.id.commentsLL);
-        rateCount = findViewById(R.id.ratingBarText);
+       commentTextView = findViewById(R.id.editTextComment);
+     addCommentButton = findViewById(R.id.buttonAddComment);
+     ratingBar = findViewById(R.id.ratingBars);
+//        LL = findViewById(R.id.commentsLL);
+     rateCount = findViewById(R.id.ratingBarText);
         code = getIntent().getStringExtra("code");
         barCodeTextView.setText(code);
         requestQueue = Volley.newRequestQueue(this);
+        mList = findViewById(R.id.RecycleViewComments);
+
+        commentsList = new ArrayList<>();
+        adapter = new CommentAdapter(getApplicationContext(), commentsList);
+
+        linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        dividerItemDecoration = new DividerItemDecoration(mList.getContext(), linearLayoutManager.getOrientation());
+
+        mList.setHasFixedSize(true);
+        mList.setLayoutManager(linearLayoutManager);
+        mList.addItemDecoration(dividerItemDecoration);
+        mList.setAdapter(adapter);
         jsonParse();
         checkCode();
 
@@ -293,34 +317,42 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                         //l = new LinearLayout(LL.getContext());
                         //LinearLayout l = new LinearLayout(LL.getContext());
                         //l.setOrientation(LinearLayout.HORIZONTAL);
-                        TextView tv = new TextView(LL.getContext());
-                        tv.setGravity(View.TEXT_ALIGNMENT_CENTER);
-                        tv.setTextSize(20);
-                        //Space space= new Space(l.getContext());
+                        Comments comments1 = new Comments();
+                        comments1.setDescription(comment.getString("description"));
+                        comments1.setRating(comment.getDouble("ratingValue"));
+                        comments1.setDate(comment.getString("comment_date"));
+                        comments1.setImageUser("https://wasticelo.000webhostapp.com/"+ comment.getString("avatar"));
+                        comments1.setUsername(comment.getString("username"));
 
-                        //Button b = new Button(l.getContext());
-                        //b.setGravity(View.FOCUS_RIGHT);
-                        tv.setText(comment.getString("description") + " Ocena:" + comment.getDouble("ratingValue") + " " + comment.get("comment_date")  );
-                        //b.setText(" Przejdź > ");
-                        //       b.setText(product.getString("name")+ "\n" + barcode);
-                        //b.setBackgroundColor(Color.rgb(0,85,77));
-                        //b.setTextColor(Color.rgb(255,255,255));
-                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                        //LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                        lp.setMargins(10,10,10,10);
-                        //lp.setMarginEnd(10);
-                        //lp2.setMargins(10,10,10,10);
-                        tv.setLayoutParams(lp);
-                        //b.setLayoutParams(lp2);
-                        //space.setLayoutParams(lp2);
-                        //b.setId(i);
-                        //final int id=i;
-                        //s[i] = product.getString("bar_code");
-
-                        //b.setOnClickListener(new View.OnClickListener() {
-                         //   @Override
-                         //   public void onClick(View v) {
-                         //       Intent x = new Intent(getApplicationContext() , ProductActivity.class);
+                        commentsList.add(comments1);
+//                        TextView tv = new TextView(LL.getContext());
+//                        tv.setGravity(View.TEXT_ALIGNMENT_CENTER);
+//                        tv.setTextSize(20);
+//                        //Space space= new Space(l.getContext());
+//
+//                        //Button b = new Button(l.getContext());
+//                        //b.setGravity(View.FOCUS_RIGHT);
+//                        tv.setText(comment.getString("description") + " Ocena:" + comment.getDouble("ratingValue") + " " + comment.get("comment_date")  );
+//                        //b.setText(" Przejdź > ");
+//                        //       b.setText(product.getString("name")+ "\n" + barcode);
+//                        //b.setBackgroundColor(Color.rgb(0,85,77));
+//                        //b.setTextColor(Color.rgb(255,255,255));
+//                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//                        //LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//                        lp.setMargins(10,10,10,10);
+//                        //lp.setMarginEnd(10);
+//                        //lp2.setMargins(10,10,10,10);
+//                        tv.setLayoutParams(lp);
+//                        //b.setLayoutParams(lp2);
+//                        //space.setLayoutParams(lp2);
+//                        //b.setId(i);
+//                        //final int id=i;
+//                        //s[i] = product.getString("bar_code");
+//
+//                        //b.setOnClickListener(new View.OnClickListener() {
+//                         //   @Override
+//                         //   public void onClick(View v) {
+//                         //       Intent x = new Intent(getApplicationContext() , ProductActivity.class);
                          //       x.putExtra("code",s[id]);
 
                          //       startActivity(x);
@@ -330,7 +362,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                         //l.addView(tv);
                        // l.addView(space);
                        // l.addView(b);
-                        LL.addView(tv);
+                       // LL.addView(tv);
 
 
                     }
