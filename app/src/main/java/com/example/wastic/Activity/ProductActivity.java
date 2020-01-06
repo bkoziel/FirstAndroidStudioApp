@@ -369,7 +369,6 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
 
                         if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
                             rateCount.setVisibility(View.INVISIBLE);
-
                             addCommentButton.setVisibility(View.INVISIBLE);
                             ratingBar.setVisibility(View.INVISIBLE);
                             commentTextView.setVisibility(View.INVISIBLE);
