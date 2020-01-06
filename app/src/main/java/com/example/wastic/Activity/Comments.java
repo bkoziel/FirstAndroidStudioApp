@@ -4,14 +4,14 @@ public class Comments {
     public String description;
     public  String imageUser;
     public String username;
-    public double rating;
+    public String rating;
     public String date;
 
     public Comments() {
 
     }
 
-    public Comments(String description, String imageUser, String username, double rating, String date) {
+    public Comments(String description, String imageUser, String username, String rating, String date) {
         this.description = description;
         this.imageUser = imageUser;
         this.username = username;
@@ -43,11 +43,11 @@ public class Comments {
         this.username = username;
     }
 
-    public double getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 

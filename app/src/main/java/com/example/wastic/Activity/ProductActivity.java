@@ -319,7 +319,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                         //l.setOrientation(LinearLayout.HORIZONTAL);
                         Comments comments1 = new Comments();
                         comments1.setDescription(comment.getString("description"));
-                        comments1.setRating(comment.getDouble("ratingValue"));
+                        comments1.setRating("Ocena: " + comment.getString("ratingValue"));
                         comments1.setDate(comment.getString("comment_date"));
                         comments1.setImageUser("https://wasticelo.000webhostapp.com/"+ comment.getString("avatar"));
                         comments1.setUsername(comment.getString("username"));
