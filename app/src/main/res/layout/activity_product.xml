@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/background2"
     tools:context=".Activity.ProductActivity">
 
     <ProgressBar
@@ -64,7 +64,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17dp"
-                android:text="Nazwa produktu"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
@@ -104,20 +103,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textViewCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:text="Kod produktu" />
 
             <TextView
                 android:id="@+id/textViewUser"
@@ -137,6 +129,13 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/textViewCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center" />
+
 
         <Button
             android:id="@+id/buttonAddProduct"
@@ -155,11 +154,17 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF">
+            android:layout_margin="10dp"
+            android:background="@drawable/background">
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp">
 
                 <LinearLayout
                     android:id="@+id/commentsLL"
@@ -171,7 +176,7 @@
                         android:id="@+id/ratingBars"
 
                         android:layout_width="240dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
 
@@ -184,26 +189,27 @@
                     <TextView
                         android:id="@+id/ratingBarText"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="Twoja ocena:  /5" />
+                        android:text="Twoja ocena:  /5"
+                        android:visibility="invisible" />
 
                     <EditText
                         android:id="@+id/editTextComment"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
                         android:ems="10"
                         android:gravity="start|top"
                         android:hint="Komentarz.."
                         android:inputType="textMultiLine"
-                        android:visibility="invisible"
-                        android:layout_margin="10dp" />
+                        android:visibility="invisible" />
 
                     <Button
                         android:id="@+id/buttonAddComment"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
                         android:layout_marginStart="10dp"

@@ -191,7 +191,7 @@ requestQueue.add(request);
                         photoURL = product.getString("photo");
                         addedByUser = product.getString("username");
                          getRatings();
-                        nameTextView.setText(productName);
+                        nameTextView.setText(productName.toUpperCase());
                         barCodeTextView.setText(barcode);
                         userTextView.setText("Dodane przez: " + addedByUser);
                         seeComments();
