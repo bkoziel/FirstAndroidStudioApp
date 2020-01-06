@@ -216,6 +216,41 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                     JSONObject comment = response.getJSONObject("data");
                     commentExist=comment.getString("exist");
 
+                    if(commentExist.equals("false")) {
+                        addCommentButton.setVisibility(View.VISIBLE);
+                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(addCommentButton.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        addCommentButton.setLayoutParams(lp);
+
+                        ratingBar.setVisibility(View.VISIBLE);
+                        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ratingBar.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        ratingBar.setLayoutParams(lp2);
+
+                        commentTextView.setVisibility(View.VISIBLE);
+                        LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(commentTextView.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        commentTextView.setLayoutParams(lp3);
+
+                        rateCount.setVisibility(View.VISIBLE);
+                        LinearLayout.LayoutParams lp4 = new LinearLayout.LayoutParams(rateCount.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        rateCount.setLayoutParams(lp4);
+
+                    }else {
+                        addCommentButton.setVisibility(View.INVISIBLE);
+                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(addCommentButton.getLayoutParams().width, 0);
+                        addCommentButton.setLayoutParams(lp);
+
+                        ratingBar.setVisibility(View.INVISIBLE);
+                        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ratingBar.getLayoutParams().width, 0);
+                        ratingBar.setLayoutParams(lp2);
+
+                        commentTextView.setVisibility(View.INVISIBLE);
+                        LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(commentTextView.getLayoutParams().width, 0);
+                        commentTextView.setLayoutParams(lp3);
+
+                        rateCount.setVisibility(View.INVISIBLE);
+                        LinearLayout.LayoutParams lp4 = new LinearLayout.LayoutParams(rateCount.getLayoutParams().width, 0);
+                        rateCount.setLayoutParams(lp4);
+                    }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -421,40 +456,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                             });
                         }else{
  //                           System.out.println("co siedzi w commentExist= "+commentExist);
-                            if(commentExist.equals("false")) {
-                                addCommentButton.setVisibility(View.VISIBLE);
-                                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(addCommentButton.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
-                                addCommentButton.setLayoutParams(lp);
 
-                                ratingBar.setVisibility(View.VISIBLE);
-                                LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ratingBar.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
-                                ratingBar.setLayoutParams(lp2);
-
-                                commentTextView.setVisibility(View.VISIBLE);
-                                LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(commentTextView.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
-                                commentTextView.setLayoutParams(lp3);
-
-                                rateCount.setVisibility(View.VISIBLE);
-                                LinearLayout.LayoutParams lp4 = new LinearLayout.LayoutParams(rateCount.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
-                                rateCount.setLayoutParams(lp4);
-
-                        }else {
-                                addCommentButton.setVisibility(View.INVISIBLE);
-                                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(addCommentButton.getLayoutParams().width, 0);
-                                addCommentButton.setLayoutParams(lp);
-
-                                ratingBar.setVisibility(View.INVISIBLE);
-                                LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ratingBar.getLayoutParams().width, 0);
-                                ratingBar.setLayoutParams(lp2);
-
-                                commentTextView.setVisibility(View.INVISIBLE);
-                                LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(commentTextView.getLayoutParams().width, 0);
-                                commentTextView.setLayoutParams(lp3);
-
-                                rateCount.setVisibility(View.INVISIBLE);
-                                LinearLayout.LayoutParams lp4 = new LinearLayout.LayoutParams(rateCount.getLayoutParams().width, 0);
-                                rateCount.setLayoutParams(lp4);
-                            }
                         }
                 }
             }
