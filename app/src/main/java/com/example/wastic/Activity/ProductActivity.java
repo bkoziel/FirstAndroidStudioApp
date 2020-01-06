@@ -3,6 +3,7 @@ package com.example.wastic.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,6 +105,14 @@ public class ProductActivity extends AppCompatActivity {
         addCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final String commentText = commentTextView.getText().toString().trim();
+                if(TextUtils.isEmpty(commentText)){
+
+                    commentTextView.setError("Wprowadź komentarz");
+                    commentTextView.requestFocus();
+                    return;
+
+                }
 StringRequest request = new StringRequest(Request.Method.POST, addOpinionURL, new Response.Listener<String>() {
     @Override
     public void onResponse(String response) {
