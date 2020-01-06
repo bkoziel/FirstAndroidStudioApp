@@ -415,24 +415,29 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                     JSONObject obj = new JSONObject(s);
 
                     if (!obj.getBoolean("error")) {
-                        
+
                         nameTextView.setText("Brak produktu w bazie");
 
 
                         addCommentButton.setVisibility(View.INVISIBLE);
                         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(addCommentButton.getLayoutParams().width, 0);
+                        lp.setMargins(10,10,10,10);
                         addCommentButton.setLayoutParams(lp);
+
 
                         ratingBar.setVisibility(View.INVISIBLE);
                         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ratingBar.getLayoutParams().width, 0);
+                        lp2.setMargins(10,10,10,10);
                         ratingBar.setLayoutParams(lp2);
 
                         commentTextView.setVisibility(View.INVISIBLE);
                         LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(commentTextView.getLayoutParams().width, 0);
+                        lp3.setMargins(10,10,10,10);
                         commentTextView.setLayoutParams(lp3);
 
                         rateCount.setVisibility(View.INVISIBLE);
                         LinearLayout.LayoutParams lp4 = new LinearLayout.LayoutParams(rateCount.getLayoutParams().width, 0);
+                        lp4.setMargins(10,10,10,10);
                         rateCount.setLayoutParams(lp4);
 
 
@@ -452,10 +457,12 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                             });
                             addProductButton.setVisibility(View.INVISIBLE);
                             LinearLayout.LayoutParams lp6 = new LinearLayout.LayoutParams(addProductButton.getLayoutParams().width, 0);
+                            lp6.setMargins(10,10,10,10);
                             addProductButton.setLayoutParams(lp6);
                         } else {
                             addProductButton.setVisibility(View.VISIBLE);
                             LinearLayout.LayoutParams lp6 = new LinearLayout.LayoutParams(addProductButton.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            lp6.setMargins(10,10,10,10);
                             addProductButton.setLayoutParams(lp6);
                         }
                     }
@@ -463,27 +470,33 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                     e.printStackTrace();
                         addProductButton.setVisibility(View.INVISIBLE);
                     LinearLayout.LayoutParams lp6 = new LinearLayout.LayoutParams(addProductButton.getLayoutParams().width, 0);
+                    lp6.setMargins(10,10,10,10);
                     addProductButton.setLayoutParams(lp6);
 
                     if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
                             addCommentButton.setVisibility(View.INVISIBLE);
                             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(addCommentButton.getLayoutParams().width, 0);
+                        lp.setMargins(10,10,10,10);
                             addCommentButton.setLayoutParams(lp);
 
                             ratingBar.setVisibility(View.INVISIBLE);
                             LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ratingBar.getLayoutParams().width, 0);
+                        lp2.setMargins(10,10,10,10);
                             ratingBar.setLayoutParams(lp2);
 
                             commentTextView.setVisibility(View.INVISIBLE);
                             LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(commentTextView.getLayoutParams().width, 0);
+                        lp3.setMargins(10,10,10,10);
                             commentTextView.setLayoutParams(lp3);
 
                             rateCount.setVisibility(View.INVISIBLE);
                             LinearLayout.LayoutParams lp4 = new LinearLayout.LayoutParams(rateCount.getLayoutParams().width, 0);
+                        lp4.setMargins(10,10,10,10);
                             rateCount.setLayoutParams(lp4);
 
                             loginForMore.setVisibility(View.VISIBLE);
                             LinearLayout.LayoutParams lp5 = new LinearLayout.LayoutParams(loginForMore.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        lp5.setMargins(10,10,10,10);
                             loginForMore.setLayoutParams(lp5);
 
                             loginForMore.setOnTouchListener(new View.OnTouchListener() {

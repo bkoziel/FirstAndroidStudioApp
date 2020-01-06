@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background2"
+    android:background="@drawable/background"
     tools:context=".Activity.ProductActivity">
 
     <ProgressBar
@@ -63,13 +63,13 @@
                 android:id="@+id/textViewName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="10dp"
                 android:textSize="30dp"
                 android:textStyle="bold" />
 
             <Space
                 android:layout_width="wrap_content"
-                android:layout_height="27dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
         </LinearLayout>
@@ -88,7 +88,7 @@
                 android:id="@+id/textViewPleaseLogIn"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:background="@color/colorPrimary"
                 android:clickable="true"
                 android:ellipsize="none"
@@ -162,8 +162,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:background="@drawable/background">
+            android:background="#44aaaaaa">
 
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp">
 
                 <LinearLayout
                     android:id="@+id/commentsLL"
@@ -175,7 +180,7 @@
                         android:id="@+id/ratingBars"
 
                         android:layout_width="240dp"
-                        android:layout_height="0dp"
+                        android:layout_height="1dp"
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
 
@@ -188,7 +193,7 @@
                     <TextView
                         android:id="@+id/ratingBarText"
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
+                        android:layout_height="1dp"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="Twoja ocena:  /5"
@@ -197,7 +202,7 @@
                     <EditText
                         android:id="@+id/editTextComment"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="1dp"
                         android:layout_margin="10dp"
                         android:ems="10"
                         android:gravity="start|top"
@@ -208,7 +213,7 @@
                     <Button
                         android:id="@+id/buttonAddComment"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="1dp"
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
                         android:layout_marginStart="10dp"
@@ -222,13 +227,14 @@
                         android:visibility="invisible" />
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/RecycleViewComments"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/RecycleViewComments"
-                        android:layout_margin="10dp"/>
+                        android:layout_marginTop="10dp" />
 
 
                 </LinearLayout>
+            </ScrollView>
 
         </RelativeLayout>
 
