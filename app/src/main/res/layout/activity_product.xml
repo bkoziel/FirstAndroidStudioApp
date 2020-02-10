@@ -129,7 +129,6 @@
                 android:layout_margin="14dp"
                 android:gravity="center"
                 android:text=""
-                android:textAlignment="viewStart"
                 android:textStyle="bold" />
 
             <TextView
@@ -139,7 +138,6 @@
                 android:layout_margin="14dp"
                 android:gravity="center"
                 android:text=""
-                android:textAlignment="textEnd"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -197,7 +195,7 @@
                         android:layout_height="1dp"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="Twoja ocena:  5/5"
+                        android:text="Twoja ocena opakowania:  5/5"
                         android:visibility="invisible" />
 
                     <EditText
@@ -207,7 +205,7 @@
                         android:layout_margin="10dp"
                         android:ems="10"
                         android:gravity="start|top"
-                        android:hint="Komentarz.."
+                        android:hint="Komentarz dotyczący opakowania.."
                         android:inputType="textMultiLine"
                         android:visibility="invisible" />
 
@@ -223,7 +221,7 @@
                         android:layout_marginBottom="10dp"
                         android:background="@color/colorPrimary"
                         android:drawableLeft="@drawable/ic_action_comment"
-                        android:text="Oceń"
+                        android:text="Oceń opakowanie"
                         android:textColor="#fff"
                         android:visibility="invisible" />
 

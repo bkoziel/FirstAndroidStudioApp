@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -47,7 +49,7 @@ String barcode;
  String[]s;
     @Override
     public void onBackPressed() {
-        if(onBackPressedCalled==true) {
+        if(onBackPressedCalled) {
             LL.removeAllViews();
             onBackPressedCalled = false;
         }else{
@@ -55,6 +57,7 @@ String barcode;
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,13 +68,13 @@ String barcode;
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
         }
-        searchEditText = (EditText) findViewById(R.id.editTextSearch);
-        scannerButton = (Button) findViewById(R.id.buttonScanner);
-        loginButton = (Button) findViewById(R.id.buttonLogin);
-        toProfileButton = (Button) findViewById(R.id.buttonToProfile);
-        info = (TextView) findViewById(R.id.textViewInfo);
+        searchEditText = findViewById(R.id.editTextSearch);
+        scannerButton = findViewById(R.id.buttonScanner);
+        loginButton = findViewById(R.id.buttonLogin);
+        toProfileButton = findViewById(R.id.buttonToProfile);
+        info = findViewById(R.id.textViewInfo);
         requestQueue = Volley.newRequestQueue(this);
-        LL = (LinearLayout) findViewById(R.id.LL);
+        LL = findViewById(R.id.LL);
 
         if (!SharedPrefManager.getInstance(this).isLoggedIn()) {
             info.setVisibility(View.VISIBLE);

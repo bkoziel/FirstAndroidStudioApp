@@ -60,9 +60,8 @@
             android:id="@+id/buttonLogin"
             android:layout_width="288dp"
             android:layout_height="47dp"
-            android:layout_marginStart="61dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="25dp"
             app:cardElevation="10dp"
@@ -101,19 +100,16 @@
             android:textColor="#000"
             android:textSize="15dp" />
 
+        <TextView
+            android:id="@+id/textInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textColor="#88880000" />
+
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/textInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_below="@+id/editTextPassword"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="232dp"
-        android:textColor="#88880000" />
 
     <ProgressBar
         android:visibility="gone"

@@ -75,7 +75,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="95dp"
             android:cropToPadding="false"
-            app:srcCompat="@drawable/leaf" />
+            app:srcCompat="@drawable/leaf"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/textView2"
