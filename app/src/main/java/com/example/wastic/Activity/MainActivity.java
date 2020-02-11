@@ -134,38 +134,17 @@ String barcode;
     }
     private void jsonParse() {
         String url = "https://wasticelo.000webhostapp.com/Search.php?name="+searchEditText.getText().toString() ;
-        //System.out.println(url);
+
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 if(searchEditText.getText().length()!=0){
                 try {
                     JSONArray products = response.getJSONArray("products");
-                    //l.removeAllViews() ;
-                   // l.removeView(b);
-                    //l.removeAllViewsInLayout();
 
-///////////////////////////////////////////////
-
-                 /*       Button btn = new Button(this);
-                        btn.setId(i);
-                        final int id_ = btn.getId();
-                       // btn.setText("button " + id_);
-                       // btn.setBackgroundColor(Color.rgb(70, 80, 90));
-                        linear.addView(btn);
-                        btn1 = ((Button) findViewById(id_));
-                        btn1.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View view) {
-                                Toast.makeText(view.getContext(),
-                                        "Button clicked index = " + id_, Toast.LENGTH_SHORT)
-                                        .show();
-                            }
-                        });
-                    l = new LinearLayout(LL.getContext());*/
-                        ////////////////////////////////////////////
                     LL.removeAllViews();
                     s = new String[7];
-                    for(int i = 0; i < ((JSONArray) products).length() && i < 7; i++) {
+                    for(int i = 0; i < (products).length() && i < 7; i++) {
                         JSONObject product = products.getJSONObject(i);
                         l = new LinearLayout(LL.getContext());
                         b = new Button(l.getContext());
@@ -175,31 +154,10 @@ if(searchEditText.getText().length()!=0){
                         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                         b.setLayoutParams(lp);
                         b.setId(i);
-                       // b.setElevation(3);
+
                         final int id=i;
                         s[i] = product.getString("bar_code");
-                        /*barcode=product.getString("bar_code");
-                        Button b = new Button(LL.getContext());
-                        b.setId(i);
-                        final int _id = b.getId();
-                        b.setText(/*product.getString("name")+ "\n" +*/ /*barcode);
-                        s[i]=barcode;
-                        // btn.setText("button " + id_);
-                        // btn.setBackgroundColor(Color.rgb(70, 80, 90));
-                        l.addView(b);
-                        Button bb = ((Button) findViewById(_id));
-                        bb.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View view) {
-                                Toast.makeText(view.getContext(),
-                                        "Button clicked index = " + _id, Toast.LENGTH_SHORT)
-                                        .show();
 
-                                Intent i = new Intent(getApplicationContext() , ProductActivity.class);
-                                i.putExtra("code",s[_id]);
-                                startActivity(i);
-                            }
-                        });*/
-                        //b.setWidth();
                         b.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -213,12 +171,6 @@ if(searchEditText.getText().length()!=0){
                         l.addView(b);
                         LL.addView(l);
 
-                         //info.append(product.getString("name"));
-                         //info.append(product.getString("bar_code"));
-                        // info.append("\n");
-                        //photoURL = product.getString("photo");
-                        //nameTextView.setText(productName);
-                        //barCodeTextView.setText(barcode);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -233,7 +185,6 @@ if(searchEditText.getText().length()!=0){
         });
         requestQueue.add(request);
     }
-
 
     @Override
     protected void onResume() {
@@ -255,7 +206,6 @@ if(searchEditText.getText().length()!=0){
         if (requestCode == MY_CAMERA_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
-
             } else {
                 Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
             }

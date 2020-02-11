@@ -1,15 +1,15 @@
 package com.example.wastic.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wastic.R;
 import com.example.wastic.Requesthandler;
@@ -29,8 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        editTextUsername = (EditText) findViewById(R.id.editTextUsername);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextUsername = findViewById(R.id.editTextUsername);
+        editTextPassword = findViewById(R.id.editTextPassword);
 
 
 
@@ -106,7 +106,8 @@ public class LoginActivity extends AppCompatActivity {
                                 userJson.getString("email"),
                                 userJson.getString("gender"),
                                 userJson.getString("since"),
-                                userJson.getString("avatar")
+                                userJson.getString("avatar"),
+                                userJson.getInt("admin")
                         );
 
                         //storing the user in shared preferences

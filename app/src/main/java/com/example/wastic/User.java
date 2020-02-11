@@ -3,14 +3,16 @@ public class User {
 
     private int id;
     private String username, email, gender, since, avatar;
+    private int admin;
 
-    public User(int id, String username, String email, String gender, String since, String avatar) {
+    public User(int id, String username, String email, String gender, String since, String avatar,int admin) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.gender = gender;
         this.since = since;
         this.avatar = avatar;
+        this.admin = admin;
     }
 
     public int getId() {
@@ -35,5 +37,9 @@ public class User {
 
     public String getAvatar() {
         return avatar;
+    }
+
+    public int getAdmin() {
+        return admin;
     }
 }

@@ -18,6 +18,7 @@ public class SharedPrefManager {
     private static final String KEY_GENDER = "keygender";
     private static final String KEY_SINCE = "keysince";
     private static final String KEY_AVATAR = "keyavatar";
+    private static final String KEY_ADMIN= "keyadmin";
     private static final String KEY_ID = "keyid";
 
     private static SharedPrefManager mInstance;
@@ -44,6 +45,7 @@ public class SharedPrefManager {
         editor.putString(KEY_GENDER, user.getGender());
         editor.putString(KEY_SINCE, user.getSince());
         editor.putString(KEY_AVATAR, user.getAvatar());
+        editor.putInt(KEY_ADMIN, user.getAdmin());
         editor.apply();
     }
 
@@ -69,6 +71,10 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getInt(KEY_ID, -1);
     }
+    public int ifAdmin(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(KEY_ADMIN, 0);
+    }
 
     //this method will give the logged in user
     public User getUser() {
@@ -79,7 +85,8 @@ public class SharedPrefManager {
                 sharedPreferences.getString(KEY_EMAIL, null),
                 sharedPreferences.getString(KEY_GENDER, null),
                 sharedPreferences.getString(KEY_SINCE, null),
-                sharedPreferences.getString(KEY_AVATAR, null)
+                sharedPreferences.getString(KEY_AVATAR, null),
+                sharedPreferences.getInt(KEY_ADMIN, 0)
         );
     }
     public Product getProduct() {

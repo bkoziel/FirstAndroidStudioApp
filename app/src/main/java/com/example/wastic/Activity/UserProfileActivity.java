@@ -3,6 +3,7 @@ package com.example.wastic.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.squareup.picasso.Picasso;
 public class UserProfileActivity extends AppCompatActivity {
     TextView textViewId, textViewUsername, textViewEmail, textViewGender, textViewSince;
     ImageView imageView;
+    Button adminPanelButton;
 
 
     @Override
@@ -30,12 +32,13 @@ public class UserProfileActivity extends AppCompatActivity {
         }
 
 
-        textViewId = (TextView) findViewById(R.id.textViewId);
-        textViewUsername = (TextView) findViewById(R.id.textViewUsername);
-        textViewEmail = (TextView) findViewById(R.id.textViewEmail);
-        textViewGender = (TextView) findViewById(R.id.textViewGender);
-        textViewSince =(TextView) findViewById(R.id.textViewSince);
-        imageView=(ImageView) findViewById(R.id.imageViewAvatar);
+        textViewId = findViewById(R.id.textViewId);
+        textViewUsername = findViewById(R.id.textViewUsername);
+        textViewEmail = findViewById(R.id.textViewEmail);
+        textViewGender = findViewById(R.id.textViewGender);
+        textViewSince = findViewById(R.id.textViewSince);
+        imageView= findViewById(R.id.imageViewAvatar);
+        adminPanelButton = findViewById(R.id.buttonAdminPanel);
         //getting the current user
         User user = SharedPrefManager.getInstance(this).getUser();
 
@@ -49,6 +52,18 @@ public class UserProfileActivity extends AppCompatActivity {
 
         //when the user presses logout button
         //calling the logout method
+        if(SharedPrefManager.getInstance(this).ifAdmin()==1) {
+            adminPanelButton.setVisibility(View.VISIBLE);
+            adminPanelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onPause();
+                    startActivity(new Intent(getApplicationContext(), AdminPanelActivity.class));
+                }
+            });
+        }else{
+            adminPanelButton.setVisibility(View.INVISIBLE);
+        }
         findViewById(R.id.buttonLogout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

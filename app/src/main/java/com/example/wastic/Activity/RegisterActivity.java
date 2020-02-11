@@ -7,12 +7,16 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Base64;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -20,26 +24,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import android.os.AsyncTask;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.wastic.R;
 import com.example.wastic.Requesthandler;
 import com.example.wastic.SharedPrefManager;
 import com.example.wastic.URLs;
 import com.example.wastic.User;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -47,7 +39,6 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -78,12 +69,12 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        editTextUsername = (EditText) findViewById(R.id.editTextUsername);
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        radioGroupGender = (RadioGroup) findViewById(R.id.radioGender);
-        imageView=(ImageView) findViewById(R.id.imageAvatar);
-        editPhotoURL=(Button) findViewById(R.id.buttonAvatarPicker);
+        editTextUsername = findViewById(R.id.editTextUsername);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        radioGroupGender = findViewById(R.id.radioGender);
+        imageView= findViewById(R.id.imageAvatar);
+        editPhotoURL= findViewById(R.id.buttonAvatarPicker);
 
 
 
@@ -208,7 +199,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 userJson.getString("email"),
                                 userJson.getString("gender"),
                                 userJson.getString("since"),
-                                userJson.getString("avatar")
+                                userJson.getString("avatar"),
+                                userJson.getInt("admin")
                         );
 
                         //storing the user in shared preferences
