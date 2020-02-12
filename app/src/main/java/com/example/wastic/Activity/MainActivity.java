@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout LL;
     LinearLayout l;
     Button b;
+    LinearLayout click;
     boolean onBackPressedCalled=false;
     ////////////
     private RequestQueue requestQueue;
@@ -75,6 +76,7 @@ String barcode;
         info = findViewById(R.id.textViewInfo);
         requestQueue = Volley.newRequestQueue(this);
         LL = findViewById(R.id.LL);
+        click = findViewById(R.id.click);
 
         if (!SharedPrefManager.getInstance(this).isLoggedIn()) {
             info.setVisibility(View.VISIBLE);
@@ -85,6 +87,14 @@ String barcode;
             loginButton.setVisibility(View.INVISIBLE);
             toProfileButton.setVisibility(View.VISIBLE);
         }
+
+        click.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LL.removeAllViews();
+                onBackPressedCalled=false;
+            }
+        });
 
         scannerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +114,14 @@ String barcode;
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
+            }
+        });
+
+        searchEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressedCalled=true;
+                jsonParse();
             }
         });
 
@@ -143,8 +161,8 @@ if(searchEditText.getText().length()!=0){
                     JSONArray products = response.getJSONArray("products");
 
                     LL.removeAllViews();
-                    s = new String[7];
-                    for(int i = 0; i < (products).length() && i < 7; i++) {
+                    s = new String[10];
+                    for(int i = 0; i < (products).length() && i < 10; i++) {
                         JSONObject product = products.getJSONObject(i);
                         l = new LinearLayout(LL.getContext());
                         b = new Button(l.getContext());
@@ -152,6 +170,8 @@ if(searchEditText.getText().length()!=0){
                         b.setText(product.getString("name")+ "\n" + barcode);
                         b.setBackgroundColor(Color.rgb(240,240,240));
                         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                        lp.setMargins(0,1,0,1);
+                        b.setBackgroundColor(Color.rgb(240,240,240));
                         b.setLayoutParams(lp);
                         b.setId(i);
 
