@@ -311,7 +311,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
 //                    nameTextView.setText(Integer.toString(productID));
                     //        LL.removeAllViews();
                     //final String[] s = new String[((JSONArray) products).length()];
-                    for(int i = 0; i < ((JSONArray) comments).length(); i++) {
+                    for(int i = 0; i < (comments).length(); i++) {
                         final JSONObject comment = comments.getJSONObject(i);
                         //final String barcode = product.getString("barcode");
                         //l = new LinearLayout(LL.getContext());
@@ -401,7 +401,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
             protected void onPreExecute() {
                 super.onPreExecute();
 
-                progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+                progressBar = findViewById(R.id.progressBar2);
                 progressBar.setVisibility(View.VISIBLE);
             }
 
