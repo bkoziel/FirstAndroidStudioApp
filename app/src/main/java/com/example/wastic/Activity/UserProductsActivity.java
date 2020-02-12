@@ -83,7 +83,7 @@ public class UserProductsActivity extends AppCompatActivity {
                                 public void onClick(View v) {
                                     Intent x = new Intent(getApplicationContext() , ProductActivity.class);
                                         x.putExtra("code",s[id]);
-
+                                    finish();
                                     startActivity(x);
                                 }
 
