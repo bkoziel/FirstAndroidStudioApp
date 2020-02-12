@@ -1,6 +1,7 @@
 package com.example.wastic.Activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -93,6 +95,7 @@ String barcode;
             public void onClick(View v) {
                 LL.removeAllViews();
                 onBackPressedCalled=false;
+                closeKeyBoard();
             }
         });
 
@@ -100,6 +103,7 @@ String barcode;
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ScannerActivity.class));
+                closeKeyBoard();
             }
         });
 
@@ -107,6 +111,7 @@ String barcode;
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                closeKeyBoard();
             }
         });
 
@@ -114,6 +119,7 @@ String barcode;
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
+                closeKeyBoard();
             }
         });
 
@@ -150,6 +156,16 @@ String barcode;
 
 
     }
+
+    private void closeKeyBoard(){
+        View view = this.getCurrentFocus();
+        if (view != null){
+            InputMethodManager imm = (InputMethodManager)
+                    getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
     private void jsonParse() {
         String url = "https://wasticelo.000webhostapp.com/Search.php?name="+searchEditText.getText().toString() ;
 
