@@ -60,6 +60,7 @@ String barcode;
         }
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,6 +198,7 @@ if(searchEditText.getText().length()!=0){
                         b.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                closeKeyBoard();
                                 Intent x = new Intent(getApplicationContext() , ProductActivity.class);
                                 x.putExtra("code",s[id]);
                                 startActivity(x);
