@@ -252,10 +252,12 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                     if(commentExist.equals("false")) {
                         addCommentButton.setVisibility(View.VISIBLE);
                         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(addCommentButton.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        addCommentButton.setPadding(5,5,5,5);
                         addCommentButton.setLayoutParams(lp);
 
                         ratingBar.setVisibility(View.VISIBLE);
                         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ratingBar.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        lp2.gravity = 1;
                         ratingBar.setLayoutParams(lp2);
 
                         commentTextView.setVisibility(View.VISIBLE);
@@ -264,6 +266,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
 
                         rateCount.setVisibility(View.VISIBLE);
                         LinearLayout.LayoutParams lp4 = new LinearLayout.LayoutParams(rateCount.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        lp4.gravity = 1;
                         rateCount.setLayoutParams(lp4);
 
                     }else {
@@ -308,15 +311,9 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                 try {
                     JSONArray comments = response.getJSONArray("comments");
 
-//                    nameTextView.setText(Integer.toString(productID));
-                    //        LL.removeAllViews();
-                    //final String[] s = new String[((JSONArray) products).length()];
                     for(int i = 0; i < (comments).length(); i++) {
                         final JSONObject comment = comments.getJSONObject(i);
-                        //final String barcode = product.getString("barcode");
-                        //l = new LinearLayout(LL.getContext());
-                        //LinearLayout l = new LinearLayout(LL.getContext());
-                        //l.setOrientation(LinearLayout.HORIZONTAL);
+
                         Comments comments1 = new Comments();
                         comments1.setDescription(comment.getString("description"));
                         comments1.setRating("Ocena: " + comment.getString("ratingValue"));
@@ -325,45 +322,6 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                         comments1.setUsername(comment.getString("username"));
 
                         commentsList.add(comments1);
-//                        TextView tv = new TextView(LL.getContext());
-//                        tv.setGravity(View.TEXT_ALIGNMENT_CENTER);
-//                        tv.setTextSize(20);
-//                        //Space space= new Space(l.getContext());
-//
-//                        //Button b = new Button(l.getContext());
-//                        //b.setGravity(View.FOCUS_RIGHT);
-//                        tv.setText(comment.getString("description") + " Ocena:" + comment.getDouble("ratingValue") + " " + comment.get("comment_date")  );
-//                        //b.setText(" Przejdź > ");
-//                        //       b.setText(product.getString("name")+ "\n" + barcode);
-//                        //b.setBackgroundColor(Color.rgb(0,85,77));
-//                        //b.setTextColor(Color.rgb(255,255,255));
-//                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//                        //LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//                        lp.setMargins(10,10,10,10);
-//                        //lp.setMarginEnd(10);
-//                        //lp2.setMargins(10,10,10,10);
-//                        tv.setLayoutParams(lp);
-//                        //b.setLayoutParams(lp2);
-//                        //space.setLayoutParams(lp2);
-//                        //b.setId(i);
-//                        //final int id=i;
-//                        //s[i] = product.getString("bar_code");
-//
-//                        //b.setOnClickListener(new View.OnClickListener() {
-//                         //   @Override
-//                         //   public void onClick(View v) {
-//                         //       Intent x = new Intent(getApplicationContext() , ProductActivity.class);
-                         //       x.putExtra("code",s[id]);
-
-                         //       startActivity(x);
-                          //  }
-
-                        //});
-                        //l.addView(tv);
-                       // l.addView(space);
-                       // l.addView(b);
-                       // LL.addView(tv);
-
 
                     }
                 } catch (JSONException e) {
@@ -508,9 +466,6 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                                     return false;
                                 }
                             });
-                        }else{
- //                           System.out.println("co siedzi w commentExist= "+commentExist);
-
                         }
                 }
             }
