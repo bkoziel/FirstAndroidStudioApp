@@ -39,6 +39,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         Picasso.get().load(comments.getImageUser()).into(holder.imageView);
         holder.textRating.setText(String.valueOf(comments.getRating()));
         holder.textDate.setText(String.valueOf(comments.getDate()));
+        holder.buttonReport.setImageResource(R.drawable.ic_error_black_24dp);
 
 
     }
@@ -50,16 +51,17 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textTitle, textRating, textDate,username;
-        public ImageView imageView;
-
+        public ImageView imageView, buttonReport;
         public ViewHolder(View itemView) {
             super(itemView);
 
             textTitle = itemView.findViewById(R.id.commentText);
             textRating = itemView.findViewById(R.id.textViewRating);
             textDate = itemView.findViewById(R.id.comment_date);
-            username=itemView.findViewById(R.id.comment_username);
-            imageView=itemView.findViewById(R.id.comment_user_img);
+            username = itemView.findViewById(R.id.comment_username);
+            imageView = itemView.findViewById(R.id.comment_user_img);
+            buttonReport = itemView.findViewById(R.id.buttonCommentReport);
+
         }
     }
 

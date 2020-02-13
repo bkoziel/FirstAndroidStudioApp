@@ -62,6 +62,8 @@ public class ProductActivity extends AppCompatActivity {
     String productName,barcode,photoURL,addedByUser,ratingValue;
     static int productID;
    private String addOpinionURL = "https://wasticelo.000webhostapp.com/addOpinion.php";
+    private String addCommentReportURL = "https://wasticelo.000webhostapp.com/addCommentReport.php";
+    private String addProductReportURL = "https://wasticelo.000webhostapp.com/addProductReport.php";
 
     private RequestQueue requestQueue;
     @Override
@@ -110,7 +112,48 @@ public class ProductActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-                ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+        findViewById(R.id.buttonReport).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //final String commentText = commentTextView.getText().toString().trim();
+                //if(TextUtils.isEmpty(commentText)){
+
+                 //   commentTextView.setError("Wprowadź komentarz");
+                 //   commentTextView.requestFocus();
+                 //   return;
+
+                //}
+                StringRequest request = new StringRequest(Request.Method.POST, addProductReportURL, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getApplicationContext(),"Wysłano zgłoszenie",Toast.LENGTH_LONG).show();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),"Wystąpił błąd",Toast.LENGTH_LONG).show();
+                    }
+                }){
+
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+
+                        //params.put("description", commentTextView.getText().toString());
+                        params.put("product_id",Integer.toString(productID));
+                        params.put("user_id", Integer.toString(SharedPrefManager.getInstance(ProductActivity.this).currentUser()));
+                        //params.put("ratingValue",String.valueOf(ratingBar.getRating()));
+
+
+                        return params;
+                    }
+                };
+                requestQueue.add(request);
+            }
+        });
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                     @Override
                     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                         if (rating < 1.0f)
@@ -122,7 +165,6 @@ public class ProductActivity extends AppCompatActivity {
 
                 }
                 );
-
 
 
 
@@ -199,6 +241,9 @@ requestQueue.add(request);
         });
         requestQueue.add(request);
     }
+
+
+
     private void jsonParse() {
         String url = "https://wasticelo.000webhostapp.com/testing.php?bar_code="+code;
         System.out.println(url);
