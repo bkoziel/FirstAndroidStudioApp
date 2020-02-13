@@ -6,17 +6,27 @@ public class Comments {
     public String username;
     public String rating;
     public String date;
+    public int userId;
 
     public Comments() {
 
     }
 
-    public Comments(String description, String imageUser, String username, String rating, String date) {
+    public Comments(String description, String imageUser, String username, String rating, String date, int userId) {
         this.description = description;
         this.imageUser = imageUser;
         this.username = username;
         this.rating = rating;
         this.date = date;
+        this.userId = userId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getDescription() {

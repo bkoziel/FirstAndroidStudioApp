@@ -356,10 +356,13 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                 try {
                     JSONArray comments = response.getJSONArray("comments");
 
+                    int comment_id;
                     for(int i = 0; i < (comments).length(); i++) {
                         final JSONObject comment = comments.getJSONObject(i);
 
                         Comments comments1 = new Comments();
+                        //comment_id = comment.getInt("comment_id");
+                        comments1.setUserId(comment.getInt(("id")));
                         comments1.setDescription(comment.getString("description"));
                         comments1.setRating("Ocena: " + comment.getString("ratingValue"));
                         comments1.setDate(comment.getString("comment_date"));
