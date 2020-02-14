@@ -117,25 +117,25 @@ public class RegisterActivity extends AppCompatActivity {
         //first we will do the validations
 
         if (TextUtils.isEmpty(username)) {
-            editTextUsername.setError("Wprowadź nazwę użytkownika");
+            editTextUsername.setError("enter a login");
             editTextUsername.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(email)) {
-            editTextEmail.setError("Wprowadź email");
+            editTextEmail.setError("enter a email");
             editTextEmail.requestFocus();
             return;
         }
 
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Wprowadź prawidłowy email");
+            editTextEmail.setError("Wrong email");
             editTextEmail.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Wprowadź hasło");
+            editTextPassword.setError("enter password");
             editTextPassword.requestFocus();
             return;
         }
@@ -172,7 +172,7 @@ public class RegisterActivity extends AppCompatActivity {
             protected void onPreExecute() {
                 super.onPreExecute();
                 //displaying the progress bar while user registers on the server
-                loading = ProgressDialog.show(RegisterActivity.this, "Trwa rejestrowanie użytkownika", "Proszę czekać...",true,true);
+                loading = ProgressDialog.show(RegisterActivity.this, "Registering in progress", "Waiting...",true,true);
             }
 
             @Override
@@ -210,7 +210,7 @@ public class RegisterActivity extends AppCompatActivity {
                         finish();
                         startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
                     } else {
-                        Toast.makeText(getApplicationContext(), "Takie konto juz istnieje", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "such account already exists", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -237,10 +237,10 @@ public class RegisterActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Wybierz Zdjęcie"), PICK_IMAGE_REQUEST);
+                startActivityForResult(Intent.createChooser(intent, "Choose photo"), PICK_IMAGE_REQUEST);
             }
             else{
-                Toast.makeText(getApplicationContext(),"Nie masz pozwolenia do uzywania Galerii",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"You don't have permission to use Gallery",Toast.LENGTH_LONG).show();
             }
             return;
         }

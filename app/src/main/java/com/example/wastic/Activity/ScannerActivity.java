@@ -1,7 +1,5 @@
 package com.example.wastic.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -14,6 +12,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wastic.R;
 import com.google.android.gms.vision.Frame;
@@ -39,7 +39,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
                 .setBarcodeFormats(Barcode.EAN_13 | Barcode.EAN_8)
                 .build();
         if(!detector.isOperational()){
-            Toast.makeText(getApplicationContext(), "Nie można odczytać kodu!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Could not read the code!", Toast.LENGTH_SHORT).show();
         }
         RelativeLayout layout = new RelativeLayout(this);
         layout.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
@@ -111,7 +111,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
                     try {
                         processData(BitmapFactory.decodeFile(picturePath));
                     }catch(Exception e){
-                        Toast.makeText(getApplicationContext(), "Nie można odczytać kodu!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Could not read the code!", Toast.LENGTH_SHORT).show();
                         //resultTextView.setText("Nie można odczytać kodu");
                     }
 

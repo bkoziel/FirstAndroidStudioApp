@@ -127,12 +127,12 @@ public class ProductActivity extends AppCompatActivity {
                 StringRequest request = new StringRequest(Request.Method.POST, addProductReportURL, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(),"Wysłano zgłoszenie",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Sent report",Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),"Wystąpił błąd",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Error occured",Toast.LENGTH_LONG).show();
                     }
                 }){
 
@@ -160,7 +160,7 @@ public class ProductActivity extends AppCompatActivity {
                         {       ratingBar.setRating(1.0f);
                                 rating = 1.0f;
                         }
-                        rateCount.setText("Twoja ocena: " + rating + "/5");
+                        rateCount.setText("Your packaging rating: " + rating + "/5");
                     }
 
                 }
@@ -174,7 +174,7 @@ public class ProductActivity extends AppCompatActivity {
                 final String commentText = commentTextView.getText().toString().trim();
                 if(TextUtils.isEmpty(commentText)){
 
-                    commentTextView.setError("Wprowadź komentarz");
+                    commentTextView.setError("enter a comment");
                     commentTextView.requestFocus();
                     return;
 
@@ -182,7 +182,7 @@ public class ProductActivity extends AppCompatActivity {
 StringRequest request = new StringRequest(Request.Method.POST, addOpinionURL, new Response.Listener<String>() {
     @Override
     public void onResponse(String response) {
-        Toast.makeText(getApplicationContext(),"Oceniono Produkt",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Product rated",Toast.LENGTH_LONG).show();
        finish();
             Intent x = new Intent(getApplicationContext() , ProductActivity.class);
             x.putExtra("code",code);
@@ -192,7 +192,7 @@ StringRequest request = new StringRequest(Request.Method.POST, addOpinionURL, ne
 }, new Response.ErrorListener() {
     @Override
     public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getApplicationContext(),"Wystąpił błąd",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Error occured",Toast.LENGTH_LONG).show();
     }
 }){
 
@@ -262,7 +262,7 @@ requestQueue.add(request);
                          getRatings();
                         nameTextView.setText(productName.toUpperCase());
                         barCodeTextView.setText(barcode);
-                        userTextView.setText("Dodane przez: " + addedByUser);
+                        userTextView.setText("Added by: " + addedByUser);
                         seeComments();
                         checkIfExsistComment();
                         Picasso.get().load("https://wasticelo.000webhostapp.com/"+ photoURL).into(photoImageView);
@@ -364,10 +364,12 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                         //comment_id = comment.getInt("comment_id");
                         comments1.setUserId(comment.getInt(("id")));
                         comments1.setDescription(comment.getString("description"));
-                        comments1.setRating("Ocena: " + comment.getString("ratingValue"));
+                        comments1.setRating("Rating: " + comment.getString("ratingValue"));
                         comments1.setDate(comment.getString("comment_date"));
                         comments1.setImageUser("https://wasticelo.000webhostapp.com/"+ comment.getString("avatar"));
                         comments1.setUsername(comment.getString("username"));
+
+
 
                         commentsList.add(comments1);
 
@@ -422,7 +424,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
 
                     if (!obj.getBoolean("error")) {
 
-                        nameTextView.setText("Brak produktu w bazie");
+                        nameTextView.setText("Product not exist in the database");
 
 
                         addCommentButton.setVisibility(View.INVISIBLE);

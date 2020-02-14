@@ -119,7 +119,7 @@
                         android:ellipsize="none"
 
                         android:gravity="center"
-                        android:text="Zaloguj się po więcej"
+                        android:text="Log in for more options"
                         android:textAlignment="center"
                         android:textColor="#fff"
                         android:textSize="18sp"
@@ -170,7 +170,7 @@
                         android:background="@color/colorPrimary"
                         android:drawableLeft="@drawable/ic_action_plus"
                         android:padding="10dp"
-                        android:text="Dodaj Produkt"
+                        android:text="Add product"
                         android:textColor="#fff"
                         android:visibility="invisible" />
 
@@ -203,7 +203,7 @@
                             android:layout_gravity="center"
                             android:layout_margin="10dp"
                             android:gravity="center"
-                            android:text="Twoja ocena opakowania:  5/5"
+                            android:text="Your packaging rating:  5/5"
                             android:visibility="invisible" />
 
                         <EditText
@@ -213,7 +213,7 @@
                             android:layout_margin="10dp"
                             android:ems="10"
                             android:gravity="start|top"
-                            android:hint="Komentarz dotyczący opakowania.."
+                            android:hint="Comment packaging"
                             android:inputType="textMultiLine"
                             android:visibility="invisible" />
 
@@ -229,7 +229,7 @@
                             android:layout_marginBottom="10dp"
                             android:background="@color/colorPrimary"
                             android:drawableLeft="@drawable/ic_action_comment"
-                            android:text="Oceń opakowanie"
+                            android:text="Rate the product packaging"
                             android:textColor="#fff"
                             android:visibility="invisible" />
 

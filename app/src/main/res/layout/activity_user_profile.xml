@@ -88,7 +88,7 @@
 
                 android:layout_margin="10dp"
                 android:background="@color/colorPrimary"
-                android:text="Dodane produkty"
+                android:text="Added products"
                 android:textColor="#fff" />
 
             <Button
@@ -98,7 +98,7 @@
                 android:layout_margin="10dp"
                 android:layout_marginTop="-201dp"
                 android:background="@color/colorPrimary"
-                android:text="Wyloguj"
+                android:text="Log out"
                 android:textColor="#fff" />
         </LinearLayout>
     </ScrollView>

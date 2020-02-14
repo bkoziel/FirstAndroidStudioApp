@@ -255,7 +255,7 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
                         SharedPrefManager.getInstance(getApplicationContext()).letProduct(product);
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "Taki produkt juz istnieje!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "This product exists!", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -290,10 +290,10 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
                Intent intent = new Intent();
                intent.setType("image/*");
                intent.setAction(Intent.ACTION_GET_CONTENT);
-               startActivityForResult(Intent.createChooser(intent, "Wybierz Zdjęcie"), PICK_IMAGE_REQUEST);
+               startActivityForResult(Intent.createChooser(intent, "Choose Photo"), PICK_IMAGE_REQUEST);
            }
            else{
-               Toast.makeText(getApplicationContext(),"Nie masz pozwolenia do uzywania Galerii",Toast.LENGTH_LONG).show();
+               Toast.makeText(getApplicationContext(),"You don't have permission to use Gallery",Toast.LENGTH_LONG).show();
            }
            return;
        }

@@ -30,7 +30,7 @@
             android:drawableLeft="@drawable/ic_action_user"
             android:ems="10"
             android:fontFamily="sans-serif"
-            android:hint="Nazwa użytkownika"
+            android:hint="Login"
             android:inputType="textPersonName"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
@@ -50,7 +50,7 @@
             android:drawableLeft="@drawable/ic_action_password"
             android:ems="10"
             android:fontFamily="sans-serif"
-            android:hint="Hasło"
+            android:hint="Password"
             android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="@string/zaloguj_sie"
+                    android:text="Log in"
                     android:textColor="#fff"
                     android:textSize="25dp"
                     android:textStyle="bold" />
@@ -95,7 +95,7 @@
             android:layout_marginBottom="26dp"
             android:background="#00ffffff"
             android:gravity="center|center_horizontal|center_vertical"
-            android:text="Zarejestruj się"
+            android:text="Sign up"
 
             android:textColor="#000"
             android:textSize="15dp" />

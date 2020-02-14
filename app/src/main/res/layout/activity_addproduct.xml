@@ -28,25 +28,25 @@
             />
 
         <EditText
-        android:id="@+id/editTextProductName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:hint="Nazwa produktu"
-        android:inputType="text"
+            android:id="@+id/editTextProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:hint="Product name"
+            android:inputType="text"
 
-        />
+            />
 
-    <EditText
-        android:id="@+id/editBarCode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:hint="Kod kreskowy"
+        <EditText
+            android:id="@+id/editBarCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:hint="Barcode"
 
-        />
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,7 +66,7 @@
                 android:layout_marginBottom="8dp"
                 android:drawableLeft="@drawable/ic_action_search"
                 android:fontFamily="sans-serif"
-                android:hint="Wybierz zdjęcie" />
+                android:hint="Choose photo" />
 
             <Button
                 android:id="@+id/buttonTakeFoto"
@@ -76,7 +76,7 @@
                 android:layout_marginBottom="8dp"
                 android:drawableLeft="@drawable/ic_action_camera"
                 android:fontFamily="sans-serif"
-                android:hint="Zrób zdjęcie" />
+                android:hint="Take photo" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -91,7 +91,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimary"
-            android:text="Dodaj Produkt"
+            android:text="Add Product"
             android:textColor="#fff" />
 
     </LinearLayout>

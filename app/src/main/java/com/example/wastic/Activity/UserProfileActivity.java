@@ -48,7 +48,7 @@ public class UserProfileActivity extends AppCompatActivity {
         textViewUsername.setText(user.getUsername());
         textViewEmail.setText(user.getEmail());
         textViewGender.setText(user.getGender());
-        textViewSince.setText(user.getSince());
+        textViewSince.setText("Registered since: " + user.getSince());
         Picasso.get().load("https://wasticelo.000webhostapp.com/" + user.getAvatar()).into(imageView);
 
         //when the user presses logout button/'''

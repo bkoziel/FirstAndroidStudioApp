@@ -59,13 +59,13 @@ public class LoginActivity extends AppCompatActivity {
 
         //validating inputs
         if (TextUtils.isEmpty(username)) {
-            editTextUsername.setError("Wprowadź nazwę użytkownika");
+            editTextUsername.setError("enter a login");
             editTextUsername.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Wprowadź hasło");
+            editTextPassword.setError("enter a password");
             editTextPassword.requestFocus();
             return;
         }
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                         startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
                     } else {
-                        Toast.makeText(getApplicationContext(), "Zła nazwa użytkownika lub hasło", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Wrong login or password", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

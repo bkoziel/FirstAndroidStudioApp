@@ -31,12 +31,11 @@
             android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:hint="Nazwa użytkownika"
-            android:inputType="text"
+            android:layout_marginBottom="8dp"
             android:drawableLeft="@drawable/ic_action_user"
-            />
+            android:hint="Login"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/editTextEmail"
@@ -52,13 +51,12 @@
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif"
-            android:hint="Hasło"
-            android:inputType="textPassword"
+            android:layout_marginBottom="8dp"
             android:drawableLeft="@drawable/ic_action_password"
-            />
+            android:fontFamily="sans-serif"
+            android:hint="Password"
+            android:inputType="textPassword" />
 
         <RadioGroup
             android:id="@+id/radioGender"
@@ -73,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Mężczyzna"
+                android:text="Male"
                 android:textColor="#000"/>
 
 
@@ -81,19 +79,20 @@
                 android:id="@+id/radioButtonFemale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kobieta"
+                android:text="Female"
                 android:textColor="#000
 "/>
 
         </RadioGroup>
+
         <Button
             android:id="@+id/buttonAvatarPicker"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Wybierz Avatar"
-            />
+            android:text="Choose avatar" />
+
         <Button
             android:id="@+id/buttonRegister"
             android:layout_width="match_parent"
@@ -101,16 +100,16 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimary"
-            android:text="Zarejestruj"
+            android:text="Sign up"
             android:textColor="#fff" />
 
         <TextView
             android:id="@+id/textViewLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:text="Zarejestrowany już?\nZaloguj się tutaj"
+            android:layout_marginBottom="8dp"
+            android:text="Already have an account? \nSign in."
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
 
