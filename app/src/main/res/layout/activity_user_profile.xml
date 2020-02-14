@@ -1,162 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.UserProfileActivity"
     android:background="@drawable/background"
     >
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/imageViewAvatar"
-                    android:layout_width="148dp"
-                    android:layout_height="143dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="32dp"
-
-                    android:layout_marginBottom="8dp" />
-            </TableRow>
-
-            <TableRow android:layout_height="329dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="ID:"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            <ImageView
+                android:id="@+id/imageViewAvatar"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/textViewId"
-                android:layout_width="195dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="-50dp"
                 android:padding="10dp"
-                android:text="id_number"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="Login:"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             <TextView
                 android:id="@+id/textViewUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:padding="10dp"
                 android:text="username"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="Email:"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:padding="10dp"
                 android:text="useremail"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="Płeć:"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             <TextView
                 android:id="@+id/textViewGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:padding="10dp"
                 android:text="Male/Female"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-        </TableRow>
-            <TableRow>
+            <TextView
+                android:id="@+id/textViewSince"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:text="YYYY-MM-dd"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="Data założenia:"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            <Button
+                android:id="@+id/buttonAdminPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="-201dp"
+                android:background="@color/colorPrimary"
+                android:text="Admin Panel"
+                android:textColor="#fff" />
 
-                <TextView
-                    android:id="@+id/textViewSince"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="YYYY-MM-dd"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            <Button
+                android:id="@+id/buttonAddedProducts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-            </TableRow>
+                android:layout_margin="10dp"
+                android:background="@color/colorPrimary"
+                android:text="Dodane produkty"
+                android:textColor="#fff" />
 
-        </TableLayout>
+            <Button
+                android:id="@+id/buttonLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="-201dp"
+                android:background="@color/colorPrimary"
+                android:text="Wyloguj"
+                android:textColor="#fff" />
+        </LinearLayout>
+    </ScrollView>
 
-        <Button
-            android:id="@+id/buttonAdminPanel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginTop="-201dp"
-            android:background="@color/colorPrimary"
-            android:text="Admin Panel"
-            android:textColor="#fff" />
-
-        <Button
-            android:id="@+id/buttonAddedProducts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_margin="10dp"
-            android:background="@color/colorPrimary"
-            android:text="Dodane produkty"
-            android:textColor="#fff" />
-
-        <Button
-            android:id="@+id/buttonLogout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginTop="-201dp"
-            android:background="@color/colorPrimary"
-            android:text="Wyloguj"
-            android:textColor="#fff" />
-    </LinearLayout>
     <!--    <TextView-->
 <!--        android:id="@+id/textView3"-->
 <!--        android:layout_width="wrap_content"-->

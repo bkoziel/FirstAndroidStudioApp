@@ -39,18 +39,19 @@ public class UserProfileActivity extends AppCompatActivity {
         textViewSince = findViewById(R.id.textViewSince);
         imageView= findViewById(R.id.imageViewAvatar);
         adminPanelButton = findViewById(R.id.buttonAdminPanel);
+
         //getting the current user
         User user = SharedPrefManager.getInstance(this).getUser();
 
         //setting the values to the textviews
-        textViewId.setText(String.valueOf(user.getId()));
+       // textViewId.setText(String.valueOf(user.getId()));
         textViewUsername.setText(user.getUsername());
         textViewEmail.setText(user.getEmail());
         textViewGender.setText(user.getGender());
         textViewSince.setText(user.getSince());
-        Picasso.get().load("https://wasticelo.000webhostapp.com/"+user.getAvatar()).into(imageView);
+        Picasso.get().load("https://wasticelo.000webhostapp.com/" + user.getAvatar()).into(imageView);
 
-        //when the user presses logout button
+        //when the user presses logout button/'''
         //calling the logout method
         if(SharedPrefManager.getInstance(this).ifAdmin()==1) {
             adminPanelButton.setVisibility(View.VISIBLE);
