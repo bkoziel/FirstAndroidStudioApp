@@ -33,7 +33,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         return new ViewHolder(v);
     }
 
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Comments comments = list.get(position);
@@ -45,7 +44,42 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         holder.textDate.setText(String.valueOf(comments.getDate()));
         holder.buttonReport.setImageResource(R.drawable.ic_error_black_24dp);
 
+  /*
 
+        holder.buttonReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                StringRequest request = new StringRequest(Request.Method.POST, addCommentReportURL, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                       // Toast.makeText(getApplicationContext(),"Wysłano zgłoszenie",Toast.LENGTH_LONG).show();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                      //  Toast.makeText(getApplicationContext(),"Wystąpił błąd",Toast.LENGTH_LONG).show();
+                    }
+                }){
+
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+
+                        //params.put("description", commentTextView.getText().toString());
+                        params.put("comment_id",Integer.toString(comments.getUserId()));
+                        String user_id = params.put("user_id", Integer.toString(SharedPrefManager.getInstance(ProductActivity.this).currentUser()));
+                        //params.put("ratingValue",String.valueOf(ratingBar.getRating()));
+
+
+                        return params;
+                    }
+                };
+                requestQueue.add(request);
+            }
+        });
+
+*/
     }
 
     @Override

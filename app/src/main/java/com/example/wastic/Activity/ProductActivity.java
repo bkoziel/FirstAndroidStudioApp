@@ -226,7 +226,7 @@ requestQueue.add(request);
                     JSONObject product = response.getJSONObject("data");
 
                     ratingValue = product.getString("ratingValue");
-                    userRating.setText("Ocena: "+ ratingValue);
+                    userRating.setText("Rating: "+ ratingValue);
 
 
                 } catch (JSONException e) {
