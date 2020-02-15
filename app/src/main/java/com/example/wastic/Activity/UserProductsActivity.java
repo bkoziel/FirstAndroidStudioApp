@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Space;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -54,43 +54,53 @@ public class UserProductsActivity extends AppCompatActivity {
                             //l = new LinearLayout(LL.getContext());
                             LinearLayout l = new LinearLayout(LL.getContext());
                             l.setOrientation(LinearLayout.HORIZONTAL);
-                            TextView tv = new TextView(l.getContext());
+
+                            CardView cv = new CardView(l.getContext());
+                            cv.setCardElevation(10);
+                            cv.setRadius(0.0f);
+                            cv.setContentPadding(5,5,5,5);
+                            cv.setBackgroundColor(Color.parseColor("#008577"));
+                            TextView tv = new TextView(cv.getContext());
                             tv.setGravity(View.TEXT_ALIGNMENT_CENTER);
                             tv.setTextSize(20);
-                            Space space= new Space(l.getContext());
+                            tv.setTextColor(Color.parseColor("#ffffff"));
 
-                            Button b = new Button(l.getContext());
+                            //Space space= new Space(l.getContext());
+
+                            //Button b = new Button(l.getContext());
                             //b.setGravity(View.FOCUS_RIGHT);
                             tv.setText(product.getString("name"));
-                            b.setText(" Przejdź > ");
+                            //b.setText("show");
                      //       b.setText(product.getString("name")+ "\n" + barcode);
-                            b.setBackgroundColor(Color.rgb(0,85,77));
-                            b.setTextColor(Color.rgb(255,255,255));
-                            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(800, LinearLayout.LayoutParams.WRAP_CONTENT);
-                            LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                            lp.setMargins(10,10,10,10);
+                            //b.setBackgroundColor(Color.rgb(0,85,77));
+                            //b.setTextColor(Color.rgb(255,255,255));
+                            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            //LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            lp.setMargins(5,5,5,5);
                             //lp.setMarginEnd(10);
-                            lp2.setMargins(10,10,10,10);
+                            //lp2.setMargins(10,10,10,10);
+                            cv.setLayoutParams(lp);
                             tv.setLayoutParams(lp);
-                            b.setLayoutParams(lp2);
+                            //b.setLayoutParams(lp2);
                             //space.setLayoutParams(lp2);
-                            b.setId(i);
+                            //b.setId(i);
                             final int id=i;
                             s[i] = product.getString("bar_code");
 
-                            b.setOnClickListener(new View.OnClickListener() {
+                            tv.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     Intent x = new Intent(getApplicationContext() , ProductActivity.class);
                                         x.putExtra("code",s[id]);
-                                    finish();
+                                    //finish();
                                     startActivity(x);
                                 }
 
                             });
-                            l.addView(tv);
-                            l.addView(space);
-                           l.addView(b);
+                            l.addView(cv);
+                            cv.addView(tv);
+                            //l.addView(space);
+                           //l.addView(b);
                            LL.addView(l);
 
 

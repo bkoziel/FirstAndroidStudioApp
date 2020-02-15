@@ -424,7 +424,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
 
                     if (!obj.getBoolean("error")) {
 
-                        nameTextView.setText("Product not exist in the database");
+                        nameTextView.setText("Product don't exist in the database");
 
 
                         addCommentButton.setVisibility(View.INVISIBLE);
@@ -453,6 +453,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                             nameTextView.setText("Brak produktu w bazie");
                             loginForMore.setVisibility(View.VISIBLE);
                             LinearLayout.LayoutParams lp5 = new LinearLayout.LayoutParams(loginForMore.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            loginForMore.setGravity(2);
                             loginForMore.setLayoutParams(lp5);
                             loginForMore.setOnTouchListener(new View.OnTouchListener() {
                                 @Override

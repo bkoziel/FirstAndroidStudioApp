@@ -117,7 +117,7 @@
                         android:background="@color/colorPrimary"
                         android:clickable="true"
                         android:ellipsize="none"
-
+                        android:padding="5dp"
                         android:gravity="center"
                         android:text="Log in for more options"
                         android:textAlignment="center"

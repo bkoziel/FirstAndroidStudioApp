@@ -46,8 +46,8 @@ public class UserProfileActivity extends AppCompatActivity {
         //setting the values to the textviews
        // textViewId.setText(String.valueOf(user.getId()));
         textViewUsername.setText(user.getUsername());
-        textViewEmail.setText(user.getEmail());
-        textViewGender.setText(user.getGender());
+        textViewEmail.setText("Email: "+user.getEmail());
+        textViewGender.setText("Sex: " + user.getGender());
         textViewSince.setText("Registered since: " + user.getSince());
         Picasso.get().load("https://wasticelo.000webhostapp.com/" + user.getAvatar()).into(imageView);
 
