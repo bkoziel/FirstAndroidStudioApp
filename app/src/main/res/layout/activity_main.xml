@@ -44,7 +44,7 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="280dp">
+                android:layout_height="260dp">
 
                 <LinearLayout
                     android:id="@+id/LL"
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
 
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="140dp"
 
             app:cardBackgroundColor="#ffffff"
             app:cardCornerRadius="20dp"
