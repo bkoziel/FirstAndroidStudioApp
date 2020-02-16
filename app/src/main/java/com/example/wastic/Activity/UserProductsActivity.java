@@ -58,7 +58,7 @@ public class UserProductsActivity extends AppCompatActivity {
                             CardView cv = new CardView(l.getContext());
                             cv.setCardElevation(10);
                             cv.setRadius(0.0f);
-                            cv.setContentPadding(5,5,5,5);
+                            cv.setContentPadding(10,10,10,10);
                             cv.setBackgroundColor(Color.parseColor("#008577"));
                             TextView tv = new TextView(cv.getContext());
                             tv.setGravity(View.TEXT_ALIGNMENT_CENTER);

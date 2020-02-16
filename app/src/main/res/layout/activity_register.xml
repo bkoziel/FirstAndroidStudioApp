@@ -22,7 +22,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="50dp"
-            app:cardBackgroundColor="#3C3E3F"
+            app:cardBackgroundColor="#ffffff"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
             app:contentPadding="30dp">
