@@ -599,23 +599,26 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                                 }
                             });
                             addProductButton.setVisibility(View.INVISIBLE);
+                            findViewById(R.id.CV).setVisibility(View.INVISIBLE);
                             LinearLayout.LayoutParams lp6 = new LinearLayout.LayoutParams(addProductButton.getLayoutParams().width, 0);
-                            lp6.setMargins(10,10,10,10);
+                            lp6.setMargins(20,10,20,20);
                             addProductButton.setLayoutParams(lp6);
                         } else {
                             averageRatingBar.setVisibility(View.INVISIBLE);
                             addProductButton.setVisibility(View.VISIBLE);
-                            LinearLayout.LayoutParams lp6 = new LinearLayout.LayoutParams(addProductButton.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
-                            lp6.setMargins(10,10,10,10);
+                            findViewById(R.id.CV).setVisibility(View.INVISIBLE);
+                            LinearLayout.LayoutParams lp6 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            lp6.setMargins(40,-70,40,50);
                             addProductButton.setLayoutParams(lp6);
                         }
                     }
                 } catch (JSONException e) {
+                    findViewById(R.id.CV).setVisibility(View.VISIBLE);
                     e.printStackTrace();
                     averageRatingBar.setVisibility(View.VISIBLE);
                     addProductButton.setVisibility(View.INVISIBLE);
                     LinearLayout.LayoutParams lp6 = new LinearLayout.LayoutParams(addProductButton.getLayoutParams().width, 0);
-                    lp6.setMargins(10,10,10,10);
+                    lp6.setMargins(20,10,20,20);
                     addProductButton.setLayoutParams(lp6);
 
                     if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
