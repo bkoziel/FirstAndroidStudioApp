@@ -1,9 +1,11 @@
 package com.example.wastic.Activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,7 +54,7 @@ public class ProductActivity extends AppCompatActivity {
     private DividerItemDecoration dividerItemDecoration;
     private List<Comments> commentsList;
     private RecyclerView.Adapter adapter;
-    private RatingBar ratingBar;
+    private RatingBar ratingBar, averageRatingBar;
    private TextView barCodeTextView, rateCount;
     private TextView nameTextView,userTextView,userRating,loginForMore,commentTextView,addCommentButton;
    private ImageView photoImageView;
@@ -76,16 +79,18 @@ public class ProductActivity extends AppCompatActivity {
         addProductButton = findViewById(R.id.buttonAddProduct);
         userTextView= findViewById(R.id.textViewUser);
         userRating= findViewById(R.id.textViewUserRate);
+        averageRatingBar = findViewById(R.id.averageRating);
         loginForMore = findViewById(R.id.textViewPleaseLogIn);
        commentTextView = findViewById(R.id.editTextComment);
      addCommentButton = findViewById(R.id.buttonAddComment);
      ratingBar = findViewById(R.id.ratingBars);
-//        LL = findViewById(R.id.commentsLL);
+       LL = findViewById(R.id.LL);
      rateCount = findViewById(R.id.ratingBarText);
         code = getIntent().getStringExtra("code");
         barCodeTextView.setText(code);
         requestQueue = Volley.newRequestQueue(this);
         mList = findViewById(R.id.RecycleViewComments);
+
 
         commentsList = new ArrayList<>();
         adapter = new CommentAdapter(getApplicationContext(), commentsList);
@@ -94,14 +99,12 @@ public class ProductActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         dividerItemDecoration = new DividerItemDecoration(mList.getContext(), linearLayoutManager.getOrientation());
 
-        mList.setHasFixedSize(true);
+        mList.setHasFixedSize(false);
         mList.setLayoutManager(linearLayoutManager);
         mList.addItemDecoration(dividerItemDecoration);
         mList.setAdapter(adapter);
         jsonParse();
         checkCode();
-
-
 
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +163,7 @@ public class ProductActivity extends AppCompatActivity {
                         {       ratingBar.setRating(1.0f);
                                 rating = 1.0f;
                         }
-                        rateCount.setText("Your packaging rating: " + rating + "/5");
+                        rateCount.setText("Your packaging rating: " + (int)rating + "/5");
                     }
 
                 }
@@ -226,8 +229,18 @@ requestQueue.add(request);
                     JSONObject product = response.getJSONObject("data");
 
                     ratingValue = product.getString("ratingValue");
-                    userRating.setText("Rating: "+ ratingValue);
+                    userRating.setText("Packaging average rating: "+ ratingValue);
+                    double d=0;
+                    try
+                    {
+                        d = Double.parseDouble(ratingValue);
 
+                    }
+                    catch(NumberFormatException e)
+                    {
+                        d = 0;
+                    }
+                    averageRatingBar.setRating((float)d);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -264,6 +277,7 @@ requestQueue.add(request);
                         barCodeTextView.setText(barcode);
                         userTextView.setText("Added by: " + addedByUser);
                         seeComments();
+                        seeAlternativeProduct();
                         checkIfExsistComment();
                         Picasso.get().load("https://wasticelo.000webhostapp.com/"+ photoURL).into(photoImageView);
 
@@ -356,6 +370,13 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                 try {
                     JSONArray comments = response.getJSONArray("comments");
 
+                    TextView tv = new TextView(findViewById(R.id.commentsLL).getContext());
+                    tv.setText("Comments: ");
+                    tv.setTextSize(30);
+
+                    //findViewById(R.id.commentsLL).addView(tv);
+
+
                     int comment_id;
                     for(int i = 0; i < (comments).length(); i++) {
                         final JSONObject comment = comments.getJSONObject(i);
@@ -382,6 +403,119 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+            }
+        });
+        requestQueue.add(request);
+    }
+
+    private void seeAlternativeProduct(){
+
+        String url = "https://wasticelo.000webhostapp.com/alternative.php?name="+ productName + "&code=" + code;
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray products = response.getJSONArray("products");
+                    int size = (products).length();
+
+                    final String[] s = new String[size];
+
+                    if(size==0){
+                        findViewById(R.id.AlternativeCV).setVisibility(View.INVISIBLE);
+                    }else{
+                        findViewById(R.id.AlternativeCV).setVisibility(View.VISIBLE);
+                    }
+
+                    for(int i = 0; i < size; i++) {
+                        final JSONObject product = products.getJSONObject(i);
+
+
+                        //nameTextView.append("\n" + product.getString("name"));
+                        CardView cv = new CardView(LL.getContext());
+                        cv.setCardElevation(10);
+                        cv.setRadius(0.555f);
+                        cv.setPadding(5,5,5,5);
+                        cv.setBackgroundColor(Color.parseColor("#00ffffff"));
+                        LinearLayout l = new LinearLayout(cv.getContext());
+                        l.setOrientation(LinearLayout.VERTICAL);
+                        l.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                        ImageView iv = new ImageView(l.getContext());
+                        Picasso.get().load("https://wasticelo.000webhostapp.com/"+ product.getString("photo")).into(iv);
+
+                        TextView tv = new TextView(l.getContext());
+                        tv.setGravity(View.TEXT_ALIGNMENT_CENTER);
+
+                        tv.setTextSize(10);
+                        //tv.setTextColor(Color.parseColor("#ffffff"));
+                        tv.setText(product.getString("name"));
+
+                        TextView tv2 = new TextView(l.getContext());
+                        tv2.setGravity(Gravity.CENTER);
+                        tv2.setTextSize(10);
+                        //tv2.setTextColor(Color.parseColor("#ffffff"));
+
+                        View viewDivider = new View(LL.getContext());
+                        LinearLayout.LayoutParams vdlp = new LinearLayout.LayoutParams (1, ViewGroup.LayoutParams.MATCH_PARENT);
+                        vdlp.setMargins(0,15,0,15);
+                        viewDivider.setLayoutParams(vdlp);
+                        viewDivider.setBackgroundColor(Color.parseColor("#555555"));
+
+                        String temp= product.getString("rating");
+                        if(temp.equals("null")) {
+                            tv2.setText("No rating");
+                        }
+                        else {
+                            tv2.setText("Rating: " + product.getString("rating"));
+                        }
+                        LinearLayout.LayoutParams cvlp = new LinearLayout.LayoutParams(400, ViewGroup.LayoutParams.MATCH_PARENT);
+                        LinearLayout.LayoutParams ivlp = new LinearLayout.LayoutParams(300,300 );
+                        LinearLayout.LayoutParams tvlp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 75);
+                        LinearLayout.LayoutParams tv2lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 40);
+
+                        tv2lp.gravity= Gravity.CENTER;
+                        tvlp.gravity=Gravity.CENTER;
+
+
+                        cvlp.setMargins(10,20,10,20);
+                        ivlp.setMargins(50,10,50,10);
+                        //tvlp.setMargins(5,5,5,5);
+                        tv2lp.setMargins(5,0,5,5);
+
+
+                      iv.setLayoutParams(ivlp);
+                      cv.setLayoutParams(cvlp);
+                      tv.setLayoutParams(tvlp);
+                        tv2.setLayoutParams(tv2lp);
+
+                        final int id=i;
+                        s[i] = product.getString("bar_code");
+
+                        cv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent x = new Intent(getApplicationContext() , ProductActivity.class);
+                                x.putExtra("code",s[id]);
+                                startActivity(x);
+                            }
+
+                        });
+                         l.addView(tv);
+                         l.addView(iv);
+                         l.addView(tv2);
+                        cv.addView(l);
+                        LL.addView(cv);
+                        LL.addView(viewDivider);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    //nameTextView.setVisibility(View.INVISIBLE);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                //nameTextView.setVisibility(View.INVISIBLE);
             }
         });
         requestQueue.add(request);
@@ -426,12 +560,11 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
 
                         nameTextView.setText("Product doesn't exist in the database");
 
-
+                        averageRatingBar.setVisibility(View.INVISIBLE);
                         addCommentButton.setVisibility(View.INVISIBLE);
                         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(addCommentButton.getLayoutParams().width, 0);
                         lp.setMargins(10,10,10,10);
                         addCommentButton.setLayoutParams(lp);
-
 
                         ratingBar.setVisibility(View.INVISIBLE);
                         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ratingBar.getLayoutParams().width, 0);
@@ -450,10 +583,11 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
 
 
                         if (!SharedPrefManager.getInstance(ProductActivity.this).isLoggedIn()) {
-                            nameTextView.setText("Brak produktu w bazie");
+                            nameTextView.setText("Product doesn't exist in the database");
                             loginForMore.setVisibility(View.VISIBLE);
                             LinearLayout.LayoutParams lp5 = new LinearLayout.LayoutParams(loginForMore.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
-                            loginForMore.setGravity(2);
+                            loginForMore.setGravity(Gravity.CENTER);
+                            lp5.gravity = Gravity.CENTER;
                             loginForMore.setLayoutParams(lp5);
                             loginForMore.setOnTouchListener(new View.OnTouchListener() {
                                 @Override
@@ -469,6 +603,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                             lp6.setMargins(10,10,10,10);
                             addProductButton.setLayoutParams(lp6);
                         } else {
+                            averageRatingBar.setVisibility(View.INVISIBLE);
                             addProductButton.setVisibility(View.VISIBLE);
                             LinearLayout.LayoutParams lp6 = new LinearLayout.LayoutParams(addProductButton.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
                             lp6.setMargins(10,10,10,10);
@@ -477,7 +612,8 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                        addProductButton.setVisibility(View.INVISIBLE);
+                    averageRatingBar.setVisibility(View.VISIBLE);
+                    addProductButton.setVisibility(View.INVISIBLE);
                     LinearLayout.LayoutParams lp6 = new LinearLayout.LayoutParams(addProductButton.getLayoutParams().width, 0);
                     lp6.setMargins(10,10,10,10);
                     addProductButton.setLayoutParams(lp6);
@@ -506,7 +642,9 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
                             loginForMore.setVisibility(View.VISIBLE);
                             LinearLayout.LayoutParams lp5 = new LinearLayout.LayoutParams(loginForMore.getLayoutParams().width, ViewGroup.LayoutParams.WRAP_CONTENT);
                         lp5.setMargins(10,10,10,10);
-                            loginForMore.setLayoutParams(lp5);
+
+                        lp5.gravity = Gravity.CENTER;
+                    loginForMore.setLayoutParams(lp5);
 
                             loginForMore.setOnTouchListener(new View.OnTouchListener() {
                                 @Override
