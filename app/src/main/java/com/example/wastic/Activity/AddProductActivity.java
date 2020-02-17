@@ -117,7 +117,7 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
                 //here we will register the user to server
                 //uploadImage();
                 productPOST();
-              loading = ProgressDialog.show(AddProductActivity.this, "Uploading Image", "Proszę czekać...",true,true);
+              loading = ProgressDialog.show(AddProductActivity.this, "Uploading Image", "Please Wait...",true,true);
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, urlUpload, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -177,17 +177,17 @@ private String urlUpload="https://wasticelo.000webhostapp.com/upload.php";
 
         //first we will do the validations
         if (TextUtils.isEmpty(name)) {
-            editTextProductName.setError("Wprowadź nazwę produktu");
+            editTextProductName.setError("Enter product name");
             editTextProductName.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(barcode)) {
-            editTextBarCode.setError("Wprowadź kod produktu");
+            editTextBarCode.setError("Enter barcode");
             editTextBarCode.requestFocus();
             return;
         }
         if(!hasImage(imageView)){
-            Toast.makeText(getApplicationContext(),"Wybierz lub zrób zdjęcie", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Choose or take photo", Toast.LENGTH_SHORT).show();
             imageView.requestFocus();
             return;
         }

@@ -424,7 +424,7 @@ String url="https://wasticelo.000webhostapp.com/checkIfCommentExsist.php?user_id
 
                     if (!obj.getBoolean("error")) {
 
-                        nameTextView.setText("Product don't exist in the database");
+                        nameTextView.setText("Product doesn't exist in the database");
 
 
                         addCommentButton.setVisibility(View.INVISIBLE);
